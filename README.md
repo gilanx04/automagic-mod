@@ -10,17 +10,19 @@ Repo ini berisi dokumentasi dan APK mod. Source code asli Automagic tidak disert
 
 | Properti | Nilai |
 | --- | --- |
-| Versi rilis | `1.38.0-wa.1` |
+| Versi rilis | `1.38.0-wa.2` |
 | `versionName` APK | `1.38.0` |
 | `versionCode` | `4900` |
 | Paket | `ch.gridvision.ppam.androidautomagic` |
-| Ukuran APK | 8.809.560 byte (8,81 MB) |
-| APK | [`Automagic_1.38.0-wa.1.apk`](https://github.com/gilanx04/automagic-mod/releases/download/v1.38.0-wa.1/Automagic_1.38.0-wa.1.apk) |
-| Checksum | [`SHA256SUMS`](https://github.com/gilanx04/automagic-mod/releases/download/v1.38.0-wa.1/SHA256SUMS) |
-| Diuji pada | Xiaomi 2311DRK48G, Android 17 (SDK 37), WhatsApp 2.26.40.76 |
+| Ukuran APK | 8.813.735 byte (8,81 MB) |
+| APK | [`Automagic_1.38.0-wa.2.apk`](https://github.com/gilanx04/automagic-mod/releases/download/v1.38.0-wa.2/Automagic_1.38.0-wa.2.apk) |
+| Modul bridge (LSPosed) | [`AutomagicWaBridge_1.0.0.apk`](https://github.com/gilanx04/automagic-mod/releases/download/v1.38.0-wa.2/AutomagicWaBridge_1.0.0.apk) |
+| Checksum | [`SHA256SUMS`](https://github.com/gilanx04/automagic-mod/releases/download/v1.38.0-wa.2/SHA256SUMS) |
+| Diuji pada | Xiaomi 2311DRK48G, Android 17 (SDK 37), WhatsApp 2.26.40.76, LSPosed 2.2.1 |
 
 ```text
-205190df4f78376688b21cae0ecfe8c0d860ee97694dd12b671f93679040f57f  Automagic_1.38.0-wa.1.apk
+80a61b82ad1ea4a6227b237ce569a78cca2b21b2c362ec3796fbddbb635a4e9d  Automagic_1.38.0-wa.2.apk
+0ae9a8b3933404a8fdc0ad6a6d4a2ca9b4a34e46e90cf846251252324357ddd9  AutomagicWaBridge_1.0.0.apk
 ```
 
 ## Fitur
@@ -176,7 +178,56 @@ Offset 1 berarti data terbaru sebelum pesan saat ini. Placeholder dengan akhiran
 
 Riwayat percakapan disimpan maksimal 30 entri per percakapan, terdiri dari pesan masuk dan balasan keluar. Ini bukan arsip chat lengkap.
 
-### 5. Riwayat percakapan
+### 5. Action Post WhatsApp Status
+
+Action baru: **Post WhatsApp Status** (`wa_status`).
+
+- Memposting **status WhatsApp berisi teks** tanpa interaksi pengguna, juga saat layar mati.
+- Memakai composer status internal WhatsApp, jadi status benar-benar terkirim ke server dan muncul di tab **My status**.
+- Audiens mengikuti **pengaturan privasi status terakhir** yang dipakai di WhatsApp (My contacts / Everyone / exclude).
+- Teks mendukung placeholder dan variabel Automagic seperti action lain.
+- Action berjalan asinkron (tidak membekukan UI Automagic) dan mengembalikan error yang jelas bila modul bridge tidak aktif.
+
+Pengaturan:
+
+| Pengaturan | Keterangan |
+| --- | --- |
+| Status text | Teks status. Mendukung placeholder `{...}`. |
+
+> Action ini membutuhkan **modul LSPosed** `Automagic WA Bridge` (terlampir di rilis ini) yang diaktifkan untuk WhatsApp. Tanpa modul tersebut action akan gagal dengan pesan: *"The WhatsApp bridge module did not handle the request…"*.
+
+#### Cara kerja
+
+1. Automagic mengirim broadcast terurut ke receiver WhatsApp yang sudah diekspor
+   (`com.whatsapp.infra.systemreceivers.boot.BootReceiver`) dengan aksi `com.automagic.wa.bridge.SEND_STATUS`.
+2. Modul bridge (berjalan di proses WhatsApp) menerima broadcast, mengambil wake lock, lalu memanggil
+   composer status internal (`X.7o8.A03` → `X.7o8.A05`) untuk membuat dan mengirim status.
+3. Modul mengembalikan result code (`1` sukses, `2` gagal) ke Automagic lewat ordered broadcast.
+4. Log modul ada di `/data/data/com.whatsapp/files/wa_bridge.log`.
+
+#### Batasan
+
+- Hanya **status teks**. Status berisi foto atau video belum didukung (butuh pipeline upload media WhatsApp).
+- audience mengikuti privasi status terakhir, tidak bisa dipilih per-flow.
+- Jika WhatsApp di-update, nama kelas internal bisa berubah dan modul perlu disesuaikan.
+
+### 6. Modul bridge LSPosed
+
+Modul terpisah: `AutomagicWaBridge_1.0.0.apk` (paket `com.automagic.wa.bridge`).
+
+- Dibangun dengan libxposed API 102 (`META-INF/xposed/java_init.list`).
+- Hanya diaktifkan untuk **WhatsApp** (`com.whatsapp`).
+- Tidakmengumpulkan data apa pun; satu-satunya file yang dibuat adalah log di direktori data WhatsApp.
+- Diperlukan root + LSPosed (Zygisk) pada perangkat.
+
+Pemasangan modul:
+
+1. Install `AutomagicWaBridge_1.0.0.apk`.
+2. Buka **LSPosed → Modules**, aktifkan **Automagic WA Bridge**.
+3. Centang scope **WhatsApp** (hanya `com.whatsapp`; `com.whatsapp.w4b` tidak didukung).
+4. Force-stop WhatsApp, lalu jalankan flow yang memakai action **Post WhatsApp Status**.
+
+### 7. Riwayat percakapan
 
 - Disimpan per paket dan percakapan di SharedPreferences privat `wa_conversation_state`.
 - Maksimal 30 entri.
@@ -188,10 +239,11 @@ Riwayat percakapan disimpan maksimal 30 entri per percakapan, terdiri dari pesan
 
 1. **Backup flow** dari Automagic sebelum memasang build mod.
 2. Jika perangkat masih memakai Automagic resmi, APK ini **tidak bisa** dipasang sebagai update karena sertifikatnya berbeda. Ekspor flow, uninstall versi resmi, lalu install APK ini dan impor kembali flow. Jika perangkat sudah memakai build patched dengan kunci yang sama, update biasa bisa dilakukan.
-3. Install `Automagic_1.38.0-wa.1.apk`.
-4. Buka Automagic dan aktifkan **Notification access** untuk Automagic di pengaturan Android.
-5. Nonaktifkan AutoResponder WhatsApp lain selama pengujian agar tidak ada balasan ganda.
-6. Buat flow dan aktifkan.
+3. Install `Automagic_1.38.0-wa.2.apk`.
+4. Install `AutomagicWaBridge_1.0.0.apk`, aktifkan di LSPosed dengan scope **WhatsApp** (hanya perlu untuk action status).
+5. Buka Automagic dan aktifkan **Notification access** untuk Automagic di pengaturan Android.
+6. Nonaktifkan AutoResponder WhatsApp lain selama pengujian agar tidak ada balasan ganda.
+7. Buat flow dan aktifkan.
 
 APK ini **tidak** menghapus atau melewati pemeriksaan lisensi. Gunakan hanya jika Anda memiliki lisensi atau instalasi Automagic yang sah.
 
@@ -217,6 +269,13 @@ Admin | admin, cs
 8. Tambahkan action **Reply to WhatsApp Message** jika ingin balasan tambahan; jika menu sudah auto-send, action ini opsional.
 9. Buat flow anak untuk setiap opsi, pilih menu dan opsi dari dropdown, lalu tambahkan action balasan.
 
+### Status WhatsApp
+
+1. Buat flow baru.
+2. Tambahkan action **Post WhatsApp Status**.
+3. Isi **Status text**, misalnya `Halo dari Automagic`.
+4. Jalankan flow. Status terkirim ke audiens status terakhir yang dipakai di WhatsApp.
+
 ### Gemini
 
 1. Buat flow dengan trigger WhatsApp.
@@ -241,6 +300,10 @@ Admin | admin, cs
 - State menu disimpan per paket dan nama percakapan. Mengganti nama kontak saat menu aktif dapat membuat state tidak cocok.
 - Timeout menu maksimal 7 hari.
 - Riwayat hanya 30 entri; bukan pengganti arsip chat.
+- Action **Post WhatsApp Status** butuh modul LSPosed `Automagic WA Bridge` dan scope WhatsApp aktif.
+- Action status hanya mendukung status **teks**; foto dan video belum didukung.
+- Bridge memakai kelas internal WhatsApp (`X.7o8`, `X.81l`, `X.2Cz`). Nama kelas bisa berubah saat WhatsApp di-update, lalu modul perlu disesuaikan.
+- Audiens status mengikuti privasi status terakhir di WhatsApp, tidak bisa dipilih per-flow.
 - Android 11+ membatasi background service dan notification listener. Automagic adalah aplikasi lama yang tidak lagi dirawat, jadi perilakunya bisa berbeda di setiap ROM.
 - Tidak ada jaminan build ini berjalan di semua perangkat. Uji pada perangkat yang tidak dipakai untuk pekerjaan penting.
 
@@ -248,8 +311,8 @@ Admin | admin, cs
 
 ```bash
 sha256sum -c SHA256SUMS
-apksigner verify --print-certs Automagic_1.38.0-wa.1.apk
-aapt2 dump badging Automagic_1.38.0-wa.1.apk | head -3
+apksigner verify --print-certs Automagic_1.38.0-wa.2.apk
+aapt2 dump badging Automagic_1.38.0-wa.2.apk | head -3
 ```
 
 Sertifikat build ini:

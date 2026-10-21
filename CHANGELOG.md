@@ -2,6 +2,35 @@
 
 Semua perubahan penting pada build mod Automagic dicatat di sini.
 
+## [1.38.0-wa.2] — 2026-10-21
+
+Rilis kedua: menambah **posting status WhatsApp tanpa interaksi** lewat action baru dan modul LSPosed terpisah.
+
+### Ditambahkan
+
+#### Action Post WhatsApp Status
+
+- Action baru **Post WhatsApp Status** (`wa_status`).
+- Memposting status WhatsApp berisi teks tanpa membuka UI WhatsApp, juga saat layar mati.
+- Memakai composer status internal WhatsApp sehingga status benar-benar terkirim ke server.
+- Audiens mengikuti privasi status terakhir yang dipakai di WhatsApp.
+- Teks status mendukung placeholder `{...}` seperti action lain.
+- Eksekusi asinkron: tidak membekukan UI Automagic, dan error dikembalikan ke flow.
+
+#### Modul bridge LSPosed
+
+- Modul terpisah `AutomagicWaBridge_1.0.0.apk` (paket `com.automagic.wa.bridge`).
+- libxposed API 102, scope hanya `com.whatsapp`.
+- Menerima broadcast `com.automagic.wa.bridge.SEND_STATUS`, mengambil wake lock, lalu membuat dan mengirim status lewat composer internal WhatsApp.
+- Mengembalikan result code ke Automagic (1 sukses, 2 gagal).
+- Log modul: `/data/data/com.whatsapp/files/wa_bridge.log`.
+
+### Batasan
+
+- Hanya status **teks**; foto dan video belum didukung.
+- Bridge bergantung pada nama kelas internal WhatsApp, jadi perlu disesuaikan bila WhatsApp di-update.
+- Memerlukan root + LSPosed.
+
 ## [1.38.0-wa.1] — 2026-10-21
 
 Rilis publik pertama **Automagic Mod — WhatsApp + Gemini**. Build ini berbasis Automagic Premium 1.38.0 (`versionCode` 4900) dan menambahkan komponen WhatsApp native tanpa aplikasi terpisah.

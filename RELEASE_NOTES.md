@@ -1,43 +1,41 @@
-Rilis publik pertama **Automagic Mod — WhatsApp + Gemini**, berbasis Automagic Premium 1.38.0.
+Rilis kedua **Automagic Mod — WhatsApp + Gemini**, berbasis Automagic Premium 1.38.0.
 
-Build ini menambahkan komponen WhatsApp native tanpa aplikasi terpisah:
+Fokus rilis ini: **posting status WhatsApp tanpa interaksi pengguna**.
 
-- Trigger **WhatsApp Message Received** dengan mode exact, contains, wildcard, regex, similarity, dan welcome.
-- Filter kontak allow/ignore dengan nama, nomor, nama grup, dan wildcard `*` / `?`.
-- Action **Reply to WhatsApp Message** melalui Android `RemoteInput`.
-- Menu percakapan bernomor: trigger induk membuat menu, trigger anak memilih opsi dari dropdown.
-- Aksi menu `RETURN`, `STAY`, `EXIT`, dan `GOTO`.
-- Tombol reset state menu aktif.
-- Action **Gemini Reply** dengan prompt, API key, model, parameter generasi, dan placeholder riwayat percakapan.
+## Yang baru
 
-## Perbaikan penting
-
-- Trigger induk bisa membuka ulang menu saat menerima pesan yang bukan opsi menu.
-- State menu lama tanpa timeout dibersihkan otomatis.
-- Trigger anak hanya berjalan untuk menu dan opsi yang dipilih.
-- `RETURN` mengaktifkan kembali menu induk dan mengirim ulang teksnya.
+- Action **Post WhatsApp Status** (`wa_status`): memposting status teks ke WhatsApp tanpa membuka aplikasi, juga saat layar mati.
+- Memakai composer status internal WhatsApp, jadi status benar-benar terkirim dan bisa dilihat kontak.
+- Audiens mengikuti privasi status terakhir di WhatsApp.
+- Action berjalan asinkron, jadi Automagic tidak freeze.
+- Modul LSPosed baru `AutomagicWaBridge_1.0.0.apk` yang bridging Automagic ke composer status WhatsApp.
 
 ## Pasang
 
 1. Backup flow Automagic.
 2. Jika masih memakai Automagic resmi, ekspor flow lalu uninstall karena sertifikat build ini berbeda.
-3. Install `Automagic_1.38.0-wa.1.apk`.
-4. Aktifkan notification access untuk Automagic.
-5. Nonaktifkan AutoResponder WhatsApp lain saat pengujian.
+3. Install `Automagic_1.38.0-wa.2.apk`.
+4. Install `AutomagicWaBridge_1.0.0.apk`, aktifkan di LSPosed, dan beri scope **WhatsApp**.
+5. Aktifkan notification access untuk Automagic.
+6. Nonaktifkan AutoResponder WhatsApp lain saat pengujian.
 
 ## Checksum
 
 ```text
-205190df4f78376688b21cae0ecfe8c0d860ee97694dd12b671f93679040f57f  Automagic_1.38.0-wa.1.apk
+80a61b82ad1ea4a6227b237ce569a78cca2b21b2c362ec3796fbddbb635a4e9d  Automagic_1.38.0-wa.2.apk
+0ae9a8b3933404a8fdc0ad6a6d4a2ca9b4a34e46e90cf846251252324357ddd9  AutomagicWaBridge_1.0.0.apk
 ```
 
-Sertifikat: `CN=Automagic Patched, O=Local, C=ID` (bukan sertifikat resmi Gridvision).
+Sertifikat APK Automagic: `CN=Automagic Patched, O=Local, C=ID` (bukan sertifikat resmi Gridvision).
+
+## Batasan
+
+- Action status hanya mendukung status **teks** (foto/video belum didukung).
+- Butuh root + LSPosed.
+- Bridge memakai kelas internal WhatsApp; update WhatsApp bisa membuat modul perlu disesuaikan.
 
 ## Penting
 
 - Ini bukan build resmi. Tidak ada lisensi tambahan yang diberikan.
-- Jika menu auto-send aktif pada trigger induk, jangan tambahkan action balasan teks menu lagi pada flow yang sama; gunakan salah satu jalur untuk menghindari balasan ganda.
+- Posting status otomatis melanggar ketentuan layanan WhatsApp dan bisa memicu pembatasan akun. Gunakan dengan risiko sendiri.
 - API key Gemini disimpan di flow XML sebagai teks biasa; jangan bagikan flow yang berisi key.
-- Direct reply bergantung pada action reply yang disediakan notifikasi WhatsApp.
-
-Changelog lengkap: [`CHANGELOG.md`](https://github.com/gilanx04/automagic-mod/blob/main/CHANGELOG.md)
