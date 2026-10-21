@@ -124,7 +124,7 @@ Rilis publik pertama **Automagic Mod — WhatsApp + Gemini**. Build ini berbasis
 
 - Trigger induk yang menangani menu sekarang dapat membuka ulang menu saat menerima pesan yang **bukan** salah satu opsi menu. Sebelumnya semua pesan diblokir selama menu aktif.
 - Trigger anak dengan opsi tertentu mengabaikan field **Message match** umum; pencocokan dilakukan terhadap nomor opsi dan keyword opsi.
-- Menu auto-send dan action balasan manual dapat digunakan bersamaan, tetapi action manual bersifat opsional.
+- Menu auto-send dan action balasan manual adalah dua jalur terpisah. Gunakan auto-send saja atau action saja untuk menghindari balasan ganda.
 - Nama default trigger/action mengikuti konfigurasi menu, misalnya `WhatsApp: any · menu Main menu › Harga`.
 - Timeout menu dibatasi 0–10080 menit.
 

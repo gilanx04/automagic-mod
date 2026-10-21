@@ -36,6 +36,7 @@ Sertifikat: `CN=Automagic Patched, O=Local, C=ID` (bukan sertifikat resmi Gridvi
 ## Penting
 
 - Ini bukan build resmi. Tidak ada lisensi tambahan yang diberikan.
+- Jika menu auto-send aktif pada trigger induk, jangan tambahkan action balasan teks menu lagi pada flow yang sama; gunakan salah satu jalur untuk menghindari balasan ganda.
 - API key Gemini disimpan di flow XML sebagai teks biasa; jangan bagikan flow yang berisi key.
 - Direct reply bergantung pada action reply yang disediakan notifikasi WhatsApp.
 

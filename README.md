@@ -84,6 +84,8 @@ Label sebelum `|` selalu menjadi keyword. Keyword setelah `|` adalah alias tamba
 - **Auto-send menu** — kirim teks menu otomatis saat trigger induk berjalan.
 - **Timeout** — lama menu aktif, dalam menit (0–10080).
 
+Jika **Auto-send menu** aktif, jangan menambahkan action **Reply to WhatsApp Message** yang mengirim teks menu lagi pada flow yang sama. Auto-send dan action manual adalah dua jalur terpisah; memakai keduanya dapat menghasilkan balasan ganda.
+
 Saat menu aktif, trigger induk tidak akan dijalankan lagi untuk pesan yang cocok dengan salah satu opsi. Jika pesan **bukan** opsi menu, trigger induk boleh membuka ulang menu. Ini memungkinkan pengguna mengetik `halo` lagi untuk memunculkan menu tanpa menunggu timeout.
 
 #### Trigger anak (Child)
