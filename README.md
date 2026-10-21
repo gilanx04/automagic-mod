@@ -301,7 +301,7 @@ Admin | admin, cs
 - Timeout menu maksimal 7 hari.
 - Riwayat hanya 30 entri; bukan pengganti arsip chat.
 - Action **Post WhatsApp Status** butuh modul LSPosed `Automagic WA Bridge` dan scope WhatsApp aktif.
-- Action status hanya mendukung status **teks**; foto dan video belum didukung.
+- Action status hanya mendukung status **teks**. Posting status foto atau video di luar cakupan rilis ini karena memerlukan pipeline upload media internal WhatsApp.
 - Bridge memakai kelas internal WhatsApp (`X.7o8`, `X.81l`, `X.2Cz`). Nama kelas bisa berubah saat WhatsApp di-update, lalu modul perlu disesuaikan.
 - Audiens status mengikuti privasi status terakhir di WhatsApp, tidak bisa dipilih per-flow.
 - Android 11+ membatasi background service dan notification listener. Automagic adalah aplikasi lama yang tidak lagi dirawat, jadi perilakunya bisa berbeda di setiap ROM.

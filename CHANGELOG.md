@@ -27,7 +27,8 @@ Rilis kedua: menambah **posting status WhatsApp tanpa interaksi** lewat action b
 
 ### Batasan
 
-- Hanya status **teks**; foto dan video belum didukung.
+- Hanya status **teks** yang didukung. Posting status foto atau video **tidak termasuk** dalam cakupan rilis ini (butuh pipeline upload media WhatsApp).
+- Hanya paket `com.whatsapp`; WhatsApp Business (`com.whatsapp.w4b`) belum didukung untuk action status.
 - Bridge bergantung pada nama kelas internal WhatsApp, jadi perlu disesuaikan bila WhatsApp di-update.
 - Memerlukan root + LSPosed.
 
