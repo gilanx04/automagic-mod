@@ -1,0 +1,4 @@
+*.apk
+*.idsig
+*.log
+.DS_Store
