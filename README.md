@@ -10,19 +10,23 @@ Repo ini berisi dokumentasi dan APK mod. Source code asli Automagic tidak disert
 
 | Properti | Nilai |
 | --- | --- |
-| Versi rilis | `1.38.0-wa.2` |
+| Versi rilis | `1.38.0-wa.3` |
 | `versionName` APK | `1.38.0` |
 | `versionCode` | `4900` |
 | Paket | `ch.gridvision.ppam.androidautomagic` |
 | Ukuran APK | 8.813.735 byte (8,81 MB) |
-| APK | [`Automagic_1.38.0-wa.2.apk`](https://github.com/gilanx04/automagic-mod/releases/download/v1.38.0-wa.2/Automagic_1.38.0-wa.2.apk) |
-| Modul bridge (LSPosed) | [`AutomagicWaBridge_1.0.0.apk`](https://github.com/gilanx04/automagic-mod/releases/download/v1.38.0-wa.2/AutomagicWaBridge_1.0.0.apk) |
-| Checksum | [`SHA256SUMS`](https://github.com/gilanx04/automagic-mod/releases/download/v1.38.0-wa.2/SHA256SUMS) |
+| APK | [`Automagic_1.38.0-wa.3.apk`](https://github.com/gilanx04/automagic-mod/releases/download/v1.38.0-wa.3/Automagic_1.38.0-wa.3.apk) |
+| Modul bridge (LSPosed) | [`AutomagicWaBridge_1.0.0.apk`](https://github.com/gilanx04/automagic-mod/releases/download/v1.38.0-wa.3/AutomagicWaBridge_1.0.0.apk) |
+| Dokumentasi offline | [`AutomagicDocs_1.38.zip`](https://github.com/gilanx04/automagic-mod/releases/download/v1.38.0-wa.3/AutomagicDocs_1.38.zip) |
+| Tools agent | [`AutomagicTools_1.0.zip`](https://github.com/gilanx04/automagic-mod/releases/download/v1.38.0-wa.3/AutomagicTools_1.0.zip) |
+| Checksum | [`SHA256SUMS`](https://github.com/gilanx04/automagic-mod/releases/download/v1.38.0-wa.3/SHA256SUMS) |
 | Diuji pada | Xiaomi 2311DRK48G, Android 17 (SDK 37), WhatsApp 2.26.40.76, LSPosed 2.2.1 |
 
 ```text
-80a61b82ad1ea4a6227b237ce569a78cca2b21b2c362ec3796fbddbb635a4e9d  Automagic_1.38.0-wa.2.apk
+505936a20bdbad2c6f0ab4a742a6d4f79e14b9c092563ca9eab0f2a0601b1062  Automagic_1.38.0-wa.3.apk
 0ae9a8b3933404a8fdc0ad6a6d4a2ca9b4a34e46e90cf846251252324357ddd9  AutomagicWaBridge_1.0.0.apk
+e6343052cb1f77b3ed3f53b4fe5de4981a63ede46eb192412082db6f911f7160  AutomagicDocs_1.38.zip
+2a97d4c9ca6352bc1101c93faae8b49e2f1e30c365637afcea3e0e8f014b39cc  AutomagicTools_1.0.zip
 ```
 
 ## Fitur
@@ -227,7 +231,67 @@ Pemasangan modul:
 3. Centang scope **WhatsApp** (hanya `com.whatsapp`; `com.whatsapp.w4b` tidak didukung).
 4. Force-stop WhatsApp, lalu jalankan flow yang memakai action **Post WhatsApp Status**.
 
-### 7. Riwayat percakapan
+### 7. Dokumentasi offline
+
+Halaman bantuan bawaan Automagic menampilkan **404** karena seluruh isi
+`automagic4android.com/automagic/1.38/` sudah dihapus dari server. Rilis ini
+memulihkannya memakai arsip `web.archive.org`:
+
+- **Help (F1)** — 449 halaman per bahasa (en/de). `HelpActivity` sudah mendukung
+  mode offline: bila `files/help/<lang>/<page>.html` ada dan `version.txt` berisi
+  `1.38`, halaman dimuat lewat `file://` tanpa menyentuh jaringan.
+- **Catalog** — 448 komponen. `CatalogActivity` dipatch agar memakai
+  `files/catalog/<lang>/catalog.html` bila tersedia, melewati cek jaringan, dan
+  mengizinkan navigasi `file://` di dalam WebView.
+- **Cakupan** — 219 action, 127 trigger, 88 condition; seluruhnya cocok dengan ID
+  komponen di APK, ditambah 4 halaman untuk komponen buatan mod ini
+  (`wa_reply`, `wa_status`, `wa_gemini_reply`, `wa_message_received`).
+
+Pemasangan dokumentasi (butuh root):
+
+```bash
+unzip AutomagicDocs_1.38.zip -d docs
+# lalu salin docs/{en,de} ke /data/data/ch.gridvision.ppam.androidautomagic/files/help/
+# dan docs/catalog/{en,de} ke .../files/catalog/
+```
+
+Atau pakai `tools/docs/install_docs.sh` dari `AutomagicTools_1.0.zip`.
+Dokumentasi tetap ada saat APK di-update, tetapi hilang bila aplikasi di-uninstall.
+
+### 8. AI flow agent (amflow)
+
+`tools/amflow/` berisi alat agar agent (LLM) bisa merancang dan mengedit flow:
+
+| Perintah | Fungsi |
+| --- | --- |
+| `amflow.py docs "<kata>"` | cari dokumentasi komponen |
+| `amflow.py list [kategori]` | daftar ID komponen (223 action, 128 trigger, 89 condition) |
+| `amflow.py component <id>` | tag, tipe, dan contoh nyata komponen |
+| `amflow.py new "<nama>"` | buat file flow |
+| `amflow.py add <file> <id> --from-example` | tambah komponen + container + koneksi |
+| `amflow.py validate <file>` | validasi struktur, tag, koneksi, keterjangkauan |
+| `amflow.py install <file>` | backup + gabung ke `flows.xml` |
+
+Skema komponen (`schema.json`) diekstrak dari source hasil decompile; 198 dari 223
+action, 127 dari 128 trigger, dan 64 dari 89 condition sudah memiliki daftar tag.
+Panduan lengkap untuk agent ada di `tools/amflow/AGENTS.md`.
+
+Contoh:
+
+```bash
+python3 tools/amflow/amflow.py new "Backup harian"
+python3 tools/amflow/amflow.py add "Backup harian.flow.xml" periodic_timer \
+    --category trigger --from-example --set interval=86400
+python3 tools/amflow/amflow.py add "Backup harian.flow.xml" http_request \
+    --from-example --set url=https://example.com/upload --set httpMethod=POST
+python3 tools/amflow/amflow.py validate "Backup harian.flow.xml"
+python3 tools/amflow/amflow.py install "Backup harian.flow.xml" --restart
+```
+
+`install` selalu membuat backup `flows.xml_amflow_<timestamp>.bak` dan tidak pernah
+menghapus flow yang sudah ada.
+
+### 9. Riwayat percakapan
 
 - Disimpan per paket dan percakapan di SharedPreferences privat `wa_conversation_state`.
 - Maksimal 30 entri.
@@ -239,11 +303,12 @@ Pemasangan modul:
 
 1. **Backup flow** dari Automagic sebelum memasang build mod.
 2. Jika perangkat masih memakai Automagic resmi, APK ini **tidak bisa** dipasang sebagai update karena sertifikatnya berbeda. Ekspor flow, uninstall versi resmi, lalu install APK ini dan impor kembali flow. Jika perangkat sudah memakai build patched dengan kunci yang sama, update biasa bisa dilakukan.
-3. Install `Automagic_1.38.0-wa.2.apk`.
+3. Install `Automagic_1.38.0-wa.3.apk`.
 4. Install `AutomagicWaBridge_1.0.0.apk`, aktifkan di LSPosed dengan scope **WhatsApp** (hanya perlu untuk action status).
-5. Buka Automagic dan aktifkan **Notification access** untuk Automagic di pengaturan Android.
-6. Nonaktifkan AutoResponder WhatsApp lain selama pengujian agar tidak ada balasan ganda.
-7. Buat flow dan aktifkan.
+5. Pasang dokumentasi offline dari `AutomagicDocs_1.38.zip` (lihat bagian [Dokumentasi offline](#7-dokumentasi-offline)).
+6. Buka Automagic dan aktifkan **Notification access** untuk Automagic di pengaturan Android.
+7. Nonaktifkan AutoResponder WhatsApp lain selama pengujian agar tidak ada balasan ganda.
+8. Buat flow dan aktifkan.
 
 APK ini **tidak** menghapus atau melewati pemeriksaan lisensi. Gunakan hanya jika Anda memiliki lisensi atau instalasi Automagic yang sah.
 
@@ -304,6 +369,8 @@ Admin | admin, cs
 - Action status hanya mendukung status **teks**. Posting status foto atau video di luar cakupan rilis ini karena memerlukan pipeline upload media internal WhatsApp.
 - Bridge memakai kelas internal WhatsApp (`X.7o8`, `X.81l`, `X.2Cz`). Nama kelas bisa berubah saat WhatsApp di-update, lalu modul perlu disesuaikan.
 - Audiens status mengikuti privasi status terakhir di WhatsApp, tidak bisa dipilih per-flow.
+- Dokumentasi offline disimpan di data aplikasi; hilang bila aplikasi di-uninstall.
+- Skema komponen untuk `amflow` diekstrak otomatis, jadi sebagian condition belum punya daftar tag.
 - Android 11+ membatasi background service dan notification listener. Automagic adalah aplikasi lama yang tidak lagi dirawat, jadi perilakunya bisa berbeda di setiap ROM.
 - Tidak ada jaminan build ini berjalan di semua perangkat. Uji pada perangkat yang tidak dipakai untuk pekerjaan penting.
 
@@ -311,8 +378,8 @@ Admin | admin, cs
 
 ```bash
 sha256sum -c SHA256SUMS
-apksigner verify --print-certs Automagic_1.38.0-wa.2.apk
-aapt2 dump badging Automagic_1.38.0-wa.2.apk | head -3
+apksigner verify --print-certs Automagic_1.38.0-wa.3.apk
+aapt2 dump badging Automagic_1.38.0-wa.3.apk | head -3
 ```
 
 Sertifikat build ini:

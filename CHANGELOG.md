@@ -2,6 +2,47 @@
 
 Semua perubahan penting pada build mod Automagic dicatat di sini.
 
+## [1.38.0-wa.3] — 2026-10-23
+
+Rilis ketiga: **restorasi dokumentasi offline** dan **tooling AI agent untuk merancang flow**.
+
+### Ditambahkan
+
+#### Dokumentasi offline
+
+- Halaman bantuan bawaan (404) dipulihkan dari arsip `web.archive.org`.
+- 449 halaman per bahasa (en/de): 219 action, 127 trigger, 88 condition,
+  4 panduan, 6 referensi, plus halaman indeks.
+- 4 halaman baru untuk komponen mod ini: `wa_reply`, `wa_status`,
+  `wa_gemini_reply`, `wa_message_received`.
+- `HelpActivity` memakai fitur offline bawaan: `files/help/<lang>/*.html` +
+  `version.txt` = `1.38`.
+- `CatalogActivity` dipatch: memakai `files/catalog/<lang>/catalog.html` bila ada,
+  melewati cek jaringan, dan mengizinkan navigasi `file://` di WebView.
+- 56 screenshot ikut dipulihkan.
+
+#### AI flow agent (amflow)
+
+- `tools/amflow/amflow.py`: `docs`, `list`, `component`, `new`, `add`, `validate`,
+  `install`.
+- `schema.json` diekstrak otomatis dari source decompile: 223 action, 128 trigger,
+  89 condition, dengan daftar tag untuk 198 action / 127 trigger / 64 condition.
+- Contoh komponen nyata diambil dari `flows.xml` (36 action, 20 trigger,
+  10 condition) untuk dipakai `--from-example`.
+- Validator memeriksa: tipe komponen dikenal, definisi vs container, nama duplikat,
+  koneksi ke ID tak dikenal, node tidak terhubung, dan tag di luar skema.
+- `install` membuat backup `flows.xml_amflow_<timestamp>.bak` dan tidak menghapus
+  flow yang sudah ada.
+- `tools/amflow/AGENTS.md`: panduan kerja untuk agent.
+
+### Diperbaiki
+
+- Container `actioncontainer`/`conditioncontainer` memakai teks elemen, sedangkan
+  `triggercontainer` memakai child `<trigger>`; keduanya kini ditangani validator.
+- Nama komponen hanya unik per kategori, sehingga trigger dan condition boleh
+  bernama sama.
+- `triggercontainer` kosong diperlakukan sebagai flow manual (peringatan, bukan error).
+
 ## [1.38.0-wa.2] — 2026-10-21
 
 Rilis kedua: menambah **posting status WhatsApp tanpa interaksi** lewat action baru dan modul LSPosed terpisah.

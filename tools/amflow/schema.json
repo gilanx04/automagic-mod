@@ -1,0 +1,4758 @@
+{
+ "version": "1.38.0",
+ "generated_from": "Automagic 1.38.0 (jadx sources) + flows.xml",
+ "counts": {
+  "trigger": 128,
+  "condition": 89,
+  "action": 223
+ },
+ "components": {
+  "trigger": {
+   "time": {
+    "name": "Time",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.dn",
+    "tags": {
+     "useDefaultName": "boolean",
+     "weekday": "string",
+     "hour": "int",
+     "minute": "int",
+     "second": "int",
+     "allowInDeviceIdle": "boolean",
+     "likeAlarmClock": "boolean"
+    },
+    "example": "<trigger type=\"time\">\n    <useDefaultName>false</useDefaultName>\n    <name>afternoon</name>\n    <enabled>false</enabled>\n    <weekday>Mon</weekday>\n    <weekday>Tue</weekday>\n    <weekday>Wed</weekday>\n    <weekday>Thu</weekday>\n    <weekday>Fri</weekday>\n    <weekday>Sat</weekday>\n    <weekday>Sun</weekday>\n    <hour>16</hour>\n    <minute>0</minute>\n    <second>0</second>\n    <allowInDeviceIdle>true</allowInDeviceIdle>\n    <likeAlarmClock>false</likeAlarmClock>\n  </trigger>"
+   },
+   "location": {
+    "name": "Location",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.bm",
+    "tags": {
+     "useDefaultName": "boolean",
+     "locationName": "string",
+     "latitude": "double",
+     "longitude": "double",
+     "radius": "double",
+     "entering": "boolean",
+     "exiting": "boolean",
+     "locationMethod": "string"
+    }
+   },
+   "periodic_timer": {
+    "name": "Periodic Timer",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.cc",
+    "tags": {
+     "useDefaultName": "boolean",
+     "frequency": "long",
+     "wakeDevice": "boolean",
+     "fixedTimes": "boolean",
+     "limitTimeRange": "boolean",
+     "weekday": "string",
+     "hourFrom": "int",
+     "minuteFrom": "int",
+     "hourTo": "int",
+     "minuteTo": "int",
+     "allowInDeviceIdle": "boolean",
+     "likeAlarmClock": "boolean"
+    },
+    "example": "<trigger type=\"periodic_timer\">\n    <useDefaultName>true</useDefaultName>\n    <name>Periodic Timer: every 3d (Don't wake device)</name>\n    <enabled>false</enabled>\n    <frequency>259200000</frequency>\n    <wakeDevice>false</wakeDevice>\n    <fixedTimes>true</fixedTimes>\n    <limitTimeRange>false</limitTimeRange>\n    <weekday>Mon</weekday>\n    <weekday>Tue</weekday>\n    <weekday>Wed</weekday>\n    <weekday>Thu</weekday>\n    <weekday>Fri</weekday>\n    <weekday>Sat</weekday>\n    <weekday>Sun</weekday>\n    <hourFrom>8</hourFrom>\n    <minuteFrom>0</minuteFrom>\n    <hourTo>17</hourTo>\n    <minuteTo>0</minuteTo>\n    <allowInDeviceIdle>false</allowInDeviceIdle>\n    <likeAlarmClock>false</likeAlarmClock>\n  </trigger>"
+   },
+   "shortcut": {
+    "name": "Shortcut",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.cw",
+    "tags": {
+     "useDefaultName": "boolean"
+    },
+    "example": "<trigger type=\"shortcut\">\n    <useDefaultName>true</useDefaultName>\n    <name>Shortcut: AM Backup</name>\n    <enabled>false</enabled>\n    <title>AM Backup</title>\n  </trigger>"
+   },
+   "calendar": {
+    "name": "Calendar",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.y",
+    "tags": {
+     "useDefaultName": "boolean",
+     "calendarRepeatType": "string",
+     "date": "string",
+     "allowInDeviceIdle": "boolean",
+     "likeAlarmClock": "boolean"
+    }
+   },
+   "gleeo_recording_started": {
+    "name": "Gleeo Recording Started",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.ar",
+    "tags": {
+     "useDefaultName": "boolean",
+     "domainFilterEnabled": "boolean",
+     "domainFilterList": "string",
+     "projectFilterEnabled": "boolean",
+     "projectFilterList": "string",
+     "taskFilterEnabled": "boolean",
+     "taskFilterList": "string"
+    }
+   },
+   "gleeo_recording_stopped": {
+    "name": "Gleeo Recording Stopped",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.as",
+    "tags": {
+     "useDefaultName": "boolean",
+     "domainFilterEnabled": "boolean",
+     "domainFilterList": "string",
+     "projectFilterEnabled": "boolean",
+     "projectFilterList": "string",
+     "taskFilterEnabled": "boolean",
+     "taskFilterList": "string"
+    }
+   },
+   "periodic_location_update": {
+    "name": "Periodic Location Update",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.cb",
+    "tags": {
+     "useDefaultName": "boolean",
+     "provider": "string",
+     "frequency": "long",
+     "enforceFrequency": "boolean",
+     "minimumAccuracyEnabled": "boolean",
+     "minimumAccuracy": "int",
+     "limitTimeRange": "boolean",
+     "weekday": "string",
+     "hourFrom": "int",
+     "minuteFrom": "int",
+     "hourTo": "int",
+     "minuteTo": "int",
+     "allowInDeviceIdle": "boolean",
+     "likeAlarmClock": "boolean"
+    }
+   },
+   "battery_low_okay": {
+    "name": "Battery Low Condition",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.u",
+    "tags": {
+     "useDefaultName": "boolean",
+     "batteryLow": "boolean"
+    }
+   },
+   "battery_level": {
+    "name": "Battery Level",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.s",
+    "tags": {
+     "useDefaultName": "int",
+     "wearDevice": "int",
+     "levelPercentage": "int",
+     "batteryLevelCondition": "string",
+     "ignoreTemperatureChanges": "boolean",
+     "ignoreVoltageChanges": "boolean"
+    },
+    "example": "<trigger type=\"battery_level\">\n    <useDefaultName>true</useDefaultName>\n    <name>Battery Level: higher than 99%</name>\n    <enabled>false</enabled>\n    <levelPercentage>99</levelPercentage>\n    <batteryLevelCondition>HIGHER_THAN</batteryLevelCondition>\n    <ignoreTemperatureChanges>true</ignoreTemperatureChanges>\n    <ignoreVoltageChanges>true</ignoreVoltageChanges>\n  </trigger>"
+   },
+   "power_connected": {
+    "name": "Power Source",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.cl",
+    "tags": {
+     "useDefaultName": "boolean",
+     "wearDevice": "string",
+     "powerConnected": "boolean",
+     "chargingACAdapter": "boolean",
+     "chargingUSB": "boolean",
+     "chargingWireless": "boolean"
+    }
+   },
+   "sms_receive": {
+    "name": "SMS Received",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.dc",
+    "tags": {
+     "useDefaultName": "boolean",
+     "allSender": "boolean",
+     "senders": "string",
+     "containedString": "string",
+     "abortBroadcast": "boolean"
+    },
+    "example": "<trigger type=\"sms_receive\">\n    <useDefaultName>true</useDefaultName>\n    <name>SMS Received: All containing Secret Keyword</name>\n    <enabled>false</enabled>\n    <allSender>true</allSender>\n    <senders />\n    <containedString>Secret Keyword</containedString>\n    <abortBroadcast>false</abortBroadcast>\n  </trigger>"
+   },
+   "global_variable": {
+    "name": "Global Variable",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.at",
+    "tags": {
+     "useDefaultName": "boolean",
+     "variable": "string"
+    }
+   },
+   "outgoing_call": {
+    "name": "Outgoing Call",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.ca",
+    "tags": {
+     "useDefaultName": "boolean",
+     "all": "boolean",
+     "calledNumbersList": "string",
+     "offhook": "boolean",
+     "idle": "boolean"
+    }
+   },
+   "incoming_call": {
+    "name": "Incoming Call",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.az",
+    "tags": {
+     "useDefaultName": "boolean",
+     "all": "boolean",
+     "incomingNumbersList": "string",
+     "handleSuppressedCallnumber": "boolean",
+     "ringing": "boolean",
+     "offhook": "boolean",
+     "idle": "boolean",
+     "missedRejected": "boolean"
+    }
+   },
+   "storage_media_event": {
+    "name": "Storage Media Event",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.di",
+    "tags": {
+     "useDefaultName": "boolean",
+     "broadcast": "string"
+    }
+   },
+   "display_state": {
+    "name": "Display State",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.al",
+    "tags": {
+     "useDefaultName": "boolean",
+     "displayOn": "boolean"
+    },
+    "example": "<trigger type=\"display_state\">\n    <useDefaultName>true</useDefaultName>\n    <name>Display State: Off</name>\n    <enabled>false</enabled>\n    <displayOn>false</displayOn>\n  </trigger>"
+   },
+   "wifi_connected": {
+    "name": "WiFi Connected",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.dv",
+    "tags": {
+     "useDefaultName": "boolean",
+     "all": "boolean",
+     "ssidList": "string",
+     "triggerOnBSSIDChanges": "boolean"
+    },
+    "example": "<trigger type=\"wifi_connected\">\n    <useDefaultName>true</useDefaultName>\n    <name>WiFi Connected: All SSIDs</name>\n    <enabled>false</enabled>\n    <all>true</all>\n    <ssidList />\n    <triggerOnBSSIDChanges>true</triggerOnBSSIDChanges>\n  </trigger>"
+   },
+   "wifi_disconnected": {
+    "name": "WiFi Disconnected",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.dw",
+    "tags": {
+     "useDefaultName": "boolean",
+     "all": "boolean",
+     "ssidList": "string"
+    },
+    "example": "<trigger type=\"wifi_disconnected\">\n    <useDefaultName>true</useDefaultName>\n    <name>WiFi Disconnected: All SSIDs</name>\n    <enabled>false</enabled>\n    <all>true</all>\n    <ssidList />\n  </trigger>"
+   },
+   "app_task_started": {
+    "name": "App Task Started",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.m",
+    "tags": {
+     "useDefaultName": "boolean",
+     "method": "string",
+     "packageNameFilter": "string"
+    },
+    "example": "<trigger type=\"app_task_started\">\n    <useDefaultName>false</useDefaultName>\n    <name>Streaming App Opened</name>\n    <enabled>false</enabled>\n    <method>CLASSIC</method>\n    <packageNameFilter>com.lagradost.cloudstream3,app.revanced.android.youtube</packageNameFilter>\n  </trigger>"
+   },
+   "app_task_ended": {
+    "name": "App Task Ended",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.l",
+    "tags": {
+     "useDefaultName": "boolean",
+     "method": "string",
+     "packageNameFilter": "string"
+    }
+   },
+   "wired_headset_plugged": {
+    "name": "Wired Headset Plugged",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.ea",
+    "tags": {
+     "useDefaultName": "boolean",
+     "plugged": "boolean"
+    }
+   },
+   "shake": {
+    "name": "Shake",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.cv",
+    "tags": {
+     "useDefaultName": "boolean",
+     "shakeSensitivity": "string"
+    },
+    "example": "<trigger type=\"shake\">\n    <useDefaultName>true</useDefaultName>\n    <name>Shake: Sensitivity Medium</name>\n    <enabled>false</enabled>\n    <shakeSensitivity>MEDIUM</shakeSensitivity>\n  </trigger>"
+   },
+   "device_orientation": {
+    "name": "Device Orientation",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.aj",
+    "tags": {
+     "useDefaultName": "boolean",
+     "orientationFaceUp": "boolean",
+     "orientationFaceDown": "boolean",
+     "orientationFaceLeft": "boolean",
+     "orientationFaceRight": "boolean",
+     "orientationStandingUpright": "boolean",
+     "orientationStandingUpsideDown": "boolean",
+     "negate": "boolean"
+    }
+   },
+   "car_ui_mode": {
+    "name": "Car UI Mode",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.aa",
+    "tags": {
+     "useDefaultName": "boolean",
+     "enter": "boolean"
+    }
+   },
+   "desk_ui_mode": {
+    "name": "Desk UI Mode",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.ah",
+    "tags": {
+     "useDefaultName": "boolean",
+     "enter": "boolean"
+    }
+   },
+   "dock_event": {
+    "name": "Dock Event",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.am",
+    "tags": {
+     "useDefaultName": "boolean",
+     "docked": "boolean"
+    }
+   },
+   "wifi_scan_results_available": {
+    "name": "WiFi Scan Results Available",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.dx",
+    "tags": {
+     "useDefaultName": "boolean"
+    },
+    "example": "<trigger type=\"wifi_scan_results_available\">\n    <useDefaultName>true</useDefaultName>\n    <name>WiFi Scan Results Available</name>\n    <enabled>false</enabled>\n  </trigger>"
+   },
+   "bluetooth_device_connected": {
+    "name": "Bluetooth Device Connected",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.v",
+    "tags": {
+     "useDefaultName": "boolean",
+     "all": "boolean",
+     "deviceAddress": "string",
+     "deviceName": "string"
+    }
+   },
+   "bluetooth_device_disconnected": {
+    "name": "Bluetooth Device Disconnected",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.w",
+    "tags": {
+     "useDefaultName": "boolean",
+     "all": "boolean",
+     "deviceAddress": "string",
+     "deviceName": "string"
+    }
+   },
+   "auto_sync_state": {
+    "name": "Auto Sync State",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.p",
+    "tags": {
+     "useDefaultName": "boolean",
+     "autoSyncEnabled": "boolean"
+    }
+   },
+   "bluetooth_state": {
+    "name": "Bluetooth State",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.x",
+    "tags": {
+     "useDefaultName": "boolean",
+     "turningOn": "boolean",
+     "on": "boolean",
+     "turningOff": "boolean",
+     "off": "boolean"
+    },
+    "example": "<trigger type=\"bluetooth_state\">\n    <useDefaultName>true</useDefaultName>\n    <name>Bluetooth State: On</name>\n    <enabled>false</enabled>\n    <turningOn>false</turningOn>\n    <on>true</on>\n    <turningOff>false</turningOff>\n    <off>false</off>\n  </trigger>"
+   },
+   "file_observer": {
+    "name": "File Observer",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.an",
+    "tags": {
+     "useDefaultName": "string",
+     "pathList": "string",
+     "eventTypeAccess": "boolean",
+     "eventTypeAttrib": "boolean",
+     "eventTypeCloseNowrite": "boolean",
+     "eventTypeCloseWrite": "boolean",
+     "eventTypeCreate": "boolean",
+     "eventTypeDelete": "boolean",
+     "eventTypeDeleteSelf": "boolean",
+     "eventTypeModify": "boolean",
+     "eventTypeMovedFrom": "boolean",
+     "eventTypeMovedTo": "boolean",
+     "eventTypeMoveSelf": "boolean",
+     "eventTypeOpen": "boolean"
+    }
+   },
+   "automagic_startup": {
+    "name": "Automagic Startup",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.r",
+    "tags": {
+     "useDefaultName": "boolean"
+    }
+   },
+   "compass": {
+    "name": "Compass",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.ad",
+    "tags": {
+     "useDefaultName": "boolean",
+     "compassType": "string",
+     "frequency": "long",
+     "toleranceInDegrees": "int",
+     "notifyWhenSteady": "boolean",
+     "numberOfSectors": "int"
+    }
+   },
+   "nfc_tag": {
+    "name": "NFC Tag",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.bu",
+    "tags": {
+     "useDefaultName": "boolean",
+     "automagicTagID": "boolean",
+     "tagID": "string",
+     "existingTagID": "string"
+    }
+   },
+   "notification_status_bar_selected": {
+    "name": "Notification on Statusbar Selected",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.bz",
+    "tags": {
+     "useDefaultName": "boolean",
+     "ownNotification": "boolean",
+     "notificationIconType": "string",
+     "notificationIcon": "string",
+     "customNotificationIcon": "string",
+     "message": "string",
+     "channel": "string",
+     "sound": "boolean",
+     "vibrate": "boolean",
+     "flashLED": "boolean",
+     "flashLEDColor": "int",
+     "flashLEDOn": "long",
+     "flashLEDOff": "long",
+     "accentColorEnabled": "boolean",
+     "accentColor": "int",
+     "flagOngoing": "boolean",
+     "category": "string",
+     "priority": "string",
+     "visibility": "string",
+     "messageBigEnabled": "boolean",
+     "messageBig": "string",
+     "largeIconEnabled": "boolean",
+     "largeIcon": "string",
+     "group": "string",
+     "isGroupSummary": "boolean",
+     "all": "boolean",
+     "notificationIDList": "string"
+    },
+    "example": "<trigger type=\"notification_status_bar_selected\">\n    <useDefaultName>true</useDefaultName>\n    <name>Notification on Statusbar Selected: ID 15 </name>\n    <enabled>false</enabled>\n    <ownNotification>false</ownNotification>\n    <notificationIconType>BUILTIN</notificationIconType>\n    <notificationIcon>FLASH</notificationIcon>\n    <customNotificationIcon />\n    <title />\n    <message />\n    <channel />\n    <sound>false</sound>\n    <vibrate>false</vibrate>\n    <flashLED>false</flashLED>\n    <flashLEDColor>#ff00ff00</flashLEDColor>\n    <flashLEDOn>500</flashLEDOn>\n    <flashLEDOff>500</flashLEDOff>\n    <accentColorEnabled>false</accentColorEnabled>\n    <accentColor>#ffff0000</accentColor>\n    <flagOngoing>false</flagOngoing>\n    <category>DEFAULT</category>\n    <priority>DEFAULT</priority>\n    <visibility>PRIVATE</visibility>\n    <messageBigEnabled>false</messageBigEnabled>\n    <messageBig />\n    <largeIconEnabled>false</largeIconEnabled>\n    <largeIcon />\n    <group />\n    <isGroupSummary>false</isGroupSummary>\n    <all>false</all>\n    <notificationIDList>15</notificationIDList>\n  </trigger>"
+   },
+   "user_present": {
+    "name": "User Present",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.dr",
+    "tags": {
+     "useDefaultName": "boolean"
+    }
+   },
+   "airplane_mode": {
+    "name": "Airplane Mode",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.i",
+    "tags": {
+     "useDefaultName": "boolean",
+     "on": "boolean"
+    }
+   },
+   "device_storage_space_low_okay": {
+    "name": "Device Storage Space Low",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.ak",
+    "tags": {
+     "useDefaultName": "boolean",
+     "deviceStorageLow": "boolean"
+    }
+   },
+   "periodic_timer_inexact": {
+    "name": "Periodic Timer Inexact",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.cd",
+    "tags": {
+     "useDefaultName": "boolean",
+     "inexactInterval": "string",
+     "wakeDevice": "boolean",
+     "limitTimeRange": "boolean",
+     "weekday": "string",
+     "hourFrom": "int",
+     "minuteFrom": "int",
+     "hourTo": "int",
+     "minuteTo": "int"
+    }
+   },
+   "phone_service_state": {
+    "name": "Phone Service State",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.ch",
+    "tags": {
+     "useDefaultName": "boolean",
+     "sim": "string",
+     "inService": "boolean",
+     "emergencyOnly": "boolean",
+     "outOfService": "boolean",
+     "powerOff": "boolean",
+     "wakeDevice": "boolean",
+     "wakeDeviceInterval": "long",
+     "turnScreenOn": "boolean"
+    }
+   },
+   "screen_orientation": {
+    "name": "Screen Orientation",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.cs",
+    "tags": {
+     "useDefaultName": "boolean",
+     "portrait": "boolean"
+    }
+   },
+   "proximity_sensor": {
+    "name": "Proximity Sensor",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.cp",
+    "tags": {
+     "useDefaultName": "boolean",
+     "less": "boolean",
+     "distance": "double",
+     "keepDeviceAwake": "boolean"
+    }
+   },
+   "phone_cell_gsm": {
+    "name": "Phone Cell GSM",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.cg",
+    "tags": {
+     "useDefaultName": "boolean",
+     "phoneCellMethod": "string",
+     "phoneCellTriggerType": "string",
+     "lacListEnabled": "boolean",
+     "lacList": "string",
+     "cidListEnabled": "boolean",
+     "cidList": "string",
+     "cidIgnoreListEnabled": "boolean",
+     "cidIgnoreList": "string",
+     "connected": "boolean",
+     "disconnected": "boolean",
+     "wakeDevice": "boolean",
+     "wakeDeviceInterval": "long",
+     "turnScreenOn": "boolean",
+     "forceCellUpdate": "boolean"
+    },
+    "example": "<trigger type=\"phone_cell_gsm\">\n    <useDefaultName>false</useDefaultName>\n    <name>Rumah</name>\n    <enabled>false</enabled>\n    <phoneCellMethod>CLASSIC</phoneCellMethod>\n    <phoneCellTriggerType>CELL_AREA</phoneCellTriggerType>\n    <lacListEnabled>true</lacListEnabled>\n    <lacList>3783</lacList>\n    <cidListEnabled>true</cidListEnabled>\n    <cidList>50109461</cidList>\n    <cidIgnoreListEnabled>false</cidIgnoreListEnabled>\n    <cidIgnoreList />\n    <connected>true</connected>\n    <disconnected>false</disconnected>\n    <wakeDevice>false</wakeDevice>\n    <wakeDeviceInterval>300000</wakeDeviceInterval>\n    <turnScreenOn>false</turnScreenOn>\n    <forceCellUpdate>false</forceCellUpdate>\n  </trigger>"
+   },
+   "wifi_state": {
+    "name": "WiFi State",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.dy",
+    "tags": {
+     "useDefaultName": "boolean",
+     "stateEnabling": "boolean",
+     "stateEnabled": "boolean",
+     "stateDisabling": "boolean",
+     "stateDisabled": "boolean"
+    },
+    "example": "<trigger type=\"wifi_state\">\n    <useDefaultName>true</useDefaultName>\n    <name>WiFi State: Enabled</name>\n    <enabled>false</enabled>\n    <stateEnabling>false</stateEnabling>\n    <stateEnabled>true</stateEnabled>\n    <stateDisabling>false</stateDisabling>\n    <stateDisabled>false</stateDisabled>\n  </trigger>"
+   },
+   "light_sensor": {
+    "name": "Light Sensor",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.bk",
+    "tags": {
+     "useDefaultName": "boolean",
+     "lightLevelAverage": "string",
+     "lightLevelSensitivity": "string",
+     "less": "boolean",
+     "lightLevel": "int"
+    }
+   },
+   "notification_status_bar_displayed": {
+    "name": "Notification on Statusbar Displayed",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.bx",
+    "tags": {
+     "useDefaultName": "boolean",
+     "packageNameFilter": "string",
+     "textMatchField": "string",
+     "textMatchType": "string",
+     "textFilter": "string",
+     "ignoreRegular": "boolean",
+     "ignoreOngoing": "boolean",
+     "ignoreGroupSummary": "boolean"
+    },
+    "example": "<trigger type=\"notification_status_bar_displayed\">\n    <useDefaultName>true</useDefaultName>\n    <name>Notification on Statusbar Displayed: com.gbwhatsapp</name>\n    <enabled>false</enabled>\n    <packageNameFilter>com.gbwhatsapp</packageNameFilter>\n    <textMatchField>CONTENT_TITLE</textMatchField>\n    <textMatchType>CONTAINS_TEXT</textMatchType>\n    <textFilter />\n    <ignoreRegular>false</ignoreRegular>\n    <ignoreOngoing>false</ignoreOngoing>\n    <ignoreGroupSummary>false</ignoreGroupSummary>\n  </trigger>"
+   },
+   "sms_sent": {
+    "name": "SMS Sent",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.dd",
+    "tags": {
+     "useDefaultName": "boolean",
+     "allReceivers": "boolean",
+     "receivers": "string",
+     "containedString": "string"
+    }
+   },
+   "shutdown": {
+    "name": "Shutdown",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.cy",
+    "tags": {
+     "useDefaultName": "boolean"
+    }
+   },
+   "audio_volume": {
+    "name": "Audio Volume",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.o",
+    "tags": {
+     "useDefaultName": "boolean",
+     "audioStreamType": "string",
+     "audioVolumeCondition": "string",
+     "audioVolume": "int"
+    }
+   },
+   "app_package_event": {
+    "name": "App Package Event",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.k",
+    "tags": {
+     "useDefaultName": "boolean",
+     "broadcast": "string",
+     "packageNameFilter": "string"
+    }
+   },
+   "notification_screen_displayed": {
+    "name": "Notification on Screen Displayed",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.bw",
+    "tags": {
+     "useDefaultName": "boolean",
+     "packageNameFilter": "string",
+     "textMatchType": "string",
+     "textFilter": "string"
+    }
+   },
+   "next_alarm": {
+    "name": "Next Alarm",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.bv",
+    "tags": {
+     "useDefaultName": "boolean"
+    }
+   },
+   "gmail_unread_conversation_count": {
+    "name": "Gmail Unread Conversation Count",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.av",
+    "tags": {
+     "useDefaultName": "boolean",
+     "accounts": "string",
+     "inboxType": "string",
+     "increasingOnly": "boolean"
+    }
+   },
+   "general_broadcast": {
+    "name": "General Broadcast",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.aq",
+    "tags": {
+     "useDefaultName": "string",
+     "action": "string",
+     "categoryList": "string",
+     "dataSchemeList": "boolean",
+     "dataAuthorityList": "string",
+     "dataPathLiteralList": "string",
+     "dataPathPrefixList": "string",
+     "dataPathGlobList": "string",
+     "dataTypeList": "string",
+     "extras": "string",
+     "receiveInitialStickyBroadcast": "boolean"
+    }
+   },
+   "plugin": {
+    "name": "Plugin (Experimental)",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.cj",
+    "tags": {
+     "useDefaultName": "boolean",
+     "pluginLabel": "string",
+     "pluginBlurb": "string",
+     "pluginPackage": "string",
+     "pluginClass": "string",
+     "pluginBundle": "string",
+     "pluginBundleData": "string",
+     "configured": "boolean",
+     "becomesTrue": "boolean",
+     "becomesFalse": "boolean",
+     "relevantVariables": "string"
+    }
+   },
+   "active_network_type": {
+    "name": "Active Network Type",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.f",
+    "tags": {
+     "useDefaultName": "boolean",
+     "none": "boolean",
+     "mobile": "boolean",
+     "wifi": "boolean",
+     "wimax": "boolean",
+     "bluetooth": "boolean",
+     "ethernet": "boolean"
+    },
+    "example": "<trigger type=\"active_network_type\">\n    <useDefaultName>true</useDefaultName>\n    <name>Active Network Type: Changed to Mobile</name>\n    <enabled>false</enabled>\n    <none>false</none>\n    <mobile>true</mobile>\n    <wifi>false</wifi>\n    <wimax>false</wimax>\n    <bluetooth>false</bluetooth>\n    <ethernet>false</ethernet>\n  </trigger>"
+   },
+   "assist": {
+    "name": "Assist",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.n",
+    "tags": {
+     "useDefaultName": "boolean"
+    }
+   },
+   "global_variable_date": {
+    "name": "Global Variable Date/Time",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.au",
+    "tags": {
+     "useDefaultName": "boolean",
+     "variable": "string",
+     "executeWhenMissed": "boolean",
+     "executed": "long",
+     "executeAt": "long",
+     "allowInDeviceIdle": "boolean",
+     "likeAlarmClock": "boolean"
+    }
+   },
+   "clipboard_changed": {
+    "name": "Clipboard Changed",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.ab",
+    "tags": {
+     "useDefaultName": "boolean"
+    }
+   },
+   "phone_cell_cdma": {
+    "name": "Phone Cell CDMA",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.cf",
+    "tags": {
+     "useDefaultName": "boolean",
+     "phoneCellMethod": "string",
+     "phoneCellTriggerType": "string",
+     "cellList": "string",
+     "cellIgnoreList": "string",
+     "connected": "boolean",
+     "disconnected": "boolean",
+     "wakeDevice": "boolean",
+     "wakeDeviceInterval": "long",
+     "turnScreenOn": "boolean",
+     "forceCellUpdate": "boolean"
+    }
+   },
+   "calendar_event": {
+    "name": "Calendar Event",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.z",
+    "tags": {
+     "useDefaultName": "boolean",
+     "notifyStart": "boolean",
+     "startOffsetType": "string",
+     "startOffset": "long",
+     "notifyEnd": "boolean",
+     "endOffsetType": "string",
+     "endOffset": "long",
+     "calendarDisplayNameFilterEnabled": "boolean",
+     "calendarDisplayNameFilterList": "string",
+     "titleFilterEnabled": "boolean",
+     "titleFilterList": "string",
+     "descriptionFilterEnabled": "boolean",
+     "descriptionFilterList": "string",
+     "eventLocationFilterEnabled": "boolean",
+     "eventLocationFilterList": "string",
+     "allDayEvents": "boolean",
+     "regularEvents": "boolean",
+     "availabilityBusy": "boolean",
+     "availabilityFree": "boolean",
+     "availabilityTentative": "boolean",
+     "allowInDeviceIdle": "boolean",
+     "likeAlarmClock": "boolean"
+    }
+   },
+   "daydream_state": {
+    "name": "Daydream State",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.ag",
+    "tags": {
+     "useDefaultName": "boolean",
+     "started": "boolean"
+    }
+   },
+   "locale_adjusted": {
+    "name": "Locale Adjusted",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.bl",
+    "tags": {
+     "useDefaultName": "boolean"
+    }
+   },
+   "timezone_adjusted": {
+    "name": "Timezone Adjusted",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.dp",
+    "tags": {
+     "useDefaultName": "boolean"
+    }
+   },
+   "time_adjusted": {
+    "name": "Time Adjusted",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.do",
+    "tags": {}
+   },
+   "k9_mail_received": {
+    "name": "K-9 Mail Received",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.bb",
+    "tags": {
+     "useDefaultName": "boolean",
+     "allMailAccounts": "boolean",
+     "mailAccounts": "string",
+     "allSenders": "boolean",
+     "senders": "string",
+     "allSubjects": "boolean",
+     "subjects": "string",
+     "allReceivers": "boolean",
+     "receivers": "string",
+     "allCcs": "boolean",
+     "ccs": "string"
+    }
+   },
+   "location_provider_state": {
+    "name": "Location Provider State",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.bn",
+    "tags": {
+     "useDefaultName": "boolean",
+     "provider": "string"
+    }
+   },
+   "phone_signal_strength": {
+    "name": "Phone Signal Strength",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.ci",
+    "tags": {
+     "useDefaultName": "boolean",
+     "sim": "string",
+     "asuLevel": "int",
+     "phoneSignalStrengthCondition": "string",
+     "wakeDevice": "boolean",
+     "wakeDeviceInterval": "long",
+     "turnScreenOn": "boolean"
+    }
+   },
+   "mobile_datanetwork_type": {
+    "name": "Mobile Datanetwork Type",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.bs",
+    "tags": {
+     "useDefaultName": "boolean",
+     "sim": "string",
+     "datanetworkTypeUnknown": "boolean",
+     "datanetworkTypeGPRS": "boolean",
+     "datanetworkTypeEDGE": "boolean",
+     "datanetworkTypeUMTS": "boolean",
+     "datanetworkTypeCDMA": "boolean",
+     "datanetworkTypeEVDO_0": "boolean",
+     "datanetworkTypeEVDO_A": "boolean",
+     "datanetworkType1xRTT": "boolean",
+     "datanetworkTypeHSDPA": "boolean",
+     "datanetworkTypeHSUPA": "boolean",
+     "datanetworkTypeHSPA": "boolean",
+     "datanetworkTypeIDen": "boolean",
+     "datanetworkTypeEVDO_B": "boolean",
+     "datanetworkTypeLTE": "boolean",
+     "datanetworkTypeEHRPD": "boolean",
+     "datanetworkTypeHSPAP": "boolean",
+     "wakeDevice": "boolean",
+     "wakeDeviceInterval": "long",
+     "turnScreenOn": "boolean"
+    }
+   },
+   "http_request": {
+    "name": "HTTP Request (Experimental)",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.aw",
+    "tags": {
+     "useDefaultName": "boolean",
+     "path": "string",
+     "port": "int",
+     "bindToWifiOnly": "boolean",
+     "acquireWifiLock": "boolean",
+     "finishResponse": "boolean"
+    }
+   },
+   "activity_started": {
+    "name": "Activity Started",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.h",
+    "tags": {
+     "useDefaultName": "boolean",
+     "method": "string",
+     "packageNameFilter": "string",
+     "classNameFilter": "string"
+    }
+   },
+   "activity_ended": {
+    "name": "Activity Ended",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.g",
+    "tags": {
+     "useDefaultName": "boolean",
+     "method": "string",
+     "packageNameFilter": "string",
+     "classNameFilter": "string"
+    }
+   },
+   "login_attempt": {
+    "name": "Login Attempt",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.bo",
+    "tags": {
+     "useDefaultName": "boolean",
+     "successfulAfterFailed": "boolean",
+     "onEveryFailedAttempt": "boolean",
+     "failedAttemptCount": "int"
+    },
+    "example": "<trigger type=\"login_attempt\">\n    <useDefaultName>true</useDefaultName>\n    <name>Login Attempt: Failed the 2nd time</name>\n    <enabled>false</enabled>\n    <successfulAfterFailed>false</successfulAfterFailed>\n    <onEveryFailedAttempt>false</onEveryFailedAttempt>\n    <failedAttemptCount>2</failedAttemptCount>\n  </trigger>"
+   },
+   "pressure_sensor": {
+    "name": "Pressure Sensor",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.co",
+    "tags": {
+     "useDefaultName": "boolean",
+     "pressureCondition": "string",
+     "pressure": "double",
+     "threshold": "double",
+     "pressureChange": "double",
+     "duration": "long"
+    }
+   },
+   "system_setting_changed": {
+    "name": "System Setting Changed",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.dj",
+    "tags": {
+     "useDefaultName": "boolean",
+     "settingCategory": "string",
+     "settingName": "string",
+     "variable": "string"
+    }
+   },
+   "speed": {
+    "name": "Speed",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.dg",
+    "tags": {
+     "useDefaultName": "boolean",
+     "speedCondition": "string",
+     "speed": "double",
+     "threshold": "double",
+     "speedUnit": "string"
+    }
+   },
+   "nfc_state": {
+    "name": "NFC State",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.bt",
+    "tags": {
+     "useDefaultName": "boolean",
+     "turningOn": "boolean",
+     "on": "boolean",
+     "turningOff": "boolean",
+     "off": "boolean"
+    }
+   },
+   "significant_motion_sensor": {
+    "name": "Significant Motion Detected",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.cz",
+    "tags": {
+     "useDefaultName": "boolean"
+    }
+   },
+   "periodic_user_activity_update": {
+    "name": "User Activity (Experimental)",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.ce",
+    "tags": {
+     "useDefaultName": "boolean",
+     "frequency": "long",
+     "minimumConfidenceEnabled": "boolean",
+     "minimumConfidence": "int",
+     "limitTimeRange": "boolean",
+     "weekday": "string",
+     "hourFrom": "int",
+     "minuteFrom": "int",
+     "hourTo": "int",
+     "minuteTo": "int",
+     "userActivityTriggerType": "string",
+     "userActivityType": "string",
+     "userActivityChangeType": "string",
+     "enforceFrequency": "boolean",
+     "allowInDeviceIdle": "boolean",
+     "likeAlarmClock": "boolean"
+    }
+   },
+   "automagic_notification_selected": {
+    "name": "Automagic Notification Selected",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.q",
+    "tags": {
+     "useDefaultName": "boolean"
+    }
+   },
+   "command_output": {
+    "name": "Command Output",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.ac",
+    "tags": {
+     "useDefaultName": "boolean",
+     "command": "string",
+     "root": "boolean",
+     "seContext": "string",
+     "workingDirectory": "string",
+     "textMatchType": "string",
+     "containedString": "string",
+     "skipInitialOutput": "boolean",
+     "skipInitialOutputMillis": "long",
+     "keepDeviceAwake": "boolean",
+     "logOutput": "boolean"
+    }
+   },
+   "notification_status_bar_removed": {
+    "name": "Notification on Statusbar Removed",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.by",
+    "tags": {
+     "useDefaultName": "boolean",
+     "packageNameFilter": "string",
+     "textMatchField": "string",
+     "textMatchType": "string",
+     "textFilter": "string",
+     "ignoreRegular": "boolean",
+     "ignoreOngoing": "boolean",
+     "ignoreGroupSummary": "boolean"
+    }
+   },
+   "plugin_event": {
+    "name": "Plugin Event (Experimental)",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.ck",
+    "tags": {
+     "useDefaultName": "boolean",
+     "pluginLabel": "string",
+     "pluginBlurb": "string",
+     "pluginPackage": "string",
+     "pluginClass": "string",
+     "pluginBundle": "string",
+     "pluginBundleData": "string",
+     "configured": "boolean",
+     "relevantVariables": "string"
+    },
+    "example": "<trigger type=\"plugin_event\">\n    <useDefaultName>false</useDefaultName>\n    <name>Plugin Event: AutoResponder WA 1.2</name>\n    <pluginLabel>AutoResponder WA</pluginLabel>\n    <pluginBlurb>1</pluginBlurb>\n    <pluginPackage>tkstudio.autoresponderforwa</pluginPackage>\n    <pluginClass>tkstudio.autoresponderforwa.tasker.ui.EditActivityEvent</pluginClass>\n    <pluginBundle>AwAAAPQAAABCTkRMAgAAAC8AAAB0AGsAcwB0AHUAZABpAG8ALgBhAHUAdABvAHIAZQBzAHAAbwBu\nAGQAZQByAGYAbwByAHcAYQAuAHQAYQBzAGsAZQByAC4AZQB4AHQAcgBhAC4AUwBUAFIASQBOAEcA\nAAAAAAAAAQAAADEAAAA5AAAAdABrAHMAdAB1AGQAaQBvAC4AYQB1AHQAbwByAGUAcwBwAG8AbgBk\nAGUAcgBmAG8AcgB3AGEALgB0AGEAcwBrAGUAcgAuAGUAeAB0AHIAYQAuAEkATgBUAF8AVgBFAFIA\nUwBJAE8ATgBfAEMATwBEAEUAAAABAAAAoAEAAAAAAAA=\n</pluginBundle>\n    <pluginBundleData>rO0ABXNyABFqYXZhLnV0aWwuSGFzaE1hcAUH2sHDFmDRAwACRgAKbG9hZEZhY3RvckkACXRocmVz\naG9sZHhwP0AAAAAAAAx3CAAAABAAAAACdAA5dGtzdHVkaW8uYXV0b3Jlc3BvbmRlcmZvcndhLnRh\nc2tlci5leHRyYS5JTlRfVkVSU0lPTl9DT0RFc3IAEWphdmEubGFuZy5JbnRlZ2VyEuKgpPeBhzgC\nAAFJAAV2YWx1ZXhyABBqYXZhLmxhbmcuTnVtYmVyhqyVHQuU4IsCAAB4cAAAAaB0AC90a3N0dWRp\nby5hdXRvcmVzcG9uZGVyZm9yd2EudGFza2VyLmV4dHJhLlNUUklOR3QAATF4\n</pluginBundleData>\n    <configured>true</configured>\n    <relevantVariables>%bot_enabled,%messenger_package,%messenger_instance,%message,%sender,%is_group,%group_participant,%reply_sent,%raw_reply,%reply,%rule_id,%rule_label,%received_count_sender,%reply_count_contacts,%reply_count_groups,%reply_count_all,%reply_count_day,%action,%random_message_id</relevantVariables>\n  </trigger>"
+   },
+   "media_button_event": {
+    "name": "Media Button Event (Experimental)",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.bq",
+    "tags": {
+     "useDefaultName": "boolean",
+     "allEvents": "boolean",
+     "mediaButtonKey": "string"
+    }
+   },
+   "sound_level": {
+    "name": "Sound Level (Experimental)",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.de",
+    "tags": {
+     "useDefaultName": "boolean",
+     "soundLevelAverage": "string",
+     "soundLevelSensitivity": "string",
+     "soundLevel": "int"
+    }
+   },
+   "speech_web_search_requested": {
+    "name": "Speech Web Search Requested",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.df",
+    "tags": {
+     "useDefaultName": "boolean"
+    }
+   },
+   "voice_command_requested": {
+    "name": "Voice Command Requested",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.dt",
+    "tags": {
+     "useDefaultName": "boolean"
+    }
+   },
+   "user_interface_event": {
+    "name": "UI Event",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.dq",
+    "tags": {
+     "useDefaultName": "boolean",
+     "accessibilityEventType": "int",
+     "packageNameFilter": "string",
+     "textMatchType": "string",
+     "textFilter": "string",
+     "removeNonPrintableCharacters": "boolean"
+    }
+   },
+   "step_counter_sensor": {
+    "name": "Step counter",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.dh",
+    "tags": {
+     "useDefaultName": "boolean",
+     "nthStep": "int"
+    }
+   },
+   "wifi_tethering_state": {
+    "name": "WiFi Tethering State",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.dz",
+    "tags": {
+     "useDefaultName": "boolean",
+     "stateEnabling": "boolean",
+     "stateEnabled": "boolean",
+     "stateDisabling": "boolean",
+     "stateDisabled": "boolean"
+    }
+   },
+   "ringer_mode": {
+    "name": "Ringer Mode",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.cr",
+    "tags": {
+     "useDefaultName": "boolean",
+     "ringerMode": "string"
+    }
+   },
+   "power_save_mode": {
+    "name": "Battery Saver Mode",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.cn",
+    "tags": {
+     "useDefaultName": "boolean",
+     "on": "boolean"
+    }
+   },
+   "gps_status_event": {
+    "name": "GPS Status Event",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.ap",
+    "tags": {
+     "useDefaultName": "boolean",
+     "eventStarted": "boolean",
+     "eventStopped": "boolean",
+     "eventFirstFix": "boolean",
+     "eventSatelliteStatus": "boolean"
+    }
+   },
+   "interruptions_mode": {
+    "name": "Interruptions Mode",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.ba",
+    "tags": {
+     "useDefaultName": "boolean",
+     "interruptionsMode": "string"
+    }
+   },
+   "magnetic_field_sensor": {
+    "name": "Magnetic Field Sensor",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.bp",
+    "tags": {
+     "useDefaultName": "boolean",
+     "magneticFieldStrengthSensitivity": "string",
+     "less": "boolean",
+     "magneticFieldStrength": "int"
+    }
+   },
+   "take_note_wear": {
+    "name": "Take Note (Android Wear)",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.dl",
+    "tags": {
+     "useDefaultName": "boolean"
+    }
+   },
+   "shortcut_wear": {
+    "name": "Shortcut (Android Wear)",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.cx",
+    "tags": {
+     "useDefaultName": "boolean"
+    }
+   },
+   "battery_level_wear": {
+    "name": "Battery Level (Android Wear)",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.t",
+    "tags": {
+     "useDefaultName": "int",
+     "wearDevice": "int",
+     "levelPercentage": "int",
+     "batteryLevelCondition": "string",
+     "ignoreTemperatureChanges": "boolean",
+     "ignoreVoltageChanges": "boolean"
+    }
+   },
+   "theater_mode_wear": {
+    "name": "Theater Mode (Android Wear)",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.dm",
+    "tags": {
+     "useDefaultName": "boolean",
+     "wearDevice": "string",
+     "on": "boolean"
+    }
+   },
+   "system_setting_changed_wear": {
+    "name": "System Setting Changed (Android Wear)",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.dk",
+    "tags": {
+     "useDefaultName": "boolean",
+     "wearDevice": "string",
+     "settingCategory": "string",
+     "settingName": "string",
+     "variable": "string"
+    }
+   },
+   "power_connected_wear": {
+    "name": "Power Source (Android Wear)",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.cm",
+    "tags": {
+     "useDefaultName": "boolean",
+     "wearDevice": "string",
+     "powerConnected": "boolean",
+     "chargingACAdapter": "boolean",
+     "chargingUSB": "boolean",
+     "chargingWireless": "boolean"
+    }
+   },
+   "android_wear_device_connected": {
+    "name": "Android Wear Device Connected/Disconnected",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.j",
+    "tags": {
+     "useDefaultName": "boolean",
+     "wearDevice": "string",
+     "connected": "boolean"
+    }
+   },
+   "sim_state": {
+    "name": "SIM State",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.da",
+    "tags": {
+     "useDefaultName": "boolean",
+     "absent": "boolean",
+     "pinRequired": "boolean",
+     "pukRequired": "boolean",
+     "networkLocked": "boolean",
+     "ready": "boolean"
+    }
+   },
+   "sms_delivery_report_received": {
+    "name": "Automagic SMS Delivery Report Received",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.db",
+    "tags": {
+     "useDefaultName": "boolean"
+    }
+   },
+   "send_intent_received": {
+    "name": "Send/Share Intent Received",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.ct",
+    "tags": {
+     "useDefaultName": "boolean"
+    }
+   },
+   "send_multiple_intent_received": {
+    "name": "Send/Share Multiple Intent Received",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.cu",
+    "tags": {
+     "useDefaultName": "boolean"
+    }
+   },
+   "device_idle_mode": {
+    "name": "Device Idle/Doze Mode",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.ai",
+    "tags": {
+     "useDefaultName": "boolean",
+     "on": "boolean"
+    }
+   },
+   "cyanogen_mod_quick_settings_tile_selected": {
+    "name": "CyanogenMod Quick Settings Tile Selected",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.af",
+    "tags": {
+     "useDefaultName": "boolean",
+     "label": "string",
+     "icon": "string",
+     "shouldCollapsePanel": "boolean"
+    }
+   },
+   "media_session_changed": {
+    "name": "Media Session Changed (Experimental)",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.br",
+    "tags": {
+     "useDefaultName": "boolean",
+     "packageNameFilter": "string"
+    }
+   },
+   "content_provider_changed": {
+    "name": "Content Provider Changed",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.ae",
+    "tags": {
+     "useDefaultName": "boolean",
+     "contentUri": "string",
+     "notifyForDescendants": "boolean"
+    }
+   },
+   "quick_settings_tile_selected": {
+    "name": "Quick Settings Tile Selected",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.cq",
+    "tags": {
+     "useDefaultName": "boolean",
+     "tileID": "string",
+     "label": "string",
+     "iconType": "string",
+     "icon": "string",
+     "customIconPath": "string",
+     "shouldCollapsePanel": "boolean"
+    }
+   },
+   "hardware_keyboard_state": {
+    "name": "Hardware Keyboard State",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.ax",
+    "tags": {
+     "useDefaultName": "boolean",
+     "opened": "boolean"
+    }
+   },
+   "hardware_keyboard_type": {
+    "name": "Hardware Keyboard Type",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.ay",
+    "tags": {
+     "useDefaultName": "boolean",
+     "unavailable": "boolean",
+     "qwerty": "boolean",
+     "twelvekeys": "boolean"
+    }
+   },
+   "view_web_url_intent_received": {
+    "name": "View Web URL Intent Received",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.ds",
+    "tags": {
+     "useDefaultName": "boolean"
+    }
+   },
+   "fingerprint_gesture": {
+    "name": "Fingerprint Gesture",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.ao",
+    "tags": {
+     "useDefaultName": "boolean",
+     "fingerprintGesture": "string"
+    }
+   },
+   "key_event": {
+    "name": "Hardware Key Event",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.bc",
+    "tags": {
+     "useDefaultName": "boolean",
+     "keyList": "string",
+     "keyDown": "boolean",
+     "keyUp": "boolean",
+     "blockEvent": "boolean"
+    }
+   },
+   "launcher_trigger": {
+    "name": "Launcher Trigger",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.bj",
+    "tags": {
+     "useDefaultName": "boolean"
+    }
+   },
+   "volume_long_press_event": {
+    "name": "Volume Long Press Event",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.du",
+    "tags": {
+     "useDefaultName": "boolean",
+     "keyList": "string",
+     "keyDown": "boolean",
+     "keyUp": "boolean",
+     "minimumPressDuration": "long"
+    }
+   },
+   "launch_browser_app_intent_received": {
+    "name": "Launch Browser App Intent Received",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.bd",
+    "tags": {
+     "useDefaultName": "boolean"
+    }
+   },
+   "launch_calculator_app_intent_received": {
+    "name": "Launch Calculator App Intent Received",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.be",
+    "tags": {
+     "useDefaultName": "boolean"
+    }
+   },
+   "launch_calendar_app_intent_received": {
+    "name": "Launch Calendar App Intent Received",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.bf",
+    "tags": {
+     "useDefaultName": "boolean"
+    }
+   },
+   "launch_contacts_app_intent_received": {
+    "name": "Launch Contacts App Intent Received",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.bg",
+    "tags": {
+     "useDefaultName": "boolean"
+    }
+   },
+   "launch_mail_app_intent_received": {
+    "name": "Launch Mail App Intent Received",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.bh",
+    "tags": {
+     "useDefaultName": "boolean"
+    }
+   },
+   "launch_music_app_intent_received": {
+    "name": "Launch Music App Intent Received",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.bi",
+    "tags": {
+     "useDefaultName": "boolean"
+    }
+   },
+   "accessibility_button": {
+    "name": "Accessibility Button",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.e",
+    "tags": {
+     "useDefaultName": "boolean"
+    }
+   },
+   "wa_message_received": {
+    "name": "WhatsApp Message Received",
+    "class": "ch.gridvision.ppam.androidautomagic.model.c.wa",
+    "tags": {
+     "useDefaultName": "string",
+     "name": "string",
+     "enabled": "string",
+     "packageNameFilter": "string",
+     "matchMode": "string",
+     "matchText": "string",
+     "similarityThreshold": "string",
+     "groupMode": "string",
+     "ignoreCase": "string",
+     "specificContacts": "string",
+     "ignoredContacts": "string",
+     "menuKey": "string",
+     "parentMenuKey": "string",
+     "menuTimeoutMinutes": "string",
+     "menuMode": "string",
+     "menuId": "string",
+     "menuName": "string",
+     "menuOptions": "string",
+     "menuText": "string",
+     "menuAutoSend": "string",
+     "childMenuId": "string",
+     "childMenuName": "string",
+     "childOption": "string",
+     "childOptionLabel": "string",
+     "childKeywords": "string",
+     "childMenuText": "string",
+     "menuAfter": "string",
+     "menuNextId": "string"
+    },
+    "example": "<trigger type=\"wa_message_received\">\n    <useDefaultName>true</useDefaultName>\n    <name>WhatsApp: any · specific · menu Main menu › Harga</name>\n    <enabled>true</enabled>\n    <packageNameFilter>com.whatsapp,com.whatsapp.w4b</packageNameFilter>\n    <matchMode>ANY</matchMode>\n    <matchText />\n    <similarityThreshold>70</similarityThreshold>\n    <groupMode>ALL</groupMode>\n    <ignoreCase>true</ignoreCase>\n    <specificContacts>Pi Coding Agent</specificContacts>\n    <ignoredContacts />\n    <menuKey />\n    <parentMenuKey>menu_main-menu</parentMenuKey>\n    <menuTimeoutMinutes>30</menuTimeoutMinutes>\n    <menuMode>CHILD</menuMode>\n    <menuId />\n    <menuName />\n    <menuOptions />\n    <menuText />\n    <menuAutoSend>true</menuAutoSend>\n    <childMenuId>menu_main-menu</childMenuId>\n    <childMenuName>Main menu</childMenuName>\n    <childOption>0</childOption>\n    <childOptionLabel>Harga</childOptionLabel>\n    <childKeywords>Harga</childKeywords>\n    <childMenuText>Main menu\n\n1. Harga\n2. Jam Buka\n3. Admin\n\nReply with a number.</childMenuText>\n    <menuAfter>RETURN</menuAfter>\n    <menuNextId />\n  </trigger>"
+   }
+  },
+  "condition": {
+   "do_nothing": {
+    "name": "",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.ah",
+    "tags": {},
+    "example": "<condition type=\"do_nothing\" />"
+   },
+   "time_range": {
+    "name": "Time Range",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.ce",
+    "tags": {
+     "useDefaultName": "boolean",
+     "weekday": "string",
+     "hourFrom": "int",
+     "minuteFrom": "int",
+     "hourTo": "int",
+     "minuteTo": "int"
+    }
+   },
+   "location": {
+    "name": "Location",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.ax",
+    "tags": {
+     "useDefaultName": "boolean",
+     "locationName": "string",
+     "latitude": "double",
+     "longitude": "double",
+     "radius": "double",
+     "entering": "boolean",
+     "exiting": "boolean",
+     "ignoreInitialState": "boolean",
+     "inside": "boolean"
+    }
+   },
+   "location_entering": {
+    "name": "Location Entering",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.ay",
+    "tags": {
+     "useDefaultName": "boolean",
+     "entering": "boolean"
+    }
+   },
+   "confirmation_dialog": {
+    "name": "Confirmation Dialog",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.aa",
+    "tags": {
+     "useDefaultName": "boolean",
+     "question": "string",
+     "falseLabel": "string",
+     "trueLabel": "string",
+     "backOperation": "string",
+     "timeoutEnabled": "boolean",
+     "timeout": "long",
+     "defaultValueOnTimeout": "boolean"
+    }
+   },
+   "gleeo_recording": {
+    "name": "Gleeo is Recording",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.ao",
+    "tags": {
+     "useDefaultName": "boolean",
+     "domainFilterEnabled": "boolean",
+     "domainFilterList": "string",
+     "projectFilterEnabled": "boolean",
+     "projectFilterList": "string",
+     "taskFilterEnabled": "string",
+     "taskFilterList": "string"
+    }
+   },
+   "airplane_mode_on": {
+    "name": "Airplane Mode On",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.h",
+    "tags": {}
+   },
+   "expression": {
+    "name": "Expression",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.ak",
+    "tags": {
+     "useDefaultName": "boolean",
+     "expression": "string"
+    },
+    "example": "<condition type=\"expression\">\n    <useDefaultName>true</useDefaultName>\n    <name>Expression: !isEmpty(dellist)</name>\n    <expression>!isEmpty(dellist)</expression>\n  </condition>"
+   },
+   "wifi_connected": {
+    "name": "WiFi Connected",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.ck",
+    "tags": {
+     "useDefaultName": "boolean",
+     "all": "boolean",
+     "ssidList": "string"
+    },
+    "example": "<condition type=\"wifi_connected\">\n    <useDefaultName>true</useDefaultName>\n    <name>WiFi Connected: All SSIDs</name>\n    <all>true</all>\n    <ssidList />\n  </condition>"
+   },
+   "wifi_state": {
+    "name": "WiFi State",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.cm",
+    "tags": {
+     "useDefaultName": "boolean",
+     "enabling": "boolean",
+     "disabling": "boolean",
+     "disabled": "boolean"
+    }
+   },
+   "debug_dialog": {
+    "name": "Debug Dialog",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.ac",
+    "tags": {
+     "useDefaultName": "boolean"
+    },
+    "example": "<condition type=\"debug_dialog\">\n    <useDefaultName>true</useDefaultName>\n    <name>Debug Dialog</name>\n  </condition>"
+   },
+   "roaming": {
+    "name": "Roaming",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.bu",
+    "tags": {
+     "useDefaultName": "boolean",
+     "sim": "string"
+    }
+   },
+   "bluetooth_enabled": {
+    "name": "Bluetooth Enabled",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.v",
+    "tags": {}
+   },
+   "flow_enabled": {
+    "name": "Flow Enabled",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.am",
+    "tags": {
+     "useDefaultName": "boolean",
+     "flowName": "string"
+    }
+   },
+   "device_orientation": {
+    "name": "Device Orientation",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.ae",
+    "tags": {
+     "useDefaultName": "boolean",
+     "orientationFaceUp": "boolean",
+     "orientationFaceDown": "boolean",
+     "orientationFaceLeft": "boolean",
+     "orientationFaceRight": "boolean",
+     "orientationStandingUpright": "boolean",
+     "orientationStandingUpsideDown": "boolean"
+    }
+   },
+   "battery_level": {
+    "name": "Battery Level",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.q",
+    "tags": {
+     "useDefaultName": "boolean",
+     "wearDevice": "string",
+     "levelPercentage": "int",
+     "batteryLevelCondition": "string"
+    },
+    "example": "<condition type=\"battery_level\">\n    <useDefaultName>true</useDefaultName>\n    <name>Battery Level: higher than 99%</name>\n    <levelPercentage>99</levelPercentage>\n    <batteryLevelCondition>HIGHER_THAN</batteryLevelCondition>\n  </condition>"
+   },
+   "music_active": {
+    "name": "Music Active",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.be",
+    "tags": {}
+   },
+   "screen_on": {
+    "name": "Screen On",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.bx",
+    "tags": {}
+   },
+   "ui_mode": {
+    "name": "UI Mode",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.cf",
+    "tags": {
+     "useDefaultName": "boolean",
+     "uiMode": "int"
+    }
+   },
+   "night_mode": {
+    "name": "Night Mode",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.bh",
+    "tags": {
+     "useDefaultName": "boolean",
+     "nightMode": "string"
+    }
+   },
+   "dock_state": {
+    "name": "Dock State",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.ai",
+    "tags": {
+     "useDefaultName": "boolean",
+     "dockedCar": "boolean",
+     "dockedDesk": "boolean",
+     "dockedHighEndDesk": "boolean",
+     "dockedLowEndDesk": "boolean",
+     "dockedSpecial": "boolean",
+     "undocked": "boolean"
+    }
+   },
+   "call_state": {
+    "name": "Call State",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.z",
+    "tags": {
+     "useDefaultName": "boolean",
+     "idle": "boolean",
+     "ringing": "boolean",
+     "offhook": "boolean"
+    }
+   },
+   "wifi_available": {
+    "name": "WiFi Available",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.cj",
+    "tags": {
+     "useDefaultName": "boolean",
+     "ssidList": "string"
+    }
+   },
+   "app_process_running": {
+    "name": "App Process Running",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.j",
+    "tags": {
+     "useDefaultName": "boolean",
+     "packageName": "string"
+    }
+   },
+   "app_task_running": {
+    "name": "App Task Running",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.k",
+    "tags": {
+     "useDefaultName": "boolean",
+     "method": "string",
+     "packageNameList": "string",
+     "checkMostRecentAppTaskOnly": "int"
+    }
+   },
+   "service_running": {
+    "name": "Service Running",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.bz",
+    "tags": {
+     "useDefaultName": "boolean",
+     "serviceClass": "string"
+    },
+    "example": "<condition type=\"service_running\">\n    <useDefaultName>true</useDefaultName>\n    <name>Service Running: com.lenovo.anyshare.app.DefaultService</name>\n    <serviceClass>com.lenovo.anyshare.app.DefaultService</serviceClass>\n  </condition>"
+   },
+   "mobile_datanetwork_enabled": {
+    "name": "Mobile Datanetwork Enabled",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.bc",
+    "tags": {}
+   },
+   "auto_sync_enabled": {
+    "name": "Auto Sync Enabled",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.p",
+    "tags": {
+     "useDefaultName": "boolean",
+     "global": "boolean",
+     "account": "string",
+     "syncAuthority": "string"
+    }
+   },
+   "location_provider_enabled": {
+    "name": "Location Provider Enabled",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.az",
+    "tags": {
+     "useDefaultName": "boolean",
+     "provider": "string"
+    }
+   },
+   "power_connected": {
+    "name": "Power Source Connected",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.bo",
+    "tags": {
+     "useDefaultName": "boolean",
+     "wearDevice": "string",
+     "powerConnected": "boolean",
+     "chargingACAdapter": "boolean",
+     "chargingUSB": "boolean",
+     "chargingWireless": "boolean"
+    },
+    "example": "<condition type=\"power_connected\">\n    <useDefaultName>true</useDefaultName>\n    <name>Power Source: Connected</name>\n    <powerConnected>true</powerConnected>\n    <chargingACAdapter>true</chargingACAdapter>\n    <chargingUSB>true</chargingUSB>\n    <chargingWireless>true</chargingWireless>\n  </condition>"
+   },
+   "microphone_mute": {
+    "name": "Microphone Mute",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.bb",
+    "tags": {}
+   },
+   "speakerphone_on": {
+    "name": "Speakerphone On",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.cb",
+    "tags": {}
+   },
+   "ringer_mode": {
+    "name": "Ringer Mode",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.bt",
+    "tags": {
+     "useDefaultName": "boolean",
+     "ringerMode": "string"
+    },
+    "example": "<condition type=\"ringer_mode\">\n    <useDefaultName>true</useDefaultName>\n    <name>Ringer Mode: Normal</name>\n    <ringerMode>NORMAL</ringerMode>\n  </condition>"
+   },
+   "audio_manager_mode": {
+    "name": "Audio Manager Mode",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.l",
+    "tags": {
+     "useDefaultName": "boolean",
+     "audioManagerMode": "string"
+    }
+   },
+   "bluetooth_sco_on": {
+    "name": "Bluetooth SCO On",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.x",
+    "tags": {}
+   },
+   "phone_service_state": {
+    "name": "Phone Service State",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.bl",
+    "tags": {
+     "useDefaultName": "boolean",
+     "sim": "string",
+     "inService": "boolean",
+     "emergencyOnly": "boolean",
+     "outOfService": "int",
+     "powerOff": "boolean"
+    }
+   },
+   "phone_signal_strength": {
+    "name": "Phone Signal Strength",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.bm",
+    "tags": {
+     "useDefaultName": "boolean",
+     "sim": "string",
+     "asuLevel": "int",
+     "phoneSignalStrengthCondition": "string"
+    }
+   },
+   "wired_headset_plugged": {
+    "name": "Wired Headset Plugged",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.co",
+    "tags": {}
+   },
+   "phone_cell_gsm": {
+    "name": "Phone Cell GSM",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.bk",
+    "tags": {
+     "useDefaultName": "boolean",
+     "phoneCellMethod": "string",
+     "lacListEnabled": "boolean",
+     "lacList": "string",
+     "cidListEnabled": "boolean",
+     "cidList": "string"
+    }
+   },
+   "nfc_enabled": {
+    "name": "NFC Enabled",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.bf",
+    "tags": {}
+   },
+   "device_storage_space_low": {
+    "name": "Device Storage Space Low",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.ag",
+    "tags": {}
+   },
+   "device_storage_space": {
+    "name": "Device Storage Space",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.af",
+    "tags": {
+     "useDefaultName": "boolean",
+     "path": "string",
+     "freeSpace": "boolean",
+     "over": "boolean",
+     "size": "long"
+    }
+   },
+   "network_connected": {
+    "name": "Network Connected",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.bg",
+    "tags": {},
+    "example": "<condition type=\"network_connected\">\n    <useDefaultName>true</useDefaultName>\n    <name>Network Connected</name>\n  </condition>"
+   },
+   "screen_orientation": {
+    "name": "Screen Orientation",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.by",
+    "tags": {
+     "useDefaultName": "boolean",
+     "portrait": "boolean"
+    }
+   },
+   "proximity_sensor": {
+    "name": "Proximity Sensor",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.bs",
+    "tags": {
+     "useDefaultName": "boolean",
+     "less": "boolean",
+     "distance": "double",
+     "timeout": "long"
+    },
+    "example": "<condition type=\"proximity_sensor\">\n    <useDefaultName>true</useDefaultName>\n    <name>Proximity Sensor: Distance &lt; 2.5cm</name>\n    <less>true</less>\n    <distance>2.5</distance>\n    <timeout>5000</timeout>\n  </condition>"
+   },
+   "audio_volume": {
+    "name": "Audio Volume",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.n",
+    "tags": {
+     "useDefaultName": "boolean",
+     "audioStreamType": "string",
+     "audioVolumeCondition": "string",
+     "audioVolume": "int"
+    }
+   },
+   "execution_count": {
+    "name": "Execution Count",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.aj",
+    "tags": {
+     "useDefaultName": "boolean",
+     "count": "string",
+     "timed": "boolean",
+     "duration": "long"
+    }
+   },
+   "gmail_unread_conversation_count": {
+    "name": "Gmail Unread Conversation Count",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.ap",
+    "tags": {
+     "useDefaultName": "boolean",
+     "accounts": "string",
+     "inboxType": "string",
+     "unreadCount": "int",
+     "gmailUnreadCountCondition": "string"
+    }
+   },
+   "wifi_signal_level": {
+    "name": "WiFi Signal Level",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.cl",
+    "tags": {
+     "useDefaultName": "boolean",
+     "signalLevel": "int",
+     "wifiSignalLevelCondition": "string"
+    }
+   },
+   "plugin": {
+    "name": "Plugin (Experimental)",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.bn",
+    "tags": {
+     "useDefaultName": "boolean",
+     "pluginLabel": "string",
+     "pluginBlurb": "string",
+     "pluginPackage": "string",
+     "pluginClass": "string",
+     "pluginBundle": "string",
+     "pluginBundleData": "string",
+     "configured": "boolean",
+     "passExtras": "boolean",
+     "extras": "string",
+     "relevantVariables": "string"
+    }
+   },
+   "light_sensor": {
+    "name": "Light Sensor",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.aw",
+    "tags": {
+     "useDefaultName": "boolean",
+     "lightLevelAverage": "string",
+     "lightLevelSensitivity": "string",
+     "less": "boolean",
+     "lightLevel": "int",
+     "timeout": "long"
+    }
+   },
+   "active_network_type": {
+    "name": "Active Network Type",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.g",
+    "tags": {
+     "useDefaultName": "boolean",
+     "none": "boolean",
+     "mobile": "boolean",
+     "wifi": "boolean",
+     "wimax": "boolean",
+     "bluetooth": "boolean",
+     "ethernet": "boolean"
+    }
+   },
+   "host_reachable": {
+    "name": "Host Reachable",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.as",
+    "tags": {
+     "useDefaultName": "boolean",
+     "type": "string",
+     "host": "string",
+     "socketPort": "string"
+    }
+   },
+   "phone_cell_cdma": {
+    "name": "Phone Cell CDMA",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.bj",
+    "tags": {
+     "useDefaultName": "boolean",
+     "phoneCellMethod": "string",
+     "cellList": "string"
+    }
+   },
+   "bluetooth_device_connected": {
+    "name": "Bluetooth Device Connected",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.u",
+    "tags": {
+     "useDefaultName": "boolean",
+     "any": "boolean",
+     "deviceAddress": "string",
+     "deviceName": "int",
+     "bluetoothDeviceProfile": "string"
+    }
+   },
+   "calendar_event": {
+    "name": "Calendar Event",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.y",
+    "tags": {
+     "useDefaultName": "boolean",
+     "startOffsetType": "string",
+     "startOffset": "long",
+     "endOffsetType": "string",
+     "endOffset": "long",
+     "calendarDisplayNameFilterEnabled": "string",
+     "calendarDisplayNameFilterList": "string",
+     "titleFilterEnabled": "string",
+     "titleFilterList": "string",
+     "descriptionFilterEnabled": "string",
+     "descriptionFilterList": "string",
+     "eventLocationFilterEnabled": "string",
+     "eventLocationFilterList": "string",
+     "allDayEvents": "boolean",
+     "regularEvents": "boolean",
+     "availabilityBusy": "boolean",
+     "availabilityFree": "boolean",
+     "availabilityTentative": "boolean",
+     "multipleEventHandling": "string"
+    }
+   },
+   "flow_executing": {
+    "name": "Flow Executing",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.an",
+    "tags": {
+     "useDefaultName": "boolean",
+     "flowName": "string"
+    }
+   },
+   "telephony_radio_enabled": {
+    "name": "Telephony Radio Enabled",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.cc",
+    "tags": {}
+   },
+   "mobile_datanetwork_type": {
+    "name": "Mobile Datanetwork Type",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.bd",
+    "tags": {
+     "useDefaultName": "boolean",
+     "datanetworkTypeUnknown": "boolean",
+     "datanetworkTypeGPRS": "boolean",
+     "datanetworkTypeEDGE": "boolean",
+     "datanetworkTypeUMTS": "boolean",
+     "datanetworkTypeCDMA": "boolean",
+     "datanetworkTypeEVDO_0": "boolean",
+     "datanetworkTypeEVDO_A": "boolean",
+     "datanetworkType1xRTT": "boolean",
+     "datanetworkTypeHSDPA": "boolean",
+     "datanetworkTypeHSUPA": "boolean",
+     "datanetworkTypeHSPA": "boolean",
+     "datanetworkTypeIDen": "boolean",
+     "datanetworkTypeEVDO_B": "boolean",
+     "datanetworkTypeLTE": "boolean",
+     "datanetworkTypeEHRPD": "boolean",
+     "datanetworkTypeHSPAP": "boolean"
+    }
+   },
+   "vibrate_on_ring_enabled": {
+    "name": "Vibrate on Ring Enabled",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.ch",
+    "tags": {}
+   },
+   "wifi_access_point_enabled": {
+    "name": "WiFi Access Point Enabled",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.ci",
+    "tags": {
+     "useDefaultName": "boolean",
+     "ssid": "string"
+    }
+   },
+   "wifi_tethering_state": {
+    "name": "WiFi Tethering State",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.cn",
+    "tags": {
+     "useDefaultName": "boolean",
+     "enabling": "boolean",
+     "disabling": "boolean",
+     "disabled": "boolean"
+    }
+   },
+   "pressure_sensor": {
+    "name": "Pressure Sensor",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.br",
+    "tags": {
+     "useDefaultName": "boolean",
+     "less": "boolean",
+     "pressure": "double",
+     "timeout": "long"
+    }
+   },
+   "auto_rotate_screen_enabled": {
+    "name": "Auto-rotate Screen Enabled",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.o",
+    "tags": {}
+   },
+   "notification_status_bar_displayed": {
+    "name": "Notification on Statusbar Displayed",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.bi",
+    "tags": {
+     "useDefaultName": "boolean",
+     "packageNameFilter": "string",
+     "all": "boolean",
+     "notificationID": "string",
+     "textMatchField": "string",
+     "textMatchType": "string",
+     "textFilter": "string",
+     "ignoreRegular": "boolean",
+     "ignoreOngoing": "boolean",
+     "ignoreGroupSummary": "boolean"
+    }
+   },
+   "keyguard_locked": {
+    "name": "Keyguard Locked",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.au",
+    "tags": {}
+   },
+   "sound_level": {
+    "name": "Sound Level (Experimental)",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.ca",
+    "tags": {
+     "useDefaultName": "boolean",
+     "soundLevelAverage": "int",
+     "soundLevelSensitivity": "string",
+     "soundLevel": "int"
+    }
+   },
+   "usb_tethering_enabled": {
+    "name": "USB Tethering Enabled",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.cg",
+    "tags": {}
+   },
+   "flashlight_on": {
+    "name": "Flashlight On",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.al",
+    "tags": {}
+   },
+   "battery_level_ble": {
+    "name": "Battery Level BLE (Experimental)",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.r",
+    "tags": {
+     "useDefaultName": "boolean",
+     "deviceAddress": "string",
+     "deviceName": "string",
+     "levelPercentage": "int",
+     "batteryLevelCondition": "string"
+    }
+   },
+   "power_save_mode_enabled": {
+    "name": "Battery Saver Mode Enabled",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.bq",
+    "tags": {}
+   },
+   "interruptions_mode": {
+    "name": "Interruptions Mode",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.at",
+    "tags": {
+     "useDefaultName": "boolean",
+     "interruptionsMode": "string"
+    }
+   },
+   "bluetooth_le_device_available": {
+    "name": "Bluetooth LE Device Available",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.w",
+    "tags": {
+     "useDefaultName": "boolean",
+     "deviceAddress": "string",
+     "deviceName": "string",
+     "duration": "string"
+    }
+   },
+   "active_cyanogen_mod_profile": {
+    "name": "Active Cyanogen/LineageOS Profile",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.f",
+    "tags": {
+     "useDefaultName": "boolean",
+     "profileNameList": "string"
+    }
+   },
+   "keyguard_secure": {
+    "name": "Keyguard with Security",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.av",
+    "tags": {}
+   },
+   "magnetic_field_sensor": {
+    "name": "Magnetic Field Sensor",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.ba",
+    "tags": {
+     "useDefaultName": "boolean",
+     "magneticFieldStrengthSensitivity": "string",
+     "less": "boolean",
+     "magneticFieldStrength": "int",
+     "timeout": "long"
+    }
+   },
+   "theater_mode_on_wear": {
+    "name": "Theater Mode On (Android Wear)",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.cd",
+    "tags": {
+     "useDefaultName": "boolean",
+     "wearDevice": "string"
+    }
+   },
+   "battery_level_wear": {
+    "name": "Battery Level (Android Wear)",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.s",
+    "tags": {
+     "useDefaultName": "boolean",
+     "wearDevice": "string",
+     "levelPercentage": "int",
+     "batteryLevelCondition": "string"
+    }
+   },
+   "power_connected_wear": {
+    "name": "Power Source Connected (Android Wear)",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.bp",
+    "tags": {
+     "useDefaultName": "boolean",
+     "wearDevice": "string",
+     "powerConnected": "boolean",
+     "chargingACAdapter": "boolean",
+     "chargingUSB": "boolean",
+     "chargingWireless": "boolean"
+    }
+   },
+   "device_idle_mode_active": {
+    "name": "Device Idle/Doze Mode Active",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.ad",
+    "tags": {}
+   },
+   "audio_stream_active": {
+    "name": "Audio Stream Active",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.m",
+    "tags": {
+     "useDefaultName": "boolean",
+     "audioStreamType": "string"
+    }
+   },
+   "screen_auto_brightness_enabled": {
+    "name": "Screen Automatic Brightness Enabled",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.bw",
+    "tags": {}
+   },
+   "android_wear_device_connected": {
+    "name": "Android Wear Device Connected",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.i",
+    "tags": {
+     "useDefaultName": "boolean",
+     "wearDevice": "string"
+    }
+   },
+   "hardware_keyboard_state": {
+    "name": "Hardware Keyboard State",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.aq",
+    "tags": {
+     "useDefaultName": "boolean",
+     "open": "boolean"
+    }
+   },
+   "hardware_keyboard_type": {
+    "name": "Hardware Keyboard Type",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.ar",
+    "tags": {
+     "useDefaultName": "boolean",
+     "unavailable": "boolean",
+     "qwerty": "boolean",
+     "twelvekeys": "boolean"
+    }
+   },
+   "action_sound_playing": {
+    "name": "Action Sound Playing",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.e",
+    "tags": {}
+   },
+   "root_setting_enabled": {
+    "name": "Root Setting Enabled",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.bv",
+    "tags": {}
+   },
+   "biometric_authentication_dialog": {
+    "name": "Biometric Authentication Dialog",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.t",
+    "tags": {
+     "useDefaultName": "string",
+     "subtitle": "string",
+     "description": "string",
+     "cancelButtonLabel": "string",
+     "timeoutEnabled": "boolean",
+     "timeout": "long",
+     "defaultValueOnTimeout": "boolean"
+    }
+   },
+   "custom_widget_overlay_showing": {
+    "name": "Custom Widget Overlay Showing",
+    "class": "ch.gridvision.ppam.androidautomagic.model.b.ab",
+    "tags": {
+     "useDefaultName": "boolean",
+     "overlayNameList": "string"
+    }
+   }
+  },
+  "action": {
+   "do_nothing": {
+    "name": "",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.ae",
+    "tags": {},
+    "example": "<action type=\"do_nothing\" />"
+   },
+   "gleeo_export_to_filesystem": {
+    "name": "Gleeo Filesystem Export",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.bc",
+    "tags": {
+     "useDefaultName": "boolean",
+     "path": "string",
+     "encoding": "string",
+     "allDomains": "boolean",
+     "domains": "string",
+     "allProjects": "boolean",
+     "projects": "string",
+     "allTasks": "boolean",
+     "tasks": "string",
+     "timeRange": "string",
+     "csvColumnDelimiter": "string",
+     "separateDateTime": "boolean",
+     "exportProjectExtra1": "boolean",
+     "exportProjectExtra2": "boolean",
+     "exportTaskExtra1": "boolean",
+     "exportTaskExtra2": "boolean",
+     "attachToMail": "boolean"
+    }
+   },
+   "gleeo_start_recording": {
+    "name": "Gleeo Start Recording",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.bd",
+    "tags": {
+     "useDefaultName": "boolean",
+     "domainName": "string",
+     "projectName": "string",
+     "taskName": "string",
+     "taskDetail": "string",
+     "taskExtra1": "string",
+     "taskExtra2": "string",
+     "background": "string",
+     "turnScreenOn": "string"
+    }
+   },
+   "gleeo_stop_recording": {
+    "name": "Gleeo Stop Recording",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.be",
+    "tags": {
+     "useDefaultName": "boolean",
+     "allDomains": "boolean",
+     "domainFilterList": "string",
+     "allProjects": "string",
+     "projectFilterList": "string",
+     "allTasks": "string",
+     "taskFilterList": "string",
+     "background": "boolean",
+     "turnScreenOn": "boolean"
+    }
+   },
+   "notification_screen": {
+    "name": "Notification on Screen",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.dd",
+    "tags": {
+     "useDefaultName": "boolean",
+     "wearDevice": "string",
+     "showText": "boolean",
+     "text": "string",
+     "widgetName": "string",
+     "width": "string",
+     "height": "string",
+     "stretchToFillArea": "boolean",
+     "opacity": "string",
+     "durationLong": "boolean",
+     "customPosition": "boolean",
+     "gravityType": "string",
+     "xOffset": "string",
+     "yOffset": "string"
+    },
+    "example": "<action type=\"notification_screen\">\n    <useDefaultName>true</useDefaultName>\n    <name>Notification on Screen: Backing up Forder Sync succeed!</name>\n    <showText>true</showText>\n    <text>Backing up Forder Sync succeed!</text>\n    <widgetName />\n    <width>200</width>\n    <height>250</height>\n    <stretchToFillArea>false</stretchToFillArea>\n    <opacity>1.00</opacity>\n    <durationLong>false</durationLong>\n    <customPosition>false</customPosition>\n    <gravityType>TOP_LEFT</gravityType>\n    <xOffset>0</xOffset>\n    <yOffset>0</yOffset>\n  </action>"
+   },
+   "notification_status_bar": {
+    "name": "Notification on Statusbar",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.df",
+    "tags": {
+     "useDefaultName": "boolean",
+     "notificationIconType": "string",
+     "notificationIcon": "string",
+     "customNotificationIcon": "string",
+     "message": "string",
+     "channel": "string",
+     "sound": "boolean",
+     "vibrate": "boolean",
+     "flashLED": "boolean",
+     "flashLEDColor": "int",
+     "flashLEDOn": "long",
+     "flashLEDOff": "long",
+     "flagLocalOnly": "boolean",
+     "accentColorEnabled": "boolean",
+     "accentColor": "int",
+     "flagOngoing": "boolean",
+     "flagNoClear": "boolean",
+     "notificationIDEnabled": "boolean",
+     "notificationID": "string",
+     "category": "string",
+     "priority": "string",
+     "visibility": "string",
+     "messageBigEnabled": "boolean",
+     "messageBig": "string",
+     "showProgressbar": "boolean",
+     "progressbarIndeterminate": "boolean",
+     "progressbarValue": "string",
+     "progressbarMaximum": "string",
+     "largeIconEnabled": "boolean",
+     "largeIcon": "string",
+     "group": "string",
+     "isGroupSummary": "boolean"
+    },
+    "example": "<action type=\"notification_status_bar\">\n    <useDefaultName>false</useDefaultName>\n    <name>Notif Ring</name>\n    <notificationIconType>BUILTIN</notificationIconType>\n    <notificationIcon>NOTIFICATION</notificationIcon>\n    <customNotificationIcon />\n    <title>Ringer Mode</title>\n    <message>Ringer mode is set to \"Ring\".</message>\n    <channel />\n    <sound>false</sound>\n    <vibrate>false</vibrate>\n    <flashLED>false</flashLED>\n    <flashLEDColor>#ff00ff00</flashLEDColor>\n    <flashLEDOn>500</flashLEDOn>\n    <flashLEDOff>500</flashLEDOff>\n    <flagLocalOnly>false</flagLocalOnly>\n    <accentColorEnabled>false</accentColorEnabled>\n    <accentColor>#ffff0000</accentColor>\n    <flagOngoing>false</flagOngoing>\n    <flagNoClear>false</flagNoClear>\n    <notificationIDEnabled>false</notificationIDEnabled>\n    <notificationID>1</notificationID>\n    <category>DEFAULT</category>\n    <priority>DEFAULT</priority>\n    <visibility>PRIVATE</visibility>\n    <messageBigEnabled>false</messageBigEnabled>\n    <messageBig />\n    <showProgressbar>false</showProgressbar>\n    <progressbarIndeterminate>false</progressbarIndeterminate>\n    <progressbarValue>0</progressbarValue>\n    <progressbarMaximum>100</progressbarMaximum>\n    <largeIconEnabled>false</largeIconEnabled>\n    <largeIcon />\n    <group />\n    <isGroupSummary>false</isGroupSummary>\n  </action>"
+   },
+   "vibrate": {
+    "name": "Vibrate",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.hm",
+    "tags": {
+     "useDefaultName": "boolean",
+     "wearDevice": "string",
+     "custom": "boolean",
+     "vibratePattern": "string",
+     "customPattern": "string"
+    }
+   },
+   "sound": {
+    "name": "Sound",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.gr",
+    "tags": {
+     "useDefaultName": "long",
+     "soundSourceType": "string",
+     "alarmName": "string",
+     "uri": "string",
+     "path": "string",
+     "audioStreamType": "string",
+     "startPosition": "string",
+     "showStopSoundNotification": "boolean",
+     "waitForSoundToFinish": "boolean",
+     "requestAudioFocus": "boolean",
+     "audioFocusType": "string"
+    }
+   },
+   "sleep": {
+    "name": "Sleep",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.gp",
+    "tags": {
+     "useDefaultName": "boolean",
+     "duration": "string",
+     "keepDeviceAwake": "boolean",
+     "allowWakeupFromDeviceIdle": "boolean"
+    },
+    "example": "<action type=\"sleep\">\n    <useDefaultName>true</useDefaultName>\n    <name>Sleep: 10s (keep device awake)</name>\n    <duration>10s</duration>\n    <keepDeviceAwake>true</keepDeviceAwake>\n    <allowWakeupFromDeviceIdle>false</allowWakeupFromDeviceIdle>\n  </action>"
+   },
+   "write_to_log": {
+    "name": "Write to Log",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.hu",
+    "tags": {
+     "useDefaultName": "boolean",
+     "text": "string"
+    }
+   },
+   "speech_output": {
+    "name": "Speech Output",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.gs",
+    "tags": {
+     "useDefaultName": "boolean",
+     "audioStreamType": "string",
+     "text": "string",
+     "locale": "string",
+     "usePitch": "boolean",
+     "pitch": "string",
+     "useSpeechRate": "boolean",
+     "speechRate": "string",
+     "embeddedSynthesis": "boolean",
+     "networkSynthesis": "boolean",
+     "showStopSpeechNotification": "boolean",
+     "requestAudioFocus": "boolean",
+     "audioFocusType": "string"
+    },
+    "example": "<action type=\"speech_output\">\n    <useDefaultName>true</useDefaultName>\n    <name>Speech Output: handphone wes dilacak!!</name>\n    <audioStreamType>MUSIC</audioStreamType>\n    <text>handphone wes dilacak!!</text>\n    <locale>jv_ID</locale>\n    <usePitch>true</usePitch>\n    <pitch>1</pitch>\n    <useSpeechRate>true</useSpeechRate>\n    <speechRate>1</speechRate>\n    <embeddedSynthesis>false</embeddedSynthesis>\n    <networkSynthesis>false</networkSynthesis>\n    <showStopSpeechNotification>false</showStopSpeechNotification>\n    <requestAudioFocus>false</requestAudioFocus>\n    <audioFocusType>TRANSIENT</audioFocusType>\n  </action>"
+   },
+   "set_ringer_mode": {
+    "name": "Set Ringer Mode",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.fn",
+    "tags": {
+     "useDefaultName": "boolean",
+     "ringerMode": "string"
+    },
+    "example": "<action type=\"set_ringer_mode\">\n    <useDefaultName>true</useDefaultName>\n    <name>Set Ringer Mode: Normal</name>\n    <ringerMode>NORMAL</ringerMode>\n  </action>"
+   },
+   "set_wifi_state": {
+    "name": "Set WiFi State",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.gd",
+    "tags": {
+     "useDefaultName": "boolean"
+    },
+    "example": "<action type=\"set_wifi_state\">\n    <useDefaultName>true</useDefaultName>\n    <name>Set WiFi State: Off</name>\n    <enable>false</enable>\n  </action>"
+   },
+   "set_wifi_tethering_state": {
+    "name": "Set WiFi Tethering State",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.gf",
+    "tags": {
+     "useDefaultName": "boolean",
+     "method": "string",
+     "enableWifiWhenTurningTetheringOff": "boolean"
+    }
+   },
+   "set_usb_tethering_state": {
+    "name": "Set USB Tethering State",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.fy",
+    "tags": {
+     "useDefaultName": "boolean"
+    }
+   },
+   "set_airplane_mode": {
+    "name": "Set Airplane Mode",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.ec",
+    "tags": {
+     "useDefaultName": "boolean",
+     "method": "string"
+    }
+   },
+   "set_keyguard_state": {
+    "name": "Set Keyguard State",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.ez",
+    "tags": {
+     "useDefaultName": "boolean"
+    }
+   },
+   "mail_gmail": {
+    "name": "Mail with Gmail",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.cv",
+    "tags": {
+     "useDefaultName": "boolean",
+     "oauth": "boolean",
+     "deviceAccount": "string",
+     "mailAccount": "string",
+     "receiver": "string",
+     "replyTo": "string",
+     "subject": "string",
+     "body": "string",
+     "contentMimeType": "string",
+     "attachments": "string"
+    },
+    "example": "<action type=\"mail_gmail\">\n    <useDefaultName>true</useDefaultName>\n    <name>Mail with Gmail: Hasil Foto Redmi 5 Plus to gilanxcheetz1@gmail.com</name>\n    <oauth>true</oauth>\n    <deviceAccount>irhyoiqn@gmail.com</deviceAccount>\n    <mailAccount />\n    <receiver>gilanxcheetz1@gmail.com</receiver>\n    <replyTo />\n    <subject>Hasil Foto Redmi 5 Plus</subject>\n    <body>{location,locationformat,multiline}\n{location,locationformat,decimal}</body>\n    <contentMimeType>TEXT_PLAIN</contentMimeType>\n    <attachments>/storage/emulated/0/#py/automagic/picture.jpg\n/storage/emulated/0/#py/automagic/picture1.jpg\n/storage/emulated/0/#py/automagic/picture2.jpg</attachments>\n  </action>"
+   },
+   "open_browser_url": {
+    "name": "Open URL in Browser",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.dg",
+    "tags": {
+     "useDefaultName": "boolean",
+     "explicitComponent": "boolean",
+     "packageName": "string",
+     "className": "string",
+     "appName": "string"
+    },
+    "example": "<action type=\"open_browser_url\">\n    <useDefaultName>true</useDefaultName>\n    <name>Open URL in Browser: https://stake.com/?tab=reload&amp;modal=vip&amp;currency=doge (use Chrome)</name>\n    <url>https://stake.com/?tab=reload&amp;modal=vip&amp;currency=doge</url>\n    <explicitComponent>true</explicitComponent>\n    <packageName>com.android.chrome</packageName>\n    <className>com.google.android.apps.chrome.Main</className>\n    <appName>Chrome</appName>\n  </action>"
+   },
+   "launch_app": {
+    "name": "Launch App",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.cs",
+    "tags": {
+     "useDefaultName": "boolean",
+     "packageName": "string",
+     "className": "string"
+    }
+   },
+   "write_to_file": {
+    "name": "Write to File",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.ht",
+    "tags": {
+     "useDefaultName": "boolean",
+     "path": "string",
+     "text": "string",
+     "append": "boolean"
+    }
+   },
+   "script": {
+    "name": "Script",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.dw",
+    "tags": {
+     "useDefaultName": "boolean",
+     "script": "string"
+    },
+    "example": "<action type=\"script\">\n    <useDefaultName>false</useDefaultName>\n    <name>Script USDT JSON to Global Variables</name>\n    <script>responseJSON1 = fromJSON(response1);\nusdtPrice = getMapValue(responseJSON1, \"tether\");\n\nglobal_usdt = getMapValue(usdtPrice, \"idr\");\nchangeUSDT = getMapValue(usdtPrice, \"idr_24h_change\");\n\nglobal_pricechangeusdt = replaceAll(changeUSDT, '.{14}$', '');\n\n</script>\n  </action>"
+   },
+   "send_sms": {
+    "name": "Send SMS",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.dz",
+    "tags": {
+     "useDefaultName": "boolean",
+     "sim": "string",
+     "receiver": "string",
+     "message": "string",
+     "truncate": "boolean",
+     "limited": "boolean",
+     "maxCount": "int",
+     "duration": "long",
+     "storeSMS": "boolean",
+     "requestDeliveryReports": "boolean",
+     "synchronousDeliveryReports": "boolean",
+     "deliveryReportTimeout": "long"
+    }
+   },
+   "download_url": {
+    "name": "Download URL",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.af",
+    "tags": {
+     "useDefaultName": "boolean",
+     "directory": "string",
+     "filename": "string",
+     "showProgress": "boolean"
+    }
+   },
+   "set_audio_stream_volume": {
+    "name": "Set Audio Volume",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.ei",
+    "tags": {
+     "useDefaultName": "boolean",
+     "audioStreamType": "string",
+     "audioStreamChangeType": "string",
+     "volumeIndex": "string",
+     "playSound": "boolean",
+     "showUI": "boolean"
+    },
+    "example": "<action type=\"set_audio_stream_volume\">\n    <useDefaultName>true</useDefaultName>\n    <name>Set Audio Stream Volume: Music to level 15</name>\n    <audioStreamType>MUSIC</audioStreamType>\n    <audioStreamChangeType>ADJUST_SET_ABSOLUTE</audioStreamChangeType>\n    <volumeIndex>15</volumeIndex>\n    <playSound>false</playSound>\n    <showUI>false</showUI>\n  </action>"
+   },
+   "init_variable_file_list": {
+    "name": "Init Variable File List",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.bp",
+    "tags": {
+     "useDefaultName": "long",
+     "variable": "string",
+     "filePattern": "string",
+     "changesOnly": "boolean",
+     "includeFileAttributes": "boolean"
+    },
+    "example": "<action type=\"init_variable_file_list\">\n    <useDefaultName>true</useDefaultName>\n    <name>Init Variable File List: daily to {path}Daily_*</name>\n    <variable>daily</variable>\n    <filePattern>{path}Daily_*</filePattern>\n    <changesOnly>false</changesOnly>\n    <includeFileAttributes>true</includeFileAttributes>\n  </action>"
+   },
+   "init_variable_location": {
+    "name": "Init Variable Location",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.bs",
+    "tags": {
+     "useDefaultName": "boolean",
+     "variable": "string",
+     "newLocation": "boolean",
+     "provider": "string",
+     "minimumAccuracyEnabled": "boolean",
+     "minimumAccuracy": "int",
+     "timeoutEnabled": "boolean",
+     "timeoutMillis": "boolean"
+    },
+    "example": "<action type=\"init_variable_location\">\n    <useDefaultName>true</useDefaultName>\n    <name>Init Variable Location: new location into location using GPS</name>\n    <variable>location</variable>\n    <newLocation>true</newLocation>\n    <provider>gps</provider>\n    <minimumAccuracyEnabled>false</minimumAccuracyEnabled>\n    <minimumAccuracy>500</minimumAccuracy>\n    <timeoutEnabled>false</timeoutEnabled>\n    <timeoutMillis>60000</timeoutMillis>\n  </action>"
+   },
+   "set_wallpaper": {
+    "name": "Set Wallpaper",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.ga",
+    "tags": {
+     "useDefaultName": "boolean",
+     "wallpaperType": "string",
+     "path": "string"
+    },
+    "example": "<action type=\"set_wallpaper\">\n    <useDefaultName>true</useDefaultName>\n    <wallpaperType>SYSTEM</wallpaperType>\n    <name>Set Wallpaper: Home screen to {getRandomElement(wallp)}</name>\n    <path>{getRandomElement(wallp)}</path>\n  </action>"
+   },
+   "init_variables_gleeo_recording": {
+    "name": "Init Variables Gleeo Recording",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.ch",
+    "tags": {
+     "useDefaultName": "boolean",
+     "variableRecording": "string",
+     "variableRecordingDomainName": "string",
+     "variableRecordingProjectName": "string",
+     "variableRecordingTaskName": "string",
+     "variableRecordingStart": "string"
+    }
+   },
+   "set_flow_state": {
+    "name": "Set Flow State",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.ev",
+    "tags": {
+     "useDefaultName": "boolean",
+     "includeFlowNamePatternList": "string",
+     "excludeFlowNamePatternList": "string"
+    }
+   },
+   "init_variable_random_number": {
+    "name": "Init Variable Random Number",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.bw",
+    "tags": {
+     "useDefaultName": "boolean",
+     "variable": "string",
+     "low": "string",
+     "high": "int"
+    }
+   },
+   "set_screen_brightness": {
+    "name": "Set Screen Brightness",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.fo",
+    "tags": {
+     "useDefaultName": "boolean",
+     "automatic": "boolean",
+     "brightness": "string",
+     "changeAdaptive": "boolean",
+     "adaptiveValue": "string",
+     "forceUpdate": "boolean"
+    }
+   },
+   "set_bluetooth_state": {
+    "name": "Set Bluetooth State",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.em",
+    "tags": {
+     "useDefaultName": "boolean"
+    },
+    "example": "<action type=\"set_bluetooth_state\">\n    <useDefaultName>true</useDefaultName>\n    <name>Set Bluetooth State: Off</name>\n    <enable>false</enable>\n  </action>"
+   },
+   "execute_flows": {
+    "name": "Execute Flows",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.ap",
+    "tags": {
+     "useDefaultName": "boolean",
+     "includeFlowNamePatternList": "string",
+     "excludeFlowNamePatternList": "string",
+     "skipDisabledFlowsWithoutError": "boolean",
+     "waitForFlowsToFinish": "boolean",
+     "returnLocalVariablesToCallingFlow": "boolean"
+    },
+    "example": "<action type=\"execute_flows\">\n    <useDefaultName>true</useDefaultName>\n    <name>Execute Flows: Free Space Cache,Free Space Data,Free Space SD Card,Free Space System</name>\n    <includeFlowNamePatternList>Free Space Cache,Free Space Data,Free Space SD Card,Free Space System</includeFlowNamePatternList>\n    <excludeFlowNamePatternList />\n    <skipDisabledFlowsWithoutError>false</skipDisabledFlowsWithoutError>\n    <waitForFlowsToFinish>false</waitForFlowsToFinish>\n    <returnLocalVariablesToCallingFlow>false</returnLocalVariablesToCallingFlow>\n  </action>"
+   },
+   "execute_command": {
+    "name": "Execute Command",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.ao",
+    "tags": {
+     "useDefaultName": "string",
+     "command": "string",
+     "workingDirectory": "string",
+     "timeout": "long",
+     "variableStdout": "string",
+     "variableStderr": "string",
+     "variableExitCode": "string"
+    }
+   },
+   "set_screen_timeout": {
+    "name": "Set Screen Timeout",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.fq",
+    "tags": {
+     "useDefaultName": "boolean",
+     "screenTimeoutValue": "string"
+    }
+   },
+   "lock_device": {
+    "name": "Lock Device",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.cu",
+    "tags": {}
+   },
+   "turn_screen_on": {
+    "name": "Turn Screen On",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.hh",
+    "tags": {
+     "useDefaultName": "boolean",
+     "bright": "boolean",
+     "duration": "string",
+     "resetUserActivityTimer": "boolean"
+    },
+    "example": "<action type=\"turn_screen_on\">\n    <useDefaultName>true</useDefaultName>\n    <name>Turn Screen On: Bright for 5s</name>\n    <bright>true</bright>\n    <duration>5s</duration>\n    <resetUserActivityTimer>true</resetUserActivityTimer>\n  </action>"
+   },
+   "set_car_ui_mode": {
+    "name": "Set Car UI Mode",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.ep",
+    "tags": {
+     "useDefaultName": "boolean",
+     "launchHome": "boolean"
+    }
+   },
+   "set_night_mode": {
+    "name": "Set Night Mode",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.fj",
+    "tags": {
+     "useDefaultName": "boolean",
+     "nightMode": "string"
+    }
+   },
+   "enable_wifi_access_point": {
+    "name": "Enable WiFi Access Point",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.am",
+    "tags": {
+     "useDefaultName": "boolean",
+     "ssid": "string",
+     "disableOtherAccessPoints": "boolean"
+    }
+   },
+   "set_wifi_access_point_priority": {
+    "name": "Set WiFi Access Point Priority",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.gb",
+    "tags": {
+     "useDefaultName": "boolean",
+     "ssid": "string",
+     "priority": "int"
+    }
+   },
+   "wifi_scan": {
+    "name": "WiFi Scan",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.hq",
+    "tags": {}
+   },
+   "set_wifi_sleep_policy": {
+    "name": "Set WiFi Sleep Policy",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.gc",
+    "tags": {
+     "useDefaultName": "boolean",
+     "wifiPolicy": "string"
+    }
+   },
+   "dropbox_upload_file": {
+    "name": "Dropbox Upload File",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.ak",
+    "tags": {
+     "useDefaultName": "boolean",
+     "localPath": "string",
+     "dropboxPath": "string",
+     "showProgress": "boolean"
+    }
+   },
+   "ftp_upload_file": {
+    "name": "FTP Upload File",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.ay",
+    "tags": {
+     "useDefaultName": "boolean",
+     "protocol": "string",
+     "verifyCertificates": "boolean",
+     "protType": "string",
+     "server": "string",
+     "port": "int",
+     "username": "string",
+     "localPath": "string",
+     "serverPath": "string",
+     "defineControlEncoding": "boolean",
+     "controlEncoding": "string",
+     "showProgress": "boolean"
+    }
+   },
+   "input_dialog": {
+    "name": "Input Dialog",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.cn",
+    "tags": {
+     "useDefaultName": "boolean",
+     "inputDialogType": "string",
+     "prompt": "string",
+     "inputValues": "string",
+     "defaultValue": "string",
+     "titleFontSize": "string",
+     "promptFontSize": "long",
+     "fontSize": "long",
+     "timeoutEnabled": "boolean",
+     "timeout": "long",
+     "defaultValueOnTimeout": "int",
+     "showWhenLocked": "boolean",
+     "turnScreenOn": "boolean",
+     "keepScreenOn": "boolean",
+     "enlargeDialogWidth": "boolean",
+     "keyboardCapitalizeSentences": "boolean"
+    },
+    "example": "<action type=\"input_dialog\">\n    <useDefaultName>true</useDefaultName>\n    <name>Input Dialog: Choose task Single Choice Menu {choice,listformat,comma}</name>\n    <title>Choose task</title>\n    <inputDialogType>SINGLE_CHOICE_MENU</inputDialogType>\n    <prompt />\n    <inputValues>{choice,listformat,comma}</inputValues>\n    <defaultValue />\n    <titleFontSize>DEFAULT</titleFontSize>\n    <promptFontSize>DEFAULT</promptFontSize>\n    <fontSize>DEFAULT</fontSize>\n    <timeoutEnabled>false</timeoutEnabled>\n    <timeout>60000</timeout>\n    <defaultValueOnTimeout />\n    <showWhenLocked>false</showWhenLocked>\n    <turnScreenOn>false</turnScreenOn>\n    <keepScreenOn>false</keepScreenOn>\n    <enlargeDialogWidth>false</enlargeDialogWidth>\n    <keyboardCapitalizeSentences>false</keyboardCapitalizeSentences>\n  </action>"
+   },
+   "set_mobile_datanetwork_state": {
+    "name": "Set Mobile Datanetwork State",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.ff",
+    "tags": {
+     "useDefaultName": "boolean"
+    },
+    "example": "<action type=\"set_mobile_datanetwork_state\">\n    <useDefaultName>true</useDefaultName>\n    <name>Set Mobile Datanetwork State: Off</name>\n    <enable>false</enable>\n  </action>"
+   },
+   "http_request": {
+    "name": "HTTP Request",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.bk",
+    "tags": {
+     "useDefaultName": "boolean",
+     "verifyCertificates": "boolean",
+     "basicAuthentication": "string",
+     "username": "string",
+     "clientCert": "string",
+     "clientCertPath": "string",
+     "httpMethod": "string",
+     "networkType": "string",
+     "httpContentType": "string",
+     "contentType": "string",
+     "generalTextData": "string",
+     "formFieldList": "string",
+     "uploadFieldName": "string",
+     "uploadFilePath": "string",
+     "binaryContentType": "string",
+     "binaryFilePath": "string",
+     "timeout": "long",
+     "setCustomHTTPHeaders": "boolean",
+     "customHTTPHeaders": "string",
+     "storeInVariable": "boolean",
+     "variable": "string",
+     "encoding": "string",
+     "path": "string",
+     "followRedirects": "boolean",
+     "skipConnectivityCheck": "boolean"
+    },
+    "example": "<action type=\"http_request\">\n    <useDefaultName>false</useDefaultName>\n    <name>HTTP Request: GET https://api.binance.com/api/v3/avgPrice?symbol=BTCUSDT </name>\n    <url>https://api.binance.com/api/v3/avgPrice?symbol=BTCUSDT</url>\n    <verifyCertificates>true</verifyCertificates>\n    <basicAuthentication>false</basicAuthentication>\n    <username />\n    <clientCert>false</clientCert>\n    <clientCertPath />\n    <httpMethod>GET</httpMethod>\n    <networkType>DEFAULT</networkType>\n    <httpContentType>X_WWW_FORM_URLENCODED</httpContentType>\n    <contentType>text/plain</contentType>\n    <generalTextData />\n    <formFieldList>Lastname=XYZ,Firstname=ABC</formFieldList>\n    <uploadFieldName>upload_field</uploadFieldName>\n    <uploadFilePath />\n    <binaryContentType>application/octet-stream</binaryContentType>\n    <binaryFilePath />\n    <timeout>60000</timeout>\n    <setCustomHTTPHeaders>false</setCustomHTTPHeaders>\n    <customHTTPHeaders />\n    <storeInVariable>true</storeInVariable>\n    <variable>test5</variable>\n    <encoding />\n    <path>/storage/emulated/0/Download/file.bin</path>\n    <followRedirects>true</followRedirects>\n    <skipConnectivityCheck>false</skipConnectivityCheck>\n  </action>"
+   },
+   "set_auto_sync_state": {
+    "name": "Set Auto Sync State",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.ek",
+    "tags": {
+     "useDefaultName": "boolean",
+     "global": "boolean",
+     "accounts": "string",
+     "syncAuthorities": "string"
+    }
+   },
+   "copy_file": {
+    "name": "Copy File",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.t",
+    "tags": {
+     "useDefaultName": "boolean",
+     "sourceFile": "string",
+     "targetFile": "string"
+    }
+   },
+   "start_recording_audio": {
+    "name": "Start Recording Audio",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.gv",
+    "tags": {
+     "useDefaultName": "boolean",
+     "audioSource": "string",
+     "path": "string",
+     "audioEncoder": "string",
+     "maxDurationEnabled": "boolean",
+     "maxDuration": "long",
+     "showStopRecordingNotification": "boolean"
+    }
+   },
+   "stop_recording_audio": {
+    "name": "Stop Recording Audio",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.hc",
+    "tags": {}
+   },
+   "scan_barcode": {
+    "name": "Scan Barcode",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.dv",
+    "tags": {
+     "useDefaultName": "boolean",
+     "timeoutEnabled": "boolean",
+     "timeout": "long"
+    }
+   },
+   "map_values": {
+    "name": "Map Values",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.cw",
+    "tags": {
+     "useDefaultName": "boolean",
+     "value": "string",
+     "map": "string",
+     "variable": "string"
+    },
+    "example": "<action type=\"map_values\">\n    <useDefaultName>true</useDefaultName>\n    <name>Map Values: btc using map (mins=&gt;value1 price=&gt;value2) store result in mapped_value</name>\n    <value>btc</value>\n    <map>mins=&gt;value1\nprice=&gt;value2</map>\n    <variable>mapped_value</variable>\n  </action>"
+   },
+   "copy_text_to_clipboard": {
+    "name": "Copy Text to Clipboard",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.w",
+    "tags": {
+     "useDefaultName": "boolean",
+     "text": "string"
+    }
+   },
+   "kill_app": {
+    "name": "Kill App",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.cq",
+    "tags": {
+     "useDefaultName": "boolean",
+     "packageName": "string"
+    },
+    "example": "<action type=\"kill_app\">\n    <useDefaultName>true</useDefaultName>\n    <name>Kill App: app.revanced.android.youtube</name>\n    <packageName>app.revanced.android.youtube</packageName>\n  </action>"
+   },
+   "flashlight": {
+    "name": "Flashlight",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.ba",
+    "tags": {
+     "useDefaultName": "boolean"
+    }
+   },
+   "store_audio_stream_volume": {
+    "name": "Store Audio Volumes",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.he",
+    "tags": {
+     "useDefaultName": "boolean",
+     "storeVolumeAlarm": "boolean",
+     "variableVolumeAlarm": "string",
+     "storeVolumeDTMF": "boolean",
+     "variableVolumeDTMF": "string",
+     "storeVolumeMusic": "boolean",
+     "variableVolumeMusic": "string",
+     "storeVolumeNotification": "boolean",
+     "variableVolumeNotification": "string",
+     "storeVolumeRing": "boolean",
+     "variableVolumeRing": "string",
+     "storeVolumeSystem": "boolean",
+     "variableVolumeSystem": "string",
+     "storeVolumeVoiceCall": "boolean",
+     "variableVolumeVoiceCall": "string",
+     "storeRingerMode": "boolean",
+     "variableRingerMode": "string",
+     "storeInterruptionsMode": "boolean",
+     "variableInterruptionsMode": "string"
+    },
+    "example": "<action type=\"store_audio_stream_volume\">\n    <useDefaultName>true</useDefaultName>\n    <name>Store Audio Volumes</name>\n    <storeVolumeAlarm>true</storeVolumeAlarm>\n    <variableVolumeAlarm>global_volume_alarm</variableVolumeAlarm>\n    <storeVolumeDTMF>true</storeVolumeDTMF>\n    <variableVolumeDTMF>global_volume_dtmf</variableVolumeDTMF>\n    <storeVolumeMusic>true</storeVolumeMusic>\n    <variableVolumeMusic>global_volume_music</variableVolumeMusic>\n    <storeVolumeNotification>true</storeVolumeNotification>\n    <variableVolumeNotification>global_volume_notification</variableVolumeNotification>\n    <storeVolumeRing>true</storeVolumeRing>\n    <variableVolumeRing>global_volume_ring</variableVolumeRing>\n    <storeVolumeSystem>true</storeVolumeSystem>\n    <variableVolumeSystem>global_volume_system</variableVolumeSystem>\n    <storeVolumeVoiceCall>true</storeVolumeVoiceCall>\n    <variableVolumeVoiceCall>global_volume_voice_call</variableVolumeVoiceCall>\n    <storeRingerMode>false</storeRingerMode>\n    <variableRingerMode>global_ringer_mode</variableRingerMode>\n    <storeInterruptionsMode>false</storeInterruptionsMode>\n    <variableInterruptionsMode>global_interruptions_mode</variableInterruptionsMode>\n  </action>"
+   },
+   "restore_audio_stream_volume": {
+    "name": "Restore Audio Volumes",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.ds",
+    "tags": {
+     "useDefaultName": "boolean",
+     "restoreVolumeAlarm": "boolean",
+     "variableVolumeAlarm": "string",
+     "restoreVolumeDTMF": "boolean",
+     "variableVolumeDTMF": "string",
+     "restoreVolumeMusic": "boolean",
+     "variableVolumeMusic": "string",
+     "restoreVolumeNotification": "boolean",
+     "variableVolumeNotification": "string",
+     "restoreVolumeRing": "boolean",
+     "variableVolumeRing": "string",
+     "restoreVolumeSystem": "boolean",
+     "variableVolumeSystem": "string",
+     "restoreVolumeVoiceCall": "boolean",
+     "variableVolumeVoiceCall": "string",
+     "restoreRingerMode": "boolean",
+     "variableRingerMode": "string",
+     "restoreInterruptionsMode": "boolean",
+     "variableInterruptionsMode": "string"
+    },
+    "example": "<action type=\"restore_audio_stream_volume\">\n    <useDefaultName>true</useDefaultName>\n    <name>Restore Audio Volumes</name>\n    <restoreVolumeAlarm>false</restoreVolumeAlarm>\n    <variableVolumeAlarm>global_volume_alarm</variableVolumeAlarm>\n    <restoreVolumeDTMF>false</restoreVolumeDTMF>\n    <variableVolumeDTMF>global_volume_dtmf</variableVolumeDTMF>\n    <restoreVolumeMusic>true</restoreVolumeMusic>\n    <variableVolumeMusic>global_volume_music</variableVolumeMusic>\n    <restoreVolumeNotification>false</restoreVolumeNotification>\n    <variableVolumeNotification>global_volume_notification</variableVolumeNotification>\n    <restoreVolumeRing>false</restoreVolumeRing>\n    <variableVolumeRing>global_volume_ring</variableVolumeRing>\n    <restoreVolumeSystem>false</restoreVolumeSystem>\n    <variableVolumeSystem>global_volume_system</variableVolumeSystem>\n    <restoreVolumeVoiceCall>false</restoreVolumeVoiceCall>\n    <variableVolumeVoiceCall>global_volume_voice_call</variableVolumeVoiceCall>\n    <restoreRingerMode>false</restoreRingerMode>\n    <variableRingerMode>global_ringer_mode</variableRingerMode>\n    <restoreInterruptionsMode>false</restoreInterruptionsMode>\n    <variableInterruptionsMode>global_interruptions_mode</variableInterruptionsMode>\n  </action>"
+   },
+   "gleeo_create_entry": {
+    "name": "Gleeo Create Entry",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.bb",
+    "tags": {
+     "useDefaultName": "boolean",
+     "domainName": "string",
+     "projectName": "string",
+     "taskName": "string",
+     "taskDetail": "string",
+     "taskExtra1": "string",
+     "taskExtra2": "string",
+     "startVariable": "string",
+     "endVariable": "string",
+     "background": "string",
+     "turnScreenOn": "string"
+    }
+   },
+   "set_audio_manager_mode": {
+    "name": "Set Audio Manager Mode",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.eh",
+    "tags": {
+     "useDefaultName": "boolean",
+     "audioManagerMode": "string"
+    }
+   },
+   "set_speakerphone_state": {
+    "name": "Set Speakerphone State",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.fr",
+    "tags": {
+     "useDefaultName": "boolean"
+    }
+   },
+   "set_microphone_mute": {
+    "name": "Set Microphone Mute",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.fe",
+    "tags": {
+     "useDefaultName": "boolean"
+    }
+   },
+   "set_bluetooth_sco_state": {
+    "name": "Set Bluetooth SCO State",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.el",
+    "tags": {
+     "useDefaultName": "boolean",
+     "startBluetoothSCO": "boolean",
+     "stopBluetoothSCO": "boolean"
+    }
+   },
+   "show_home_screen": {
+    "name": "Show Home Screen",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.gl",
+    "tags": {}
+   },
+   "connect_disconnect_bluetooth_device": {
+    "name": "Connect/Disconnect Bluetooth Device",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.q",
+    "tags": {
+     "useDefaultName": "boolean",
+     "bluetoothDeviceProfile": "string",
+     "deviceAddress": "string",
+     "deviceName": "string",
+     "connect": "boolean"
+    }
+   },
+   "start_activity": {
+    "name": "Start Activity",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.gt",
+    "tags": {
+     "useDefaultName": "string",
+     "intentAction": "string",
+     "categoryListEnabled": "boolean",
+     "categoryList": "string",
+     "dataEnabled": "string",
+     "data": "string",
+     "dataTypeEnabled": "string",
+     "dataType": "boolean",
+     "explicitComponent": "string",
+     "packageName": "string",
+     "className": "string",
+     "flagList": "string",
+     "launchBoundsEnabled": "boolean",
+     "x": "string",
+     "y": "string",
+     "width": "string",
+     "height": "string",
+     "extras": "string",
+     "waitForResult": "boolean",
+     "accessResultExtras": "string"
+    },
+    "example": "<action type=\"start_activity\">\n    <useDefaultName>true</useDefaultName>\n    <name>Start Activity: android.intent.action.VIEW com.android.settings/com.android.settings.Settings$DevRunningServicesActivity </name>\n    <intentAction>android.intent.action.VIEW</intentAction>\n    <categoryListEnabled>false</categoryListEnabled>\n    <categoryList>android.intent.category.DEFAULT</categoryList>\n    <dataEnabled>false</dataEnabled>\n    <data />\n    <dataTypeEnabled>false</dataTypeEnabled>\n    <dataType>text/plain</dataType>\n    <explicitComponent>true</explicitComponent>\n    <packageName>com.android.settings</packageName>\n    <className>com.android.settings.Settings$DevRunningServicesActivity</className>\n    <flagList>FLAG_ACTIVITY_NEW_TASK</flagList>\n    <launchBoundsEnabled>false</launchBoundsEnabled>\n    <x />\n    <y />\n    <width />\n    <height />\n    <extras />\n    <waitForResult>false</waitForResult>\n    <accessResultExtras />\n  </action>"
+   },
+   "init_variables_device_orientation": {
+    "name": "Init Variables Device Orientation",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.ce",
+    "tags": {
+     "useDefaultName": "string",
+     "variableAzimuth": "string",
+     "variablePitch": "string",
+     "variableRoll": "string",
+     "timeout": "long"
+    }
+   },
+   "call_number": {
+    "name": "Call Number",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.l",
+    "tags": {
+     "useDefaultName": "boolean",
+     "sim": "string",
+     "number": "string",
+     "directlyInitiateCall": "boolean"
+    }
+   },
+   "end_call": {
+    "name": "End Call",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.an",
+    "tags": {}
+   },
+   "set_gps_state": {
+    "name": "Set GPS State",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.ew",
+    "tags": {
+     "useDefaultName": "boolean"
+    }
+   },
+   "kill_app_process": {
+    "name": "Kill App Process",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.cr",
+    "tags": {
+     "useDefaultName": "boolean",
+     "packageName": "string",
+     "signal": "string"
+    }
+   },
+   "execute_root_command": {
+    "name": "Execute Root Command",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.aq",
+    "tags": {
+     "useDefaultName": "string",
+     "command": "string",
+     "user": "string",
+     "seContext": "string",
+     "workingDirectory": "string",
+     "timeout": "long",
+     "variableStdout": "string",
+     "variableStderr": "string",
+     "variableExitCode": "string"
+    },
+    "example": "<action type=\"execute_root_command\">\n    <useDefaultName>true</useDefaultName>\n    <name>Execute Root Command: df -k /cache | tail -1 | tr -s ' ' | cut -d' ' -f4 as root in </name>\n    <command>df -k /cache | tail -1 | tr -s ' ' | cut -d' ' -f4</command>\n    <user>root</user>\n    <seContext />\n    <workingDirectory />\n    <timeout>300000</timeout>\n    <variableStdout>cache1</variableStdout>\n    <variableStderr>stderr</variableStderr>\n    <variableExitCode>exit_code</variableExitCode>\n  </action>"
+   },
+   "post_tweet": {
+    "name": "Post Tweet",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.dj",
+    "tags": {
+     "useDefaultName": "boolean",
+     "userID": "long",
+     "screenName": "string",
+     "message": "string",
+     "imageFiles": "string"
+    }
+   },
+   "post_twitter_direct_message": {
+    "name": "Post Twitter Direct Message",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.dk",
+    "tags": {
+     "useDefaultName": "boolean",
+     "userID": "long",
+     "screenName": "string",
+     "receiver": "string",
+     "message": "string"
+    }
+   },
+   "ftp_download_files": {
+    "name": "FTP Download Files",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.aw",
+    "tags": {
+     "useDefaultName": "boolean",
+     "protocol": "string",
+     "verifyCertificates": "boolean",
+     "protType": "string",
+     "server": "string",
+     "port": "int",
+     "username": "string",
+     "localDirectory": "string",
+     "serverPathList": "string",
+     "defineControlEncoding": "boolean",
+     "controlEncoding": "string",
+     "showProgress": "boolean"
+    }
+   },
+   "ftp_upload_files": {
+    "name": "FTP Upload Files",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.az",
+    "tags": {
+     "useDefaultName": "boolean",
+     "protocol": "string",
+     "verifyCertificates": "boolean",
+     "protType": "string",
+     "server": "string",
+     "port": "int",
+     "username": "string",
+     "serverDirectory": "string",
+     "localPathList": "string",
+     "defineControlEncoding": "boolean",
+     "controlEncoding": "string",
+     "showProgress": "boolean"
+    }
+   },
+   "ftp_delete_files": {
+    "name": "FTP Delete Files",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.av",
+    "tags": {
+     "useDefaultName": "boolean",
+     "protocol": "string",
+     "verifyCertificates": "boolean",
+     "protType": "string",
+     "server": "string",
+     "port": "int",
+     "username": "string",
+     "serverPathList": "string",
+     "defineControlEncoding": "boolean",
+     "controlEncoding": "string",
+     "showProgress": "boolean"
+    }
+   },
+   "copy_files": {
+    "name": "Copy Files",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.u",
+    "tags": {
+     "useDefaultName": "boolean",
+     "sourcePathList": "string",
+     "targetPath": "string",
+     "showProgress": "boolean"
+    }
+   },
+   "delete_files": {
+    "name": "Delete Files",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.aa",
+    "tags": {
+     "useDefaultName": "boolean",
+     "pathList": "string",
+     "showProgress": "boolean"
+    },
+    "example": "<action type=\"delete_files\">\n    <useDefaultName>true</useDefaultName>\n    <name>Delete Files: {dellist,listformat,comma}</name>\n    <pathList>{dellist,listformat,comma}</pathList>\n    <showProgress>true</showProgress>\n  </action>"
+   },
+   "move_files": {
+    "name": "Move Files",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.dc",
+    "tags": {
+     "useDefaultName": "boolean",
+     "sourcePathList": "string",
+     "targetPath": "string",
+     "showProgress": "boolean"
+    }
+   },
+   "create_directories": {
+    "name": "Create Directories",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.y",
+    "tags": {
+     "useDefaultName": "boolean",
+     "pathList": "string"
+    }
+   },
+   "zip_files": {
+    "name": "Zip Files",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.hv",
+    "tags": {
+     "useDefaultName": "boolean",
+     "sourcePathList": "string",
+     "targetPath": "string",
+     "showProgress": "boolean"
+    },
+    "example": "<action type=\"zip_files\">\n    <useDefaultName>true</useDefaultName>\n    <name>Zip Files: {ziplist,listformat,comma} to {path}{zipname}</name>\n    <sourcePathList>{ziplist,listformat,comma}</sourcePathList>\n    <targetPath>{path}{zipname}</targetPath>\n    <showProgress>false</showProgress>\n  </action>"
+   },
+   "unzip_files": {
+    "name": "Unzip Files",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.hj",
+    "tags": {
+     "useDefaultName": "boolean",
+     "zipFilePath": "string",
+     "targetPath": "string",
+     "showProgress": "boolean"
+    }
+   },
+   "set_nfc_state": {
+    "name": "Set NFC State",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.fh",
+    "tags": {
+     "useDefaultName": "boolean"
+    }
+   },
+   "send_broadcast": {
+    "name": "Send Broadcast",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.dy",
+    "tags": {
+     "useDefaultName": "string",
+     "intentAction": "string",
+     "categoryListEnabled": "boolean",
+     "categoryList": "string",
+     "dataEnabled": "string",
+     "data": "string",
+     "dataTypeEnabled": "string",
+     "dataType": "boolean",
+     "explicitComponent": "string",
+     "packageName": "string",
+     "className": "string",
+     "flagList": "string",
+     "launchBoundsEnabled": "boolean",
+     "x": "string",
+     "y": "string",
+     "width": "string",
+     "height": "string",
+     "extras": "string",
+     "waitForResult": "boolean",
+     "accessResultExtras": "string"
+    },
+    "example": "<action type=\"send_broadcast\">\n    <useDefaultName>false</useDefaultName>\n    <name>Send Broadcast: horg.kustom.action.SEND_VAR </name>\n    <intentAction>org.kustom.action.SEND_VAR</intentAction>\n    <categoryListEnabled>false</categoryListEnabled>\n    <categoryList>android.intent.category.DEFAULT</categoryList>\n    <dataEnabled>false</dataEnabled>\n    <data />\n    <dataTypeEnabled>false</dataTypeEnabled>\n    <dataType>text/plain</dataType>\n    <explicitComponent>false</explicitComponent>\n    <packageName />\n    <className />\n    <flagList>FLAG_ACTIVITY_NEW_TASK</flagList>\n    <extras>putString(\"org.kustom.action.EXT_NAME\", \"MAGICDATA\");\nputString(\"org.kustom.action.VAR_NAME\", \"jadwal5\");\nputString(\"org.kustom.action.VAR_VALUE\", jadwal5);</extras>\n    <waitForResult>false</waitForResult>\n    <accessResultExtras />\n  </action>"
+   },
+   "control_audio_player": {
+    "name": "Control Audio Player",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.r",
+    "tags": {
+     "useDefaultName": "boolean",
+     "simulateMediaButton": "boolean",
+     "broadcastAction": "string",
+     "mediaButton": "string",
+     "explicitComponent": "boolean",
+     "packageName": "string",
+     "className": "string",
+     "appName": "string"
+    }
+   },
+   "set_usb_debugging_state": {
+    "name": "Set USB Debugging State",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.fx",
+    "tags": {
+     "useDefaultName": "boolean"
+    }
+   },
+   "set_lock_pattern_state": {
+    "name": "Set Lock Pattern State",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.fd",
+    "tags": {
+     "useDefaultName": "boolean",
+     "method": "string"
+    }
+   },
+   "set_data_roaming_state": {
+    "name": "Set Data Roaming State",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.er",
+    "tags": {
+     "useDefaultName": "boolean"
+    }
+   },
+   "remove_notification_status_bar": {
+    "name": "Remove Notification on Statusbar",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.do",
+    "tags": {},
+    "example": "<action type=\"remove_notification_status_bar\">\n    <useDefaultName>true</useDefaultName>\n    <name>Remove Notification on Statusbar: All</name>\n    <automagicNotifications>false</automagicNotifications>\n    <all>true</all>\n    <notificationID>1</notificationID>\n    <overall>true</overall>\n    <packageName />\n    <allOfApp>true</allOfApp>\n    <filterNotificationID />\n    <textMatchField>TEXT</textMatchField>\n    <textMatchType>CONTAINS_TEXT</textMatchType>\n    <textFilter />\n  </action>"
+   },
+   "dropbox_download_files": {
+    "name": "Dropbox Download Files",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.ai",
+    "tags": {
+     "useDefaultName": "boolean",
+     "targetPath": "string",
+     "dropboxPathList": "string",
+     "showProgress": "boolean"
+    }
+   },
+   "dropbox_upload_files": {
+    "name": "Dropbox Upload Files",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.al",
+    "tags": {
+     "useDefaultName": "boolean",
+     "sourcePathList": "string",
+     "dropboxPath": "string",
+     "showProgress": "boolean"
+    }
+   },
+   "dropbox_delete_files": {
+    "name": "Dropbox Delete Files",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.ah",
+    "tags": {
+     "useDefaultName": "boolean",
+     "dropboxPathList": "string",
+     "showProgress": "boolean"
+    }
+   },
+   "answer_ringing_call": {
+    "name": "Answer Ringing Call",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.k",
+    "tags": {
+     "useDefaultName": "boolean",
+     "method": "string"
+    }
+   },
+   "silence_ringer": {
+    "name": "Silence Ringer",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.go",
+    "tags": {}
+   },
+   "remove_missed_calls_notification": {
+    "name": "Remove Notification Missed Calls",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.dn",
+    "tags": {}
+   },
+   "init_variable_text_file": {
+    "name": "Init Variable Text File",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.bz",
+    "tags": {
+     "useDefaultName": "boolean",
+     "path": "string",
+     "encoding": "string",
+     "variable": "string",
+     "stripBOM": "boolean"
+    }
+   },
+   "set_default_input_method": {
+    "name": "Set Default Input Method",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.es",
+    "tags": {
+     "useDefaultName": "boolean",
+     "inputMethod": "string"
+    }
+   },
+   "export_flows": {
+    "name": "Export Flows/Widgets",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.at",
+    "tags": {
+     "useDefaultName": "boolean",
+     "includeFlowNamePatternList": "string",
+     "excludeFlowNamePatternList": "string",
+     "includeWidgetNamePatternList": "string",
+     "excludeWidgetNamePatternList": "string",
+     "path": "string"
+    }
+   },
+   "import_flows": {
+    "name": "Import Flows/Widgets",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.bn",
+    "tags": {
+     "useDefaultName": "boolean",
+     "path": "string",
+     "replace": "boolean"
+    }
+   },
+   "set_screen_orientation": {
+    "name": "Set Screen Orientation",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.fp",
+    "tags": {
+     "useDefaultName": "boolean",
+     "screenOrientation": "string",
+     "showResetNotification": "boolean"
+    }
+   },
+   "control_user_interface": {
+    "name": "Control UI",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.s",
+    "tags": {
+     "useDefaultName": "boolean",
+     "script": "string"
+    }
+   },
+   "send_wake_on_lan_packet": {
+    "name": "Send Wake on LAN Packet",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.eb",
+    "tags": {
+     "useDefaultName": "boolean",
+     "host": "string",
+     "port": "string",
+     "macAddress": "string"
+    }
+   },
+   "set_auto_rotate_screen_state": {
+    "name": "Set Auto-rotate Screen State",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.ej",
+    "tags": {
+     "useDefaultName": "boolean"
+    }
+   },
+   "set_network_location_state": {
+    "name": "Set Network Location State",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.fi",
+    "tags": {
+     "useDefaultName": "boolean"
+    }
+   },
+   "message_dialog": {
+    "name": "Message Dialog",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.cx",
+    "tags": {
+     "useDefaultName": "boolean",
+     "message": "string",
+     "buttonLabel": "string",
+     "timeoutEnabled": "string",
+     "timeout": "long"
+    },
+    "example": "<action type=\"message_dialog\">\n    <useDefaultName>true</useDefaultName>\n    <name>Message Dialog: Crypto Price Bitcoin : {global_btc} USDT Ethereum : {global_eth} USDT Injective : {global_inj} USDT</name>\n    <title>Crypto Price</title>\n    <message>Bitcoin : {global_btc} USDT\nEthereum : {global_eth} USDT\nInjective : {global_inj} USDT</message>\n    <buttonLabel>Close</buttonLabel>\n    <timeoutEnabled>false</timeoutEnabled>\n    <timeout>60000</timeout>\n  </action>"
+   },
+   "stop_flows": {
+    "name": "Stop Flows",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.hb",
+    "tags": {
+     "useDefaultName": "boolean",
+     "includeFlowNamePatternList": "string",
+     "excludeFlowNamePatternList": "string"
+    }
+   },
+   "launch_shortcut": {
+    "name": "Launch Shortcut",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.ct",
+    "tags": {
+     "useDefaultName": "boolean",
+     "shortcutName": "string",
+     "shortcutIntent": "string",
+     "shortcutIntentURI": "string"
+    }
+   },
+   "plugin": {
+    "name": "Plugin (Experimental)",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.di",
+    "tags": {
+     "useDefaultName": "boolean",
+     "pluginLabel": "string",
+     "pluginBlurb": "long",
+     "pluginPackage": "string",
+     "pluginClass": "string",
+     "pluginBundle": "string",
+     "pluginBundleData": "string",
+     "configured": "boolean",
+     "passExtras": "boolean",
+     "extras": "string",
+     "relevantVariables": "string",
+     "synchronous": "boolean",
+     "timeout": "string",
+     "pluginRequestedTimeout": "int"
+    },
+    "example": "<action type=\"plugin\">\n    <useDefaultName>true</useDefaultName>\n    <name>Plugin: AutoResponder WA reply</name>\n    <pluginLabel>AutoResponder WA</pluginLabel>\n    <pluginBlurb>reply</pluginBlurb>\n    <pluginPackage>tkstudio.autoresponderforwa</pluginPackage>\n    <pluginClass>tkstudio.autoresponderforwa.tasker.ui.EditActivityAction</pluginClass>\n    <pluginBundle>AwAAAPQjAABCTkRMJwAAAD0AAAB0AGsAcwB0AHUAZABpAG8ALgBhAHUAdABvAHIAZQBzAHAAbwBu\nAGQAZQByAGYAbwByAHcAYQAuAHQAYQBzAGsAZQByAC4AZQB4AHQAcgBhAC4AUwBUAFIASQBOAEcA\nXwBPAFUAVABQAFUAVABfAEMATwBOAEYASQBHAAAAAAAAAAAAAAAAAAAAPQAAAHQAawBzAHQAdQBk\nAGkAbwAuAGEAdQB0AG8AcgBlAHMAcABvAG4AZABlAHIAZgBvAHIAdwBhAC4AdABhAHMAawBlAHIA\nLgBlAHgAdAByAGEALgBTAFQAUgBJAE4ARwBfAEcATwBfAFQATwBfAFIAVQBMAEUAXwBJAEQAAAAA\nAAAAAAAAAAAAAAAyAAAAdABrAHMAdAB1AGQAaQBvAC4AYQB1AHQAbwByAGUAcwBwAG8AbgBkAGUA\ncgBmAG8AcgB3AGEALgB0AGEAcwBrAGUAcgAuAGUAeAB0AHIAYQAuAFMAVABSAEkATgBHAF8ARgBS\nAAAAAAAAAAAAAAAAAAAAAAAyAAAAdABrAHMAdAB1AGQAaQBvAC4AYQB1AHQAbwByAGUAcwBwAG8A\nbgBkAGUAcgBmAG8AcgB3AGEALgB0AGEAcwBrAGUAcgAuAGUAeAB0AHIAYQAuAFMAVABSAEkATgBH\nAF8ATQBPAAAAAAAAAAAAAAAAAAAAAAAyAAAAdABrAHMAdAB1AGQAaQBvAC4AYQB1AHQAbwByAGUA\ncwBwAG8AbgBkAGUAcgBmAG8AcgB3AGEALgB0AGEAcwBrAGUAcgAuAGUAeAB0AHIAYQAuAFMAVABS\nAEkATgBHAF8AUwBBAAAAAAAAAAAAAAAAAAAAAAAyAAAAdABrAHMAdAB1AGQAaQBvAC4AYQB1AHQA\nbwByAGUAcwBwAG8AbgBkAGUAcgBmAG8AcgB3AGEALgB0AGEAcwBrAGUAcgAuAGUAeAB0AHIAYQAu\nAFMAVABSAEkATgBHAF8AUwBVAAAAAAAAAAAAAAAAAAAAAAAyAAAAdABrAHMAdAB1AGQAaQBvAC4A\nYQB1AHQAbwByAGUAcwBwAG8AbgBkAGUAcgBmAG8AcgB3AGEALgB0AGEAcwBrAGUAcgAuAGUAeAB0\nAHIAYQAuAFMAVABSAEkATgBHAF8AVABIAAAAAAAAAAAAAAAAAAAAAAAyAAAAdABrAHMAdAB1AGQA\naQBvAC4AYQB1AHQAbwByAGUAcwBwAG8AbgBkAGUAcgBmAG8AcgB3AGEALgB0AGEAcwBrAGUAcgAu\nAGUAeAB0AHIAYQAuAFMAVABSAEkATgBHAF8AVABVAAAAAAAAAAAAAAAAAAAAAAAyAAAAdABrAHMA\ndAB1AGQAaQBvAC4AYQB1AHQAbwByAGUAcwBwAG8AbgBkAGUAcgBmAG8AcgB3AGEALgB0AGEAcwBr\nAGUAcgAuAGUAeAB0AHIAYQAuAFMAVABSAEkATgBHAF8AVwBFAAAAAAAAAAAAAAAAAAAAAAA8AAAA\ndABrAHMAdAB1AGQAaQBvAC4AYQB1AHQAbwByAGUAcwBwAG8AbgBkAGUAcgBmAG8AcgB3AGEALgB0\nAGEAcwBrAGUAcgAuAGUAeAB0AHIAYQAuAFMAVABSAEkATgBHAF8AUwBFAE4ARABfAE0ARQBTAFMA\nQQBHAEUAAAAAAAAAAAAAAAAAAAAAADkAAABuAGUAdAAuAGQAaQBuAGcAbABpAHMAYwBoAC4AYQBu\nAGQAcgBvAGkAZAAuAHQAYQBzAGsAZQByAC4AZQB4AHQAcgBhAHMALgBWAEEAUgBJAEEAQgBMAEUA\nXwBSAEUAUABMAEEAQwBFAF8ASwBFAFkAUwAAAAAAAABUBwAAdABrAHMAdAB1AGQAaQBvAC4AYQB1\nAHQAbwByAGUAcwBwAG8AbgBkAGUAcgBmAG8AcgB3AGEALgB0AGEAcwBrAGUAcgAuAGUAeAB0AHIA\nYQAuAFMAVABSAEkATgBHAF8AUgBVAEwARQBfAEkARAAgAHQAawBzAHQAdQBkAGkAbwAuAGEAdQB0\nAG8AcgBlAHMAcABvAG4AZABlAHIAZgBvAHIAdwBhAC4AdABhAHMAawBlAHIALgBlAHgAdAByAGEA\nLgBTAFQAUgBJAE4ARwBfAFIARQBDAEUASQBWAEUARABfAE0ARQBTAFMAQQBHAEUAIAB0AGsAcwB0\nAHUAZABpAG8ALgBhAHUAdABvAHIAZQBzAHAAbwBuAGQAZQByAGYAbwByAHcAYQAuAHQAYQBzAGsA\nZQByAC4AZQB4AHQAcgBhAC4AUwBUAFIASQBOAEcAXwBTAEUATgBEAF8ATQBFAFMAUwBBAEcARQAg\nAHQAawBzAHQAdQBkAGkAbwAuAGEAdQB0AG8AcgBlAHMAcABvAG4AZABlAHIAZgBvAHIAdwBhAC4A\ndABhAHMAawBlAHIALgBlAHgAdAByAGEALgBTAFQAUgBJAE4ARwBfAFMAUABFAEMASQBGAEkAQwBf\nAEMATwBOAFQAQQBDAFQAUwAgAHQAawBzAHQAdQBkAGkAbwAuAGEAdQB0AG8AcgBlAHMAcABvAG4A\nZABlAHIAZgBvAHIAdwBhAC4AdABhAHMAawBlAHIALgBlAHgAdAByAGEALgBTAFQAUgBJAE4ARwBf\nAEkARwBOAE8AUgBFAEQAXwBDAE8ATgBUAEEAQwBUAFMAIAB0AGsAcwB0AHUAZABpAG8ALgBhAHUA\ndABvAHIAZQBzAHAAbwBuAGQAZQByAGYAbwByAHcAYQAuAHQAYQBzAGsAZQByAC4AZQB4AHQAcgBh\nAC4AUwBUAFIASQBOAEcAXwBUAEkATQBFACAAdABrAHMAdAB1AGQAaQBvAC4AYQB1AHQAbwByAGUA\ncwBwAG8AbgBkAGUAcgBmAG8AcgB3AGEALgB0AGEAcwBrAGUAcgAuAGUAeAB0AHIAYQAuAFMAVABS\nAEkATgBHAF8ATQBPACAAdABrAHMAdAB1AGQAaQBvAC4AYQB1AHQAbwByAGUAcwBwAG8AbgBkAGUA\ncgBmAG8AcgB3AGEALgB0AGEAcwBrAGUAcgAuAGUAeAB0AHIAYQAuAFMAVABSAEkATgBHAF8AVABV\nACAAdABrAHMAdAB1AGQAaQBvAC4AYQB1AHQAbwByAGUAcwBwAG8AbgBkAGUAcgBmAG8AcgB3AGEA\nLgB0AGEAcwBrAGUAcgAuAGUAeAB0AHIAYQAuAFMAVABSAEkATgBHAF8AVwBFACAAdABrAHMAdAB1\nAGQAaQBvAC4AYQB1AHQAbwByAGUAcwBwAG8AbgBkAGUAcgBmAG8AcgB3AGEALgB0AGEAcwBrAGUA\ncgAuAGUAeAB0AHIAYQAuAFMAVABSAEkATgBHAF8AVABIACAAdABrAHMAdAB1AGQAaQBvAC4AYQB1\nAHQAbwByAGUAcwBwAG8AbgBkAGUAcgBmAG8AcgB3AGEALgB0AGEAcwBrAGUAcgAuAGUAeAB0AHIA\nYQAuAFMAVABSAEkATgBHAF8ARgBSACAAdABrAHMAdAB1AGQAaQBvAC4AYQB1AHQAbwByAGUAcwBw\nAG8AbgBkAGUAcgBmAG8AcgB3AGEALgB0AGEAcwBrAGUAcgAuAGUAeAB0AHIAYQAuAFMAVABSAEkA\nTgBHAF8AUwBBACAAdABrAHMAdAB1AGQAaQBvAC4AYQB1AHQAbwByAGUAcwBwAG8AbgBkAGUAcgBm\nAG8AcgB3AGEALgB0AGEAcwBrAGUAcgAuAGUAeAB0AHIAYQAuAFMAVABSAEkATgBHAF8AUwBVACAA\ndABrAHMAdAB1AGQAaQBvAC4AYQB1AHQAbwByAGUAcwBwAG8AbgBkAGUAcgBmAG8AcgB3AGEALgB0\nAGEAcwBrAGUAcgAuAGUAeAB0AHIAYQAuAFMAVABSAEkATgBHAF8AUgBFAFAATABZAF8ARABFAEwA\nQQBZACAAdABrAHMAdAB1AGQAaQBvAC4AYQB1AHQAbwByAGUAcwBwAG8AbgBkAGUAcgBmAG8AcgB3\nAGEALgB0AGEAcwBrAGUAcgAuAGUAeAB0AHIAYQAuAFMAVABSAEkATgBHAF8AUgBFAFAATABZAF8A\nRABFAEwAQQBZAF8ATQBBAFgAIAB0AGsAcwB0AHUAZABpAG8ALgBhAHUAdABvAHIAZQBzAHAAbwBu\nAGQAZQByAGYAbwByAHcAYQAuAHQAYQBzAGsAZQByAC4AZQB4AHQAcgBhAC4AUwBUAFIASQBOAEcA\nXwBNAFUATABUAEkAUABMAEUAXwBSAEUAUABMAFkAXwBEAEUATABBAFkAIAB0AGsAcwB0AHUAZABp\nAG8ALgBhAHUAdABvAHIAZQBzAHAAbwBuAGQAZQByAGYAbwByAHcAYQAuAHQAYQBzAGsAZQByAC4A\nZQB4AHQAcgBhAC4AUwBUAFIASQBOAEcAXwBNAFUATABUAEkAUABMAEUAXwBSAEUAUABMAFkAXwBE\nAEUATABBAFkAXwBNAEEAWAAgAHQAawBzAHQAdQBkAGkAbwAuAGEAdQB0AG8AcgBlAHMAcABvAG4A\nZABlAHIAZgBvAHIAdwBhAC4AdABhAHMAawBlAHIALgBlAHgAdAByAGEALgBTAFQAUgBJAE4ARwBf\nAE0AVQBMAFQASQBQAEwARQBfAFIARQBQAEwAWQBfAEQARQBMAEEAWQBTACAAdABrAHMAdAB1AGQA\naQBvAC4AYQB1AHQAbwByAGUAcwBwAG8AbgBkAGUAcgBmAG8AcgB3AGEALgB0AGEAcwBrAGUAcgAu\nAGUAeAB0AHIAYQAuAFMAVABSAEkATgBHAF8AUABBAFUAUwBFAF8AVgBBAEwAVQBFACAAdABrAHMA\ndAB1AGQAaQBvAC4AYQB1AHQAbwByAGUAcwBwAG8AbgBkAGUAcgBmAG8AcgB3AGEALgB0AGEAcwBr\nAGUAcgAuAGUAeAB0AHIAYQAuAFMAVABSAEkATgBHAF8AUgBFAFEAXwBTAEMAUgBFAEUATgBfAE8A\nRgBGACAAdABrAHMAdAB1AGQAaQBvAC4AYQB1AHQAbwByAGUAcwBwAG8AbgBkAGUAcgBmAG8AcgB3\nAGEALgB0AGEAcwBrAGUAcgAuAGUAeAB0AHIAYQAuAFMAVABSAEkATgBHAF8AUgBFAFEAXwBDAEgA\nQQBSAEcASQBOAEcAIAB0AGsAcwB0AHUAZABpAG8ALgBhAHUAdABvAHIAZQBzAHAAbwBuAGQAZQBy\nAGYAbwByAHcAYQAuAHQAYQBzAGsAZQByAC4AZQB4AHQAcgBhAC4AUwBUAFIASQBOAEcAXwBSAEUA\nUQBfAFMASQBMAEUATgBUACAAdABrAHMAdAB1AGQAaQBvAC4AYQB1AHQAbwByAGUAcwBwAG8AbgBk\nAGUAcgBmAG8AcgB3AGEALgB0AGEAcwBrAGUAcgAuAGUAeAB0AHIAYQAuAFMAVABSAEkATgBHAF8A\nUgBFAFEAXwBEAE8AXwBOAE8AVABfAEQASQBTAFQAVQBSAEIAIAB0AGsAcwB0AHUAZABpAG8ALgBh\nAHUAdABvAHIAZQBzAHAAbwBuAGQAZQByAGYAbwByAHcAYQAuAHQAYQBzAGsAZQByAC4AZQB4AHQA\ncgBhAC4AUwBUAFIASQBOAEcAXwBSAEUAUQBfAEMAQQBSAF8ATQBPAEQARQAgAHQAawBzAHQAdQBk\nAGkAbwAuAGEAdQB0AG8AcgBlAHMAcABvAG4AZABlAHIAZgBvAHIAdwBhAC4AdABhAHMAawBlAHIA\nLgBlAHgAdAByAGEALgBTAFQAUgBJAE4ARwBfAFAAUgBFAFYAXwBSAFUATABFAF8AVABJAE0ARQBP\nAFUAVAAgAHQAawBzAHQAdQBkAGkAbwAuAGEAdQB0AG8AcgBlAHMAcABvAG4AZABlAHIAZgBvAHIA\ndwBhAC4AdABhAHMAawBlAHIALgBlAHgAdAByAGEALgBTAFQAUgBJAE4ARwBfAFAAUgBJAE8AUgBJ\nAFQAWQBfAE4ATwBUAEkARgBJAEMAQQBUAEkATwBOACAAdABrAHMAdAB1AGQAaQBvAC4AYQB1AHQA\nbwByAGUAcwBwAG8AbgBkAGUAcgBmAG8AcgB3AGEALgB0AGEAcwBrAGUAcgAuAGUAeAB0AHIAYQAu\nAFMAVABSAEkATgBHAF8AUABSAE8AQgBBAEIASQBMAEkAVABZACAAdABrAHMAdAB1AGQAaQBvAC4A\nYQB1AHQAbwByAGUAcwBwAG8AbgBkAGUAcgBmAG8AcgB3AGEALgB0AGEAcwBrAGUAcgAuAGUAeAB0\nAHIAYQAuAFMAVABSAEkATgBHAF8AUgBBAE4ARABPAE0AXwBNAEUAUwBTAEEARwBFAF8ASQBEACAA\ndABrAHMAdAB1AGQAaQBvAC4AYQB1AHQAbwByAGUAcwBwAG8AbgBkAGUAcgBmAG8AcgB3AGEALgB0\nAGEAcwBrAGUAcgAuAGUAeAB0AHIAYQAuAFMAVABSAEkATgBHAF8ARABJAFIARQBDAFQAXwBSAEUA\nUABMAFkAIAB0AGsAcwB0AHUAZABpAG8ALgBhAHUAdABvAHIAZQBzAHAAbwBuAGQAZQByAGYAbwBy\nAHcAYQAuAHQAYQBzAGsAZQByAC4AZQB4AHQAcgBhAC4AUwBUAFIASQBOAEcAXwBHAE8AXwBUAE8A\nXwBSAFUATABFAF8ASQBEACAAdABrAHMAdAB1AGQAaQBvAC4AYQB1AHQAbwByAGUAcwBwAG8AbgBk\nAGUAcgBmAG8AcgB3AGEALgB0AGEAcwBrAGUAcgAuAGUAeAB0AHIAYQAuAFMAVABSAEkATgBHAF8A\nTwBVAFQAUABVAFQAXwBDAE8ATgBGAEkARwAAAAAALwAAAHQAawBzAHQAdQBkAGkAbwAuAGEAdQB0\nAG8AcgBlAHMAcABvAG4AZABlAHIAZgBvAHIAdwBhAC4AdABhAHMAawBlAHIALgBlAHgAdAByAGEA\nLgBTAFQAUgBJAE4ARwAAAAAAAAAFAAAAcgBlAHAAbAB5AAAAQAAAAHQAawBzAHQAdQBkAGkAbwAu\nAGEAdQB0AG8AcgBlAHMAcABvAG4AZABlAHIAZgBvAHIAdwBhAC4AdABhAHMAawBlAHIALgBlAHgA\ndAByAGEALgBTAFQAUgBJAE4ARwBfAE0AVQBMAFQASQBQAEwARQBfAEEATgBTAFcARQBSAFMAAAAA\nAAAAAAAAAAAAAAAAAEgAAAB0AGsAcwB0AHUAZABpAG8ALgBhAHUAdABvAHIAZQBzAHAAbwBuAGQA\nZQByAGYAbwByAHcAYQAuAHQAYQBzAGsAZQByAC4AZQB4AHQAcgBhAC4AUwBUAFIASQBOAEcAXwBN\nAFUATABUAEkAUABMAEUAXwBSAEUAUABMAFkAXwBEAEUATABBAFkAXwBNAEEAWAAAAAAAAAAAAAAA\nAAAAAAAAOQAAAHQAawBzAHQAdQBkAGkAbwAuAGEAdQB0AG8AcgBlAHMAcABvAG4AZABlAHIAZgBv\nAHIAdwBhAC4AdABhAHMAawBlAHIALgBlAHgAdAByAGEALgBJAE4AVABfAFYARQBSAFMASQBPAE4A\nXwBDAE8ARABFAAAAAQAAAKABAAA8AAAAdABrAHMAdAB1AGQAaQBvAC4AYQB1AHQAbwByAGUAcwBw\nAG8AbgBkAGUAcgBmAG8AcgB3AGEALgB0AGEAcwBrAGUAcgAuAGUAeAB0AHIAYQAuAFMAVABSAEkA\nTgBHAF8AUgBFAFEAXwBDAEgAQQBSAEcASQBOAEcAAAAAAAAAAAAAAAAAAAAAAD4AAAB0AGsAcwB0\nAHUAZABpAG8ALgBhAHUAdABvAHIAZQBzAHAAbwBuAGQAZQByAGYAbwByAHcAYQAuAHQAYQBzAGsA\nZQByAC4AZQB4AHQAcgBhAC4AUwBUAFIASQBOAEcAXwBSAEUAUQBfAFMAQwBSAEUARQBOAF8ATwBG\nAEYAAAAAAAAAAAAAAAAAAAAAADsAAAB0AGsAcwB0AHUAZABpAG8ALgBhAHUAdABvAHIAZQBzAHAA\nbwBuAGQAZQByAGYAbwByAHcAYQAuAHQAYQBzAGsAZQByAC4AZQB4AHQAcgBhAC4AUwBUAFIASQBO\nAEcAXwBQAEEAVQBTAEUAXwBWAEEATABVAEUAAAAAAAAAAAAAAAAAAABEAAAAdABrAHMAdAB1AGQA\naQBvAC4AYQB1AHQAbwByAGUAcwBwAG8AbgBkAGUAcgBmAG8AcgB3AGEALgB0AGEAcwBrAGUAcgAu\nAGUAeAB0AHIAYQAuAFMAVABSAEkATgBHAF8ATQBVAEwAVABJAFAATABFAF8AUgBFAFAATABZAF8A\nRABFAEwAQQBZAAAAAAAAAAAAAAAAAAAAAAA0AAAAdABrAHMAdAB1AGQAaQBvAC4AYQB1AHQAbwBy\nAGUAcwBwAG8AbgBkAGUAcgBmAG8AcgB3AGEALgB0AGEAcwBrAGUAcgAuAGUAeAB0AHIAYQAuAFMA\nVABSAEkATgBHAF8AVABJAE0ARQAAAAAAAAAAAAAAAAAAAAAAQQAAAHQAawBzAHQAdQBkAGkAbwAu\nAGEAdQB0AG8AcgBlAHMAcABvAG4AZABlAHIAZgBvAHIAdwBhAC4AdABhAHMAawBlAHIALgBlAHgA\ndAByAGEALgBTAFQAUgBJAE4ARwBfAFIAQQBOAEQATwBNAF8ATQBFAFMAUwBBAEcARQBfAEkARAAA\nAAAAAAAXAAAAewBsAHYAPQAlAHIAYQBuAGQAbwBtAF8AbQBlAHMAcwBhAGcAZQBfAGkAZAB9AAAA\nQAAAAHQAawBzAHQAdQBkAGkAbwAuAGEAdQB0AG8AcgBlAHMAcABvAG4AZABlAHIAZgBvAHIAdwBh\nAC4AdABhAHMAawBlAHIALgBlAHgAdAByAGEALgBTAFQAUgBJAE4ARwBfAFAAQQBUAFQARQBSAE4A\nXwBNAEEAVABDAEgASQBOAEcAAAAAAAAAAAAAAAAAAAAAADsAAAB0AGsAcwB0AHUAZABpAG8ALgBh\nAHUAdABvAHIAZQBzAHAAbwBuAGQAZQByAGYAbwByAHcAYQAuAHQAYQBzAGsAZQByAC4AZQB4AHQA\ncgBhAC4AUwBUAFIASQBOAEcAXwBSAEUAUABMAFkAXwBEAEUATABBAFkAAAAAAAAAAAAAAAAAAABF\nAAAAdABrAHMAdAB1AGQAaQBvAC4AYQB1AHQAbwByAGUAcwBwAG8AbgBkAGUAcgBmAG8AcgB3AGEA\nLgB0AGEAcwBrAGUAcgAuAGUAeAB0AHIAYQAuAFMAVABSAEkATgBHAF8AUABSAEkATwBSAEkAVABZ\nAF8ATgBPAFQASQBGAEkAQwBBAFQASQBPAE4AAAAAAAAAAAAAAAAAAABCAAAAdABrAHMAdAB1AGQA\naQBvAC4AYQB1AHQAbwByAGUAcwBwAG8AbgBkAGUAcgBmAG8AcgB3AGEALgB0AGEAcwBrAGUAcgAu\nAGUAeAB0AHIAYQAuAFMAVABSAEkATgBHAF8AUgBFAFEAXwBEAE8AXwBOAE8AVABfAEQASQBTAFQA\nVQBSAEIAAAAAAAAAAAAAAAAAAAAAAEAAAAB0AGsAcwB0AHUAZABpAG8ALgBhAHUAdABvAHIAZQBz\nAHAAbwBuAGQAZQByAGYAbwByAHcAYQAuAHQAYQBzAGsAZQByAC4AZQB4AHQAcgBhAC4AUwBUAFIA\nSQBOAEcAXwBJAEcATgBPAFIARQBEAF8AQwBPAE4AVABBAEMAVABTAAAAAAAAAAAAAAAAAAAAAAA8\nAAAAdABrAHMAdAB1AGQAaQBvAC4AYQB1AHQAbwByAGUAcwBwAG8AbgBkAGUAcgBmAG8AcgB3AGEA\nLgB0AGEAcwBrAGUAcgAuAGUAeAB0AHIAYQAuAFMAVABSAEkATgBHAF8ARABJAFIARQBDAFQAXwBS\nAEUAUABMAFkAAAAAAAAAAAAOAAAAaQB5AGEAIABhAHAAYQAgAGsAYQBiAGEAcgA/AAAAAABAAAAA\ndABrAHMAdAB1AGQAaQBvAC4AYQB1AHQAbwByAGUAcwBwAG8AbgBkAGUAcgBmAG8AcgB3AGEALgB0\nAGEAcwBrAGUAcgAuAGUAeAB0AHIAYQAuAFMAVABSAEkATgBHAF8AUgBFAEMARQBJAFYARQBEAF8A\nTQBFAFMAUwBBAEcARQAAAAAAAAAAAAAAAAAAAAAAQQAAAHQAawBzAHQAdQBkAGkAbwAuAGEAdQB0\nAG8AcgBlAHMAcABvAG4AZABlAHIAZgBvAHIAdwBhAC4AdABhAHMAawBlAHIALgBlAHgAdAByAGEA\nLgBTAFQAUgBJAE4ARwBfAFMAUABFAEMASQBGAEkAQwBfAEMATwBOAFQAQQBDAFQAUwAAAAAAAAAA\nAAAAAAAAADoAAAB0AGsAcwB0AHUAZABpAG8ALgBhAHUAdABvAHIAZQBzAHAAbwBuAGQAZQByAGYA\nbwByAHcAYQAuAHQAYQBzAGsAZQByAC4AZQB4AHQAcgBhAC4AUwBUAFIASQBOAEcAXwBSAEUAQwBJ\nAFAASQBFAE4AVABTAAAAAAAAAAAAAAAAAAAAAABFAAAAdABrAHMAdAB1AGQAaQBvAC4AYQB1AHQA\nbwByAGUAcwBwAG8AbgBkAGUAcgBmAG8AcgB3AGEALgB0AGEAcwBrAGUAcgAuAGUAeAB0AHIAYQAu\nAFMAVABSAEkATgBHAF8ATQBVAEwAVABJAFAATABFAF8AUgBFAFAATABZAF8ARABFAEwAQQBZAFMA\nAAAAAAAAAAAAAAAAAAA6AAAAdABrAHMAdAB1AGQAaQBvAC4AYQB1AHQAbwByAGUAcwBwAG8AbgBk\nAGUAcgBmAG8AcgB3AGEALgB0AGEAcwBrAGUAcgAuAGUAeAB0AHIAYQAuAFMAVABSAEkATgBHAF8A\nUABBAFUAUwBFAF8AVABZAFAARQAAAAAAAAAAAAAAAAAAAAAAPAAAAHQAawBzAHQAdQBkAGkAbwAu\nAGEAdQB0AG8AcgBlAHMAcABvAG4AZABlAHIAZgBvAHIAdwBhAC4AdABhAHMAawBlAHIALgBlAHgA\ndAByAGEALgBTAFQAUgBJAE4ARwBfAFIARQBRAF8AQwBBAFIAXwBNAE8ARABFAAAAAAAAAAAAAAAA\nAAAAAAA9AAAAdABrAHMAdAB1AGQAaQBvAC4AYQB1AHQAbwByAGUAcwBwAG8AbgBkAGUAcgBmAG8A\ncgB3AGEALgB0AGEAcwBrAGUAcgAuAGUAeAB0AHIAYQAuAFMAVABSAEkATgBHAF8AQwBBAE4AQwBF\nAEwAXwBEAEUATABBAFkAUwAAAAAAAAAAAAAAAAAAAD8AAAB0AGsAcwB0AHUAZABpAG8ALgBhAHUA\ndABvAHIAZQBzAHAAbwBuAGQAZQByAGYAbwByAHcAYQAuAHQAYQBzAGsAZQByAC4AZQB4AHQAcgBh\nAC4AUwBUAFIASQBOAEcAXwBSAEUAUABMAFkAXwBEAEUATABBAFkAXwBNAEEAWAAAAAAAAAAAAAAA\nAAAAADcAAAB0AGsAcwB0AHUAZABpAG8ALgBhAHUAdABvAHIAZQBzAHAAbwBuAGQAZQByAGYAbwBy\nAHcAYQAuAHQAYQBzAGsAZQByAC4AZQB4AHQAcgBhAC4AUwBUAFIASQBOAEcAXwBSAFUATABFAF8A\nSQBEAAAAAAAAAAAAAAAAAAAAOgAAAHQAawBzAHQAdQBkAGkAbwAuAGEAdQB0AG8AcgBlAHMAcABv\nAG4AZABlAHIAZgBvAHIAdwBhAC4AdABhAHMAawBlAHIALgBlAHgAdAByAGEALgBTAFQAUgBJAE4A\nRwBfAFIARQBRAF8AUwBJAEwARQBOAFQAAAAAAAAAAAAAAAAAAAAAADsAAAB0AGsAcwB0AHUAZABp\nAG8ALgBhAHUAdABvAHIAZQBzAHAAbwBuAGQAZQByAGYAbwByAHcAYQAuAHQAYQBzAGsAZQByAC4A\nZQB4AHQAcgBhAC4AUwBUAFIASQBOAEcAXwBQAFIATwBCAEEAQgBJAEwASQBUAFkAAAAAAAAAAAAA\nAAAAAABBAAAAdABrAHMAdAB1AGQAaQBvAC4AYQB1AHQAbwByAGUAcwBwAG8AbgBkAGUAcgBmAG8A\ncgB3AGEALgB0AGEAcwBrAGUAcgAuAGUAeAB0AHIAYQAuAFMAVABSAEkATgBHAF8AUABSAEUAVgBf\nAFIAVQBMAEUAXwBUAEkATQBFAE8AVQBUAAAAAAAAAAAAAAAAAAAAAAAAAA==\n</pluginBundle>\n    <pluginBundleData>rO0ABXNyABFqYXZhLnV0aWwuSGFzaE1hcAUH2sHDFmDRAwACRgAKbG9hZEZhY3RvckkACXRocmVz\naG9sZHhwP0AAAAAAADB3CAAAAEAAAAAndAA8dGtzdHVkaW8uYXV0b3Jlc3BvbmRlcmZvcndhLnRh\nc2tlci5leHRyYS5TVFJJTkdfUkVRX0NIQVJHSU5HdAAAdABAdGtzdHVkaW8uYXV0b3Jlc3BvbmRl\ncmZvcndhLnRhc2tlci5leHRyYS5TVFJJTkdfUkVDRUlWRURfTUVTU0FHRXQAAHQAO3Rrc3R1ZGlv\nLmF1dG9yZXNwb25kZXJmb3J3YS50YXNrZXIuZXh0cmEuU1RSSU5HX1JFUExZX0RFTEFZdAAAdAAy\ndGtzdHVkaW8uYXV0b3Jlc3BvbmRlcmZvcndhLnRhc2tlci5leHRyYS5TVFJJTkdfU0F0AAB0ADJ0\na3N0dWRpby5hdXRvcmVzcG9uZGVyZm9yd2EudGFza2VyLmV4dHJhLlNUUklOR19XRXQAAHQASHRr\nc3R1ZGlvLmF1dG9yZXNwb25kZXJmb3J3YS50YXNrZXIuZXh0cmEuU1RSSU5HX01VTFRJUExFX1JF\nUExZX0RFTEFZX01BWHQAAHQAPHRrc3R1ZGlvLmF1dG9yZXNwb25kZXJmb3J3YS50YXNrZXIuZXh0\ncmEuU1RSSU5HX1NFTkRfTUVTU0FHRXQAAHQAMnRrc3R1ZGlvLmF1dG9yZXNwb25kZXJmb3J3YS50\nYXNrZXIuZXh0cmEuU1RSSU5HX0ZSdAAAdAAydGtzdHVkaW8uYXV0b3Jlc3BvbmRlcmZvcndhLnRh\nc2tlci5leHRyYS5TVFJJTkdfVFV0AAB0AEV0a3N0dWRpby5hdXRvcmVzcG9uZGVyZm9yd2EudGFz\na2VyLmV4dHJhLlNUUklOR19NVUxUSVBMRV9SRVBMWV9ERUxBWVN0AAB0AEB0a3N0dWRpby5hdXRv\ncmVzcG9uZGVyZm9yd2EudGFza2VyLmV4dHJhLlNUUklOR19QQVRURVJOX01BVENISU5HdAAAdAA9\ndGtzdHVkaW8uYXV0b3Jlc3BvbmRlcmZvcndhLnRhc2tlci5leHRyYS5TVFJJTkdfR09fVE9fUlVM\nRV9JRHQAAHQAL3Rrc3R1ZGlvLmF1dG9yZXNwb25kZXJmb3J3YS50YXNrZXIuZXh0cmEuU1RSSU5H\ndAAFcmVwbHl0AEB0a3N0dWRpby5hdXRvcmVzcG9uZGVyZm9yd2EudGFza2VyLmV4dHJhLlNUUklO\nR19JR05PUkVEX0NPTlRBQ1RTdAAAdABBdGtzdHVkaW8uYXV0b3Jlc3BvbmRlcmZvcndhLnRhc2tl\nci5leHRyYS5TVFJJTkdfUkFORE9NX01FU1NBR0VfSUR0ABd7bHY9JXJhbmRvbV9tZXNzYWdlX2lk\nfXQAO3Rrc3R1ZGlvLmF1dG9yZXNwb25kZXJmb3J3YS50YXNrZXIuZXh0cmEuU1RSSU5HX1BBVVNF\nX1ZBTFVFdAAAdAA7dGtzdHVkaW8uYXV0b3Jlc3BvbmRlcmZvcndhLnRhc2tlci5leHRyYS5TVFJJ\nTkdfUFJPQkFCSUxJVFl0AAB0AEF0a3N0dWRpby5hdXRvcmVzcG9uZGVyZm9yd2EudGFza2VyLmV4\ndHJhLlNUUklOR19QUkVWX1JVTEVfVElNRU9VVHQAAHQARHRrc3R1ZGlvLmF1dG9yZXNwb25kZXJm\nb3J3YS50YXNrZXIuZXh0cmEuU1RSSU5HX01VTFRJUExFX1JFUExZX0RFTEFZdAAAdAA0dGtzdHVk\naW8uYXV0b3Jlc3BvbmRlcmZvcndhLnRhc2tlci5leHRyYS5TVFJJTkdfVElNRXQAAHQAPXRrc3R1\nZGlvLmF1dG9yZXNwb25kZXJmb3J3YS50YXNrZXIuZXh0cmEuU1RSSU5HX09VVFBVVF9DT05GSUd0\nAAB0AEJ0a3N0dWRpby5hdXRvcmVzcG9uZGVyZm9yd2EudGFza2VyLmV4dHJhLlNUUklOR19SRVFf\nRE9fTk9UX0RJU1RVUkJ0AAB0ADd0a3N0dWRpby5hdXRvcmVzcG9uZGVyZm9yd2EudGFza2VyLmV4\ndHJhLlNUUklOR19SVUxFX0lEdAAAdAA6dGtzdHVkaW8uYXV0b3Jlc3BvbmRlcmZvcndhLnRhc2tl\nci5leHRyYS5TVFJJTkdfUkVRX1NJTEVOVHQAAHQAMnRrc3R1ZGlvLmF1dG9yZXNwb25kZXJmb3J3\nYS50YXNrZXIuZXh0cmEuU1RSSU5HX01PdAAAdAAydGtzdHVkaW8uYXV0b3Jlc3BvbmRlcmZvcndh\nLnRhc2tlci5leHRyYS5TVFJJTkdfU1V0AAB0AEF0a3N0dWRpby5hdXRvcmVzcG9uZGVyZm9yd2Eu\ndGFza2VyLmV4dHJhLlNUUklOR19TUEVDSUZJQ19DT05UQUNUU3QAAHQAOnRrc3R1ZGlvLmF1dG9y\nZXNwb25kZXJmb3J3YS50YXNrZXIuZXh0cmEuU1RSSU5HX1JFQ0lQSUVOVFN0AAB0AD10a3N0dWRp\nby5hdXRvcmVzcG9uZGVyZm9yd2EudGFza2VyLmV4dHJhLlNUUklOR19DQU5DRUxfREVMQVlTdAAA\ndAA5bmV0LmRpbmdsaXNjaC5hbmRyb2lkLnRhc2tlci5leHRyYXMuVkFSSUFCTEVfUkVQTEFDRV9L\nRVlTdAdUdGtzdHVkaW8uYXV0b3Jlc3BvbmRlcmZvcndhLnRhc2tlci5leHRyYS5TVFJJTkdfUlVM\nRV9JRCB0a3N0dWRpby5hdXRvcmVzcG9uZGVyZm9yd2EudGFza2VyLmV4dHJhLlNUUklOR19SRUNF\nSVZFRF9NRVNTQUdFIHRrc3R1ZGlvLmF1dG9yZXNwb25kZXJmb3J3YS50YXNrZXIuZXh0cmEuU1RS\nSU5HX1NFTkRfTUVTU0FHRSB0a3N0dWRpby5hdXRvcmVzcG9uZGVyZm9yd2EudGFza2VyLmV4dHJh\nLlNUUklOR19TUEVDSUZJQ19DT05UQUNUUyB0a3N0dWRpby5hdXRvcmVzcG9uZGVyZm9yd2EudGFz\na2VyLmV4dHJhLlNUUklOR19JR05PUkVEX0NPTlRBQ1RTIHRrc3R1ZGlvLmF1dG9yZXNwb25kZXJm\nb3J3YS50YXNrZXIuZXh0cmEuU1RSSU5HX1RJTUUgdGtzdHVkaW8uYXV0b3Jlc3BvbmRlcmZvcndh\nLnRhc2tlci5leHRyYS5TVFJJTkdfTU8gdGtzdHVkaW8uYXV0b3Jlc3BvbmRlcmZvcndhLnRhc2tl\nci5leHRyYS5TVFJJTkdfVFUgdGtzdHVkaW8uYXV0b3Jlc3BvbmRlcmZvcndhLnRhc2tlci5leHRy\nYS5TVFJJTkdfV0UgdGtzdHVkaW8uYXV0b3Jlc3BvbmRlcmZvcndhLnRhc2tlci5leHRyYS5TVFJJ\nTkdfVEggdGtzdHVkaW8uYXV0b3Jlc3BvbmRlcmZvcndhLnRhc2tlci5leHRyYS5TVFJJTkdfRlIg\ndGtzdHVkaW8uYXV0b3Jlc3BvbmRlcmZvcndhLnRhc2tlci5leHRyYS5TVFJJTkdfU0EgdGtzdHVk\naW8uYXV0b3Jlc3BvbmRlcmZvcndhLnRhc2tlci5leHRyYS5TVFJJTkdfU1UgdGtzdHVkaW8uYXV0\nb3Jlc3BvbmRlcmZvcndhLnRhc2tlci5leHRyYS5TVFJJTkdfUkVQTFlfREVMQVkgdGtzdHVkaW8u\nYXV0b3Jlc3BvbmRlcmZvcndhLnRhc2tlci5leHRyYS5TVFJJTkdfUkVQTFlfREVMQVlfTUFYIHRr\nc3R1ZGlvLmF1dG9yZXNwb25kZXJmb3J3YS50YXNrZXIuZXh0cmEuU1RSSU5HX01VTFRJUExFX1JF\nUExZX0RFTEFZIHRrc3R1ZGlvLmF1dG9yZXNwb25kZXJmb3J3YS50YXNrZXIuZXh0cmEuU1RSSU5H\nX01VTFRJUExFX1JFUExZX0RFTEFZX01BWCB0a3N0dWRpby5hdXRvcmVzcG9uZGVyZm9yd2EudGFz\na2VyLmV4dHJhLlNUUklOR19NVUxUSVBMRV9SRVBMWV9ERUxBWVMgdGtzdHVkaW8uYXV0b3Jlc3Bv\nbmRlcmZvcndhLnRhc2tlci5leHRyYS5TVFJJTkdfUEFVU0VfVkFMVUUgdGtzdHVkaW8uYXV0b3Jl\nc3BvbmRlcmZvcndhLnRhc2tlci5leHRyYS5TVFJJTkdfUkVRX1NDUkVFTl9PRkYgdGtzdHVkaW8u\nYXV0b3Jlc3BvbmRlcmZvcndhLnRhc2tlci5leHRyYS5TVFJJTkdfUkVRX0NIQVJHSU5HIHRrc3R1\nZGlvLmF1dG9yZXNwb25kZXJmb3J3YS50YXNrZXIuZXh0cmEuU1RSSU5HX1JFUV9TSUxFTlQgdGtz\ndHVkaW8uYXV0b3Jlc3BvbmRlcmZvcndhLnRhc2tlci5leHRyYS5TVFJJTkdfUkVRX0RPX05PVF9E\nSVNUVVJCIHRrc3R1ZGlvLmF1dG9yZXNwb25kZXJmb3J3YS50YXNrZXIuZXh0cmEuU1RSSU5HX1JF\nUV9DQVJfTU9ERSB0a3N0dWRpby5hdXRvcmVzcG9uZGVyZm9yd2EudGFza2VyLmV4dHJhLlNUUklO\nR19QUkVWX1JVTEVfVElNRU9VVCB0a3N0dWRpby5hdXRvcmVzcG9uZGVyZm9yd2EudGFza2VyLmV4\ndHJhLlNUUklOR19QUklPUklUWV9OT1RJRklDQVRJT04gdGtzdHVkaW8uYXV0b3Jlc3BvbmRlcmZv\ncndhLnRhc2tlci5leHRyYS5TVFJJTkdfUFJPQkFCSUxJVFkgdGtzdHVkaW8uYXV0b3Jlc3BvbmRl\ncmZvcndhLnRhc2tlci5leHRyYS5TVFJJTkdfUkFORE9NX01FU1NBR0VfSUQgdGtzdHVkaW8uYXV0\nb3Jlc3BvbmRlcmZvcndhLnRhc2tlci5leHRyYS5TVFJJTkdfRElSRUNUX1JFUExZIHRrc3R1ZGlv\nLmF1dG9yZXNwb25kZXJmb3J3YS50YXNrZXIuZXh0cmEuU1RSSU5HX0dPX1RPX1JVTEVfSUQgdGtz\ndHVkaW8uYXV0b3Jlc3BvbmRlcmZvcndhLnRhc2tlci5leHRyYS5TVFJJTkdfT1VUUFVUX0NPTkZJ\nR3QAPnRrc3R1ZGlvLmF1dG9yZXNwb25kZXJmb3J3YS50YXNrZXIuZXh0cmEuU1RSSU5HX1JFUV9T\nQ1JFRU5fT0ZGdAAAdABFdGtzdHVkaW8uYXV0b3Jlc3BvbmRlcmZvcndhLnRhc2tlci5leHRyYS5T\nVFJJTkdfUFJJT1JJVFlfTk9USUZJQ0FUSU9OdAAAdAA8dGtzdHVkaW8uYXV0b3Jlc3BvbmRlcmZv\ncndhLnRhc2tlci5leHRyYS5TVFJJTkdfUkVRX0NBUl9NT0RFdAAAdAA8dGtzdHVkaW8uYXV0b3Jl\nc3BvbmRlcmZvcndhLnRhc2tlci5leHRyYS5TVFJJTkdfRElSRUNUX1JFUExZdAAOaXlhIGFwYSBr\nYWJhcj90AEB0a3N0dWRpby5hdXRvcmVzcG9uZGVyZm9yd2EudGFza2VyLmV4dHJhLlNUUklOR19N\nVUxUSVBMRV9BTlNXRVJTdAAAdAA5dGtzdHVkaW8uYXV0b3Jlc3BvbmRlcmZvcndhLnRhc2tlci5l\neHRyYS5JTlRfVkVSU0lPTl9DT0RFc3IAEWphdmEubGFuZy5JbnRlZ2VyEuKgpPeBhzgCAAFJAAV2\nYWx1ZXhyABBqYXZhLmxhbmcuTnVtYmVyhqyVHQuU4IsCAAB4cAAAAaB0ADp0a3N0dWRpby5hdXRv\ncmVzcG9uZGVyZm9yd2EudGFza2VyLmV4dHJhLlNUUklOR19QQVVTRV9UWVBFdAAAdAAydGtzdHVk\naW8uYXV0b3Jlc3BvbmRlcmZvcndhLnRhc2tlci5leHRyYS5TVFJJTkdfVEh0AAB0AD90a3N0dWRp\nby5hdXRvcmVzcG9uZGVyZm9yd2EudGFza2VyLmV4dHJhLlNUUklOR19SRVBMWV9ERUxBWV9NQVh0\nAAB4\n</pluginBundleData>\n    <configured>true</configured>\n    <passExtras>true</passExtras>\n    <extras>//putString(\"net.dinglisch.android.tasker.extras.VARIABLE_REPLACE_KEYS\", \"tkstudio.autoresponderforwa.tasker.extra.STRING_RULE_ID tkstudio.autoresponderforwa.tasker.extra.STRING_RECEIVED_MESSAGE tkstudio.autoresponderforwa.tasker.extra.STRING_SEND_MESSAGE tkstudio.autoresponderforwa.tasker.extra.STRING_SPECIFIC_CONTACTS tkstudio.autoresponderforwa.tasker.extra.STRING_IGNORED_CONTACTS tkstudio.autoresponderforwa.tasker.extra.STRING_TIME tkstudio.autoresponderforwa.tasker.extra.STRING_MO tkstudio.autoresponderforwa.tasker.extra.STRING_TU tkstudio.autoresponderforwa.tasker.extra.STRING_WE tkstudio.autoresponderforwa.tasker.extra.STRING_TH tkstudio.autoresponderforwa.tasker.extra.STRING_FR tkstudio.autoresponderforwa.tasker.extra.STRING_SA tkstudio.autoresponderforwa.tasker.extra.STRING_SU tkstudio.autoresponderforwa.tasker.extra.STRING_REPLY_DELAY tkstudio.autoresponderforwa.tasker.extra.STRING_REPLY_DELAY_MAX tkstudio.autoresponderforwa.tasker.extra.STRING_MULTIPLE_REPLY_DELAY tkstudio.autoresponderforwa.tasker.extra.STRING_MULTIPLE_REPLY_DELAY_MAX tkstudio.autoresponderforwa.tasker.extra.STRING_MULTIPLE_REPLY_DELAYS tkstudio.autoresponderforwa.tasker.extra.STRING_PAUSE_VALUE tkstudio.autoresponderforwa.tasker.extra.STRING_REQ_SCREEN_OFF tkstudio.autoresponderforwa.tasker.extra.STRING_REQ_CHARGING tkstudio.autoresponderforwa.tasker.extra.STRING_REQ_SILENT tkstudio.autoresponderforwa.tasker.extra.STRING_REQ_DO_NOT_DISTURB tkstudio.autoresponderforwa.tasker.extra.STRING_REQ_CAR_MODE tkstudio.autoresponderforwa.tasker.extra.STRING_PREV_RULE_TIMEOUT tkstudio.autoresponderforwa.tasker.extra.STRING_PRIORITY_NOTIFICATION tkstudio.autoresponderforwa.tasker.extra.STRING_PROBABILITY tkstudio.autoresponderforwa.tasker.extra.STRING_RANDOM_MESSAGE_ID tkstudio.autoresponderforwa.tasker.extra.STRING_DIRECT_REPLY tkstudio.autoresponderforwa.tasker.extra.STRING_GO_TO_RULE_ID tkstudio.autoresponderforwa.tasker.extra.STRING_OUTPUT_CONFIG\");\n//putInt(\"tkstudio.autoresponderforwa.tasker.extra.INT_VERSION_CODE\", 416);\n//putString(\"tkstudio.autoresponderforwa.tasker.extra.STRING\", \"reply\");\n//putString(\"tkstudio.autoresponderforwa.tasker.extra.STRING_CANCEL_DELAYS\", \"\");\nputString(\"tkstudio.autoresponderforwa.tasker.extra.STRING_DIRECT_REPLY\", \"iya apa kabar?\");\nputString(\"tkstudio.autoresponderforwa.tasker.extra.STRING_FR\", \"\");\nputString(\"tkstudio.autoresponderforwa.tasker.extra.STRING_GO_TO_RULE_ID\", \"\");\nputString(\"tkstudio.autoresponderforwa.tasker.extra.STRING_IGNORED_CONTACTS\", \"\");\nputString(\"tkstudio.autoresponderforwa.tasker.extra.STRING_MO\", \"\");\n//putString(\"tkstudio.autoresponderforwa.tasker.extra.STRING_MULTIPLE_ANSWERS\", \"\");\nputString(\"tkstudio.autoresponderforwa.tasker.extra.STRING_MULTIPLE_REPLY_DELAY\", \"\");\nputString(\"tkstudio.autoresponderforwa.tasker.extra.STRING_MULTIPLE_REPLY_DELAYS\", \"\");\nputString(\"tkstudio.autoresponderforwa.tasker.extra.STRING_MULTIPLE_REPLY_DELAY_MAX\", \"\");\nputString(\"tkstudio.autoresponderforwa.tasker.extra.STRING_OUTPUT_CONFIG\", \"\");\n//putString(\"tkstudio.autoresponderforwa.tasker.extra.STRING_PATTERN_MATCHING\", \"\");\n//putString(\"tkstudio.autoresponderforwa.tasker.extra.STRING_PAUSE_TYPE\", \"\");\nputString(\"tkstudio.autoresponderforwa.tasker.extra.STRING_PAUSE_VALUE\", \"\");\nputString(\"tkstudio.autoresponderforwa.tasker.extra.STRING_PREV_RULE_TIMEOUT\", \"\");\nputString(\"tkstudio.autoresponderforwa.tasker.extra.STRING_PRIORITY_NOTIFICATION\", \"\");\nputString(\"tkstudio.autoresponderforwa.tasker.extra.STRING_PROBABILITY\", \"\");\nputString(\"tkstudio.autoresponderforwa.tasker.extra.STRING_RANDOM_MESSAGE_ID\", \"{random_message_id}\");//no variables are replaced in value\nputString(\"tkstudio.autoresponderforwa.tasker.extra.STRING_RECEIVED_MESSAGE\", \"\");\n//putString(\"tkstudio.autoresponderforwa.tasker.extra.STRING_RECIPIENTS\", \"\");\nputString(\"tkstudio.autoresponderforwa.tasker.extra.STRING_REPLY_DELAY\", \"\");\nputString(\"tkstudio.autoresponderforwa.tasker.extra.STRING_REPLY_DELAY_MAX\", \"\");\nputString(\"tkstudio.autoresponderforwa.tasker.extra.STRING_REQ_CAR_MODE\", \"\");\nputString(\"tkstudio.autoresponderforwa.tasker.extra.STRING_REQ_CHARGING\", \"\");\nputString(\"tkstudio.autoresponderforwa.tasker.extra.STRING_REQ_DO_NOT_DISTURB\", \"\");\nputString(\"tkstudio.autoresponderforwa.tasker.extra.STRING_REQ_SCREEN_OFF\", \"\");\nputString(\"tkstudio.autoresponderforwa.tasker.extra.STRING_REQ_SILENT\", \"\");\nputString(\"tkstudio.autoresponderforwa.tasker.extra.STRING_RULE_ID\", \"\");\nputString(\"tkstudio.autoresponderforwa.tasker.extra.STRING_SA\", \"\");\nputString(\"tkstudio.autoresponderforwa.tasker.extra.STRING_SEND_MESSAGE\", \"\");\nputString(\"tkstudio.autoresponderforwa.tasker.extra.STRING_SPECIFIC_CONTACTS\", \"\");\nputString(\"tkstudio.autoresponderforwa.tasker.extra.STRING_SU\", \"\");\nputString(\"tkstudio.autoresponderforwa.tasker.extra.STRING_TH\", \"\");\nputString(\"tkstudio.autoresponderforwa.tasker.extra.STRING_TIME\", \"\");\nputString(\"tkstudio.autoresponderforwa.tasker.extra.STRING_TU\", \"\");\nputString(\"tkstudio.autoresponderforwa.tasker.extra.STRING_WE\", \"\");\n</extras>\n    <relevantVariables>%rule_id_action,%replacement_id_action</relevantVariables>\n    <synchronous>true</synchronous>\n    <timeout>30s</timeout>\n    <pluginRequestedTimeout>30000</pluginRequestedTimeout>\n  </action>"
+   },
+   "set_alarm": {
+    "name": "Set Alarm",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.ed",
+    "tags": {
+     "useDefaultName": "boolean",
+     "label": "string",
+     "hour": "string",
+     "minutes": "string",
+     "alarmName": "string",
+     "alarmUri": "string",
+     "vibrate": "boolean",
+     "skipUI": "boolean"
+    }
+   },
+   "set_default_ringtone": {
+    "name": "Set Default Ringtone",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.et",
+    "tags": {
+     "useDefaultName": "boolean",
+     "ringtoneType": "string",
+     "alarmName": "string",
+     "uri": "string"
+    }
+   },
+   "stop_action_sound": {
+    "name": "Stop Action Sound",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.gz",
+    "tags": {}
+   },
+   "stop_action_speech_output": {
+    "name": "Stop Action Speech Output",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.ha",
+    "tags": {}
+   },
+   "copy_text_from_clipboard": {
+    "name": "Copy Text from Clipboard",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.v",
+    "tags": {
+     "useDefaultName": "boolean",
+     "variable": "string"
+    }
+   },
+   "wifi_reassociate": {
+    "name": "WiFi Reassociate",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.hp",
+    "tags": {}
+   },
+   "set_lock_password": {
+    "name": "Set Lock PIN/Password",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.fc",
+    "tags": {
+     "useDefaultName": "boolean",
+     "reset": "boolean",
+     "lockType": "string",
+     "manual": "boolean",
+     "variableName": "string"
+    }
+   },
+   "init_variables_phone_info": {
+    "name": "Init Variables Phone Info",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.cm",
+    "tags": {
+     "useDefaultName": "boolean",
+     "sim": "string",
+     "isVariableDeviceId": "boolean",
+     "variableDeviceId": "string",
+     "isVariableDeviceSoftwareVersion": "boolean",
+     "variableDeviceSoftwareVersion": "string",
+     "isVariableLine1Number": "boolean",
+     "variableLine1Number": "string",
+     "isVariableNetworkCountryIso": "boolean",
+     "variableNetworkCountryIso": "string",
+     "isVariableNetworkOperator": "boolean",
+     "variableNetworkOperator": "string",
+     "isVariableNetworkOperatorName": "boolean",
+     "variableNetworkOperatorName": "string",
+     "isVariablePhoneType": "boolean",
+     "variablePhoneType": "string",
+     "isVariableSimState": "boolean",
+     "variableSimState": "string",
+     "isVariableSimCountryIso": "boolean",
+     "variableSimCountryIso": "string",
+     "isVariableSimOperator": "boolean",
+     "variableSimOperator": "string",
+     "isVariableSimOperatorName": "boolean",
+     "variableSimOperatorName": "string",
+     "isVariableSimSerialNumber": "boolean",
+     "variableSimSerialNumber": "string",
+     "isVariableSubscriberId": "boolean",
+     "variableSubscriberId": "string",
+     "isVariableVoiceMailAlphaTag": "boolean",
+     "variableVoiceMailAlphaTag": "string",
+     "isVariableVoiceMailNumber": "boolean",
+     "variableVoiceMailNumber": "string"
+    }
+   },
+   "set_bluetooth_tethering_state": {
+    "name": "Set Bluetooth Tethering State",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.en",
+    "tags": {
+     "useDefaultName": "boolean"
+    }
+   },
+   "input_speech": {
+    "name": "Input Speech (Experimental)",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.co",
+    "tags": {
+     "useDefaultName": "boolean",
+     "showUI": "boolean",
+     "prompt": "string",
+     "defineLanguage": "boolean",
+     "language": "string",
+     "useBluetoothHeadset": "boolean",
+     "preferOffline": "boolean"
+    }
+   },
+   "voice_search": {
+    "name": "Voice Search (Experimental)",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.ho",
+    "tags": {
+     "useDefaultName": "boolean",
+     "prompt": "string",
+     "defineLanguage": "boolean",
+     "language": "string"
+    }
+   },
+   "take_picture": {
+    "name": "Take Picture",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.hf",
+    "tags": {
+     "useDefaultName": "boolean",
+     "useCameraApp": "boolean",
+     "path": "string",
+     "cameraId": "int",
+     "pictureSize": "string",
+     "zoom": "int",
+     "sceneMode": "string",
+     "colorEffect": "string",
+     "flashMode": "string",
+     "whiteBalance": "string",
+     "focusMode": "string",
+     "awaitPreviewImages": "boolean",
+     "blackPictureFix": "boolean",
+     "blackPictureFixDuration": "long",
+     "addToGallery": "boolean"
+    },
+    "example": "<action type=\"take_picture\">\n    <useDefaultName>true</useDefaultName>\n    <name>Take Picture: /storage/emulated/0/#py/automagic/picture.jpg (No user interface)</name>\n    <useCameraApp>false</useCameraApp>\n    <path>/storage/emulated/0/#py/automagic/picture.jpg</path>\n    <cameraId>1</cameraId>\n    <pictureSize>1280*720</pictureSize>\n    <zoom>100</zoom>\n    <sceneMode>auto</sceneMode>\n    <colorEffect>none</colorEffect>\n    <flashMode>auto</flashMode>\n    <whiteBalance>auto</whiteBalance>\n    <focusMode>fixed</focusMode>\n    <awaitPreviewImages>true</awaitPreviewImages>\n    <blackPictureFix>false</blackPictureFix>\n    <blackPictureFixDuration>2000</blackPictureFixDuration>\n    <addToGallery>true</addToGallery>\n  </action>"
+   },
+   "request_sync": {
+    "name": "Request Sync",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.dq",
+    "tags": {
+     "useDefaultName": "boolean",
+     "accounts": "string",
+     "syncAuthorities": "string"
+    }
+   },
+   "set_telephony_radio_state": {
+    "name": "Set Telephony Radio State",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.fv",
+    "tags": {
+     "useDefaultName": "boolean",
+     "method": "string"
+    }
+   },
+   "show_call_log": {
+    "name": "Show Call Log",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.gg",
+    "tags": {}
+   },
+   "show_input_method_selector": {
+    "name": "Show Input Method Selector",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.gm",
+    "tags": {}
+   },
+   "modify_call_log": {
+    "name": "Modify Call Log",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.cz",
+    "tags": {
+     "useDefaultName": "boolean",
+     "modifyCallLogOperation": "string",
+     "clearAll": "boolean",
+     "numbersToClear": "string"
+    }
+   },
+   "init_variables_call_log_call": {
+    "name": "Init Variables Call Log",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.cc",
+    "tags": {
+     "useDefaultName": "boolean",
+     "callLogQueryCriteria": "string",
+     "variableCallNumber": "string",
+     "variableCallTime": "string",
+     "variableCallDuration": "string",
+     "variableCallType": "string",
+     "variableCallCachedName": "string",
+     "variableCallNew": "string"
+    }
+   },
+   "start_daydream": {
+    "name": "Start Daydream",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.gu",
+    "tags": {}
+   },
+   "set_vibrate_on_ring_state": {
+    "name": "Set Vibrate on Ring State",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.fz",
+    "tags": {
+     "useDefaultName": "boolean"
+    }
+   },
+   "write_http_response_text": {
+    "name": "Write HTTP Response Text (Experimental)",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.hs",
+    "tags": {
+     "useDefaultName": "boolean",
+     "text": "string",
+     "replaceVariables": "boolean",
+     "contentType": "string",
+     "customHTTPHeaders": "string",
+     "finishResponse": "boolean"
+    }
+   },
+   "write_http_response_file": {
+    "name": "Write HTTP Response File (Experimental)",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.hr",
+    "tags": {
+     "useDefaultName": "boolean",
+     "path": "string",
+     "customHTTPHeaders": "string"
+    }
+   },
+   "reboot": {
+    "name": "Reboot",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.dm",
+    "tags": {
+     "useDefaultName": "boolean",
+     "options": "string"
+    }
+   },
+   "shutdown": {
+    "name": "Shutdown",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.gn",
+    "tags": {}
+   },
+   "clear_automagic_log": {
+    "name": "Clear Automagic Log",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.m",
+    "tags": {}
+   },
+   "set_system_setting": {
+    "name": "Set System Setting",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.ft",
+    "tags": {
+     "useDefaultName": "boolean",
+     "wearDevice": "string",
+     "settingCategory": "string",
+     "settingName": "string",
+     "value": "string",
+     "verified": "boolean"
+    }
+   },
+   "init_variable_system_setting": {
+    "name": "Init Variable System Setting",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.bx",
+    "tags": {
+     "useDefaultName": "boolean",
+     "wearDevice": "string",
+     "settingCategory": "string",
+     "settingName": "string",
+     "variable": "string"
+    }
+   },
+   "google_drive_download_files": {
+    "name": "Google Drive Download Files (Experimental)",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.bh",
+    "tags": {
+     "useDefaultName": "boolean",
+     "deviceAccount": "string",
+     "targetPath": "string",
+     "googleDrivePathList": "string",
+     "showProgress": "boolean"
+    }
+   },
+   "google_drive_upload_files": {
+    "name": "Google Drive Upload Files (Experimental)",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.bj",
+    "tags": {
+     "useDefaultName": "boolean",
+     "deviceAccount": "string",
+     "sourcePathList": "string",
+     "googleDrivePath": "string",
+     "showProgress": "boolean"
+    }
+   },
+   "google_drive_delete_files": {
+    "name": "Google Drive Delete Files (Experimental)",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.bg",
+    "tags": {
+     "useDefaultName": "boolean",
+     "deviceAccount": "string",
+     "googleDrivePathList": "string",
+     "showProgress": "boolean"
+    }
+   },
+   "perform_action_notification_status_bar": {
+    "name": "Perform Action on Notification on Statusbar",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.dh",
+    "tags": {
+     "useDefaultName": "boolean",
+     "actionType": "string",
+     "button": "string",
+     "wearableAction": "string",
+     "wearableActionInput": "string"
+    }
+   },
+   "set_mobile_network_mode": {
+    "name": "Set Mobile Network Mode (2G/3G)",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.fg",
+    "tags": {
+     "useDefaultName": "boolean",
+     "networkMode": "int"
+    }
+   },
+   "create_calendar_event": {
+    "name": "Create Calendar Event",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.x",
+    "tags": {
+     "useDefaultName": "boolean",
+     "calendarDisplayName": "string",
+     "calendarEventTimeType": "string",
+     "startIn": "string",
+     "duration": "string",
+     "fromScript": "string",
+     "toScript": "string",
+     "allDay": "boolean",
+     "description": "string",
+     "eventLocation": "string",
+     "availability": "string",
+     "accessLevel": "string"
+    }
+   },
+   "set_timer": {
+    "name": "Set Timer",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.fw",
+    "tags": {
+     "useDefaultName": "boolean",
+     "label": "string",
+     "duration": "string",
+     "skipUI": "boolean"
+    }
+   },
+   "close_system_dialogs": {
+    "name": "Close System Dialogs",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.n",
+    "tags": {}
+   },
+   "show_custom_widget_overlay": {
+    "name": "Show Custom Widget Overlay",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.gj",
+    "tags": {
+     "useDefaultName": "boolean",
+     "wearDevice": "string",
+     "overlayName": "string",
+     "widgetName": "string",
+     "width": "string",
+     "height": "string",
+     "gravityType": "string",
+     "xOffset": "string",
+     "yOffset": "string",
+     "draggable": "boolean",
+     "opacity": "string",
+     "clickable": "boolean",
+     "stretchToFillArea": "boolean",
+     "showOnTop": "boolean",
+     "noPositionRestriction": "boolean",
+     "useAccessibilityService": "boolean"
+    }
+   },
+   "hide_custom_widget_overlay": {
+    "name": "Hide Custom Widget Overlay",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.bl",
+    "tags": {
+     "useDefaultName": "boolean",
+     "wearDevice": "string",
+     "overlayNames": "string"
+    }
+   },
+   "set_system_locale": {
+    "name": "Set System Locale",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.fs",
+    "tags": {
+     "useDefaultName": "boolean",
+     "locale": "string"
+    }
+   },
+   "query_content_provider": {
+    "name": "Query Content Provider",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.dl",
+    "tags": {
+     "useDefaultName": "string",
+     "uri": "string",
+     "projectionEnabled": "string",
+     "projection": "boolean",
+     "selectionEnabled": "string",
+     "selection": "string",
+     "selectionArgs": "boolean",
+     "sortOrderEnabled": "string",
+     "sortOrder": "string",
+     "queryContentProviderResultType": "string",
+     "includeHeaderRow": "boolean",
+     "variable": "string"
+    }
+   },
+   "start_service": {
+    "name": "Start Service",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.gy",
+    "tags": {
+     "useDefaultName": "string",
+     "intentAction": "string",
+     "categoryListEnabled": "boolean",
+     "categoryList": "string",
+     "dataEnabled": "string",
+     "data": "string",
+     "dataTypeEnabled": "string",
+     "dataType": "boolean",
+     "explicitComponent": "string",
+     "packageName": "string",
+     "className": "string",
+     "flagList": "string",
+     "launchBoundsEnabled": "boolean",
+     "x": "string",
+     "y": "string",
+     "width": "string",
+     "height": "string",
+     "extras": "string",
+     "waitForResult": "boolean",
+     "accessResultExtras": "string"
+    }
+   },
+   "init_variables_file_info": {
+    "name": "Init Variables File Info",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.cf",
+    "tags": {
+     "useDefaultName": "boolean",
+     "path": "string",
+     "isVariableType": "boolean",
+     "variableType": "string",
+     "isVariableExists": "boolean",
+     "variableExists": "string",
+     "isVariableSize": "boolean",
+     "variableSize": "string",
+     "recursively": "boolean",
+     "isVariableLastModifiedTime": "boolean",
+     "variableLastModifiedTime": "string"
+    }
+   },
+   "reregister_media_button_receiver": {
+    "name": "Reregister Media Button Receiver",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.dr",
+    "tags": {}
+   },
+   "init_variable_image_file": {
+    "name": "Init Variable Image File",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.bq",
+    "tags": {
+     "useDefaultName": "boolean",
+     "path": "string",
+     "variable": "string"
+    }
+   },
+   "modify_image": {
+    "name": "Modify Image",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.da",
+    "tags": {
+     "useDefaultName": "boolean",
+     "variable": "string",
+     "operation": "string",
+     "scaleWidth": "boolean",
+     "scaleWidthValue": "string",
+     "scaleHeight": "boolean",
+     "scaleHeightValue": "string",
+     "rotateAmount": "string",
+     "mirrorType": "string",
+     "cropScaleWidthValue": "string",
+     "cropScaleHeightValue": "string",
+     "cropToSelectionXValue": "string",
+     "cropToSelectionYValue": "string",
+     "cropToSelectionWidthValue": "string",
+     "cropToSelectionHeightValue": "string"
+    }
+   },
+   "save_variable_image_file": {
+    "name": "Save Variable in Image File",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.dt",
+    "tags": {
+     "useDefaultName": "boolean",
+     "path": "string",
+     "variable": "string",
+     "quality": "string"
+    }
+   },
+   "dismiss_slide_to_unlock_keyguard": {
+    "name": "Dismiss Slide to Unlock Keyguard",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.ad",
+    "tags": {}
+   },
+   "set_cyanogen_mod_profile": {
+    "name": "Set Cyanogen/LineageOS Profile",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.eq",
+    "tags": {
+     "useDefaultName": "boolean",
+     "profileName": "string"
+    }
+   },
+   "set_app_notification_state": {
+    "name": "Set App Notification State",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.eg",
+    "tags": {
+     "useDefaultName": "boolean",
+     "packageName": "string"
+    }
+   },
+   "set_immersive_mode": {
+    "name": "Set Immersive Mode",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.ex",
+    "tags": {
+     "useDefaultName": "boolean",
+     "immersiveMode": "string",
+     "showResetNotification": "boolean"
+    }
+   },
+   "delete_app_cache": {
+    "name": "Delete App Cache",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.z",
+    "tags": {
+     "useDefaultName": "boolean",
+     "packageName": "string"
+    }
+   },
+   "init_variables_media_metadata": {
+    "name": "Init Variables Media Metadata",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.ci",
+    "tags": {
+     "useDefaultName": "boolean",
+     "path": "string"
+    }
+   },
+   "set_live_wallpaper": {
+    "name": "Set Live Wallpaper",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.fb",
+    "tags": {
+     "useDefaultName": "boolean",
+     "componentName": "string"
+    }
+   },
+   "init_variables_network_traffic": {
+    "name": "Init Variables Network Traffic",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.cl",
+    "tags": {
+     "useDefaultName": "boolean",
+     "overall": "boolean",
+     "variableTotalTxBytes": "string",
+     "variableTotalRxBytes": "string",
+     "variableMobileTxBytes": "string",
+     "variableMobileRxBytes": "string",
+     "packageName": "string",
+     "variableUidTxBytes": "string",
+     "variableUidRxBytes": "string"
+    }
+   },
+   "delete_flows": {
+    "name": "Delete Flows",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.ab",
+    "tags": {
+     "useDefaultName": "boolean",
+     "flowNameList": "string",
+     "deleteUnusedObjects": "boolean"
+    }
+   },
+   "execute_ssh_command": {
+    "name": "Execute SSH Command (Experimental)",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.ar",
+    "tags": {
+     "useDefaultName": "string",
+     "server": "string",
+     "port": "int",
+     "validateHostKey": "boolean",
+     "username": "string",
+     "sshAuthType": "string",
+     "privateKeyPath": "string",
+     "publicKeyPath": "string",
+     "command": "string",
+     "feedInputFile": "boolean",
+     "inputFilePath": "string",
+     "storeStdoutInVariable": "boolean",
+     "pathStdout": "string",
+     "variableStdout": "string",
+     "variableStderr": "string",
+     "variableExitCode": "string",
+     "timeout": "long"
+    }
+   },
+   "init_variables_bluetooth_device_list": {
+    "name": "Init Variables Bluetooth Device List",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.cb",
+    "tags": {
+     "useDefaultName": "boolean",
+     "bluetoothDeviceListCriteria": "string",
+     "variableDeviceNameList": "string",
+     "variableDeviceAddressList": "string"
+    }
+   },
+   "init_variable_wifi_access_point_list": {
+    "name": "Init Variable WiFi Access Point List",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.ca",
+    "tags": {
+     "useDefaultName": "boolean",
+     "wifiAccessPointListCriteria": "string",
+     "variableSSIDList": "string"
+    }
+   },
+   "set_interruptions_mode": {
+    "name": "Set Interruptions Mode",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.ey",
+    "tags": {
+     "useDefaultName": "boolean",
+     "method": "string",
+     "interruptionsMode": "string"
+    }
+   },
+   "set_power_save_mode": {
+    "name": "Set Battery Saver Mode",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.fk",
+    "tags": {
+     "useDefaultName": "boolean"
+    }
+   },
+   "set_app_notification_priority": {
+    "name": "Set App Notification Priority",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.ef",
+    "tags": {
+     "useDefaultName": "boolean",
+     "packageName": "string",
+     "priority": "boolean"
+    }
+   },
+   "init_variable_next_alarm": {
+    "name": "Init Variable Next Alarm",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.bt",
+    "tags": {
+     "useDefaultName": "boolean",
+     "variable": "string"
+    }
+   },
+   "take_screenshot": {
+    "name": "Take Screenshot (Experimental)",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.hg",
+    "tags": {
+     "useDefaultName": "boolean",
+     "resolution": "string",
+     "path": "string"
+    }
+   },
+   "start_recording_screen": {
+    "name": "Start Recording Screen (Experimental)",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.gw",
+    "tags": {
+     "useDefaultName": "boolean",
+     "resolution": "string",
+     "bitRate": "string",
+     "path": "string",
+     "recordAudio": "boolean",
+     "showStopRecordingNotification": "boolean"
+    }
+   },
+   "stop_recording_screen": {
+    "name": "Stop Recording Screen (Experimental)",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.hd",
+    "tags": {}
+   },
+   "add_wifi_access_point": {
+    "name": "Add WiFi Access Point",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.j",
+    "tags": {
+     "useDefaultName": "boolean",
+     "ssid": "string",
+     "securityType": "string",
+     "activate": "boolean"
+    }
+   },
+   "vibrate_wear": {
+    "name": "Vibrate (Android Wear)",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.hn",
+    "tags": {
+     "useDefaultName": "boolean",
+     "wearDevice": "string",
+     "custom": "boolean",
+     "vibratePattern": "string",
+     "customPattern": "string"
+    }
+   },
+   "turn_screen_on_wear": {
+    "name": "Turn Screen On (Android Wear)",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.hi",
+    "tags": {}
+   },
+   "notification_screen_wear": {
+    "name": "Notification on Screen (Android Wear)",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.de",
+    "tags": {
+     "useDefaultName": "boolean",
+     "wearDevice": "string",
+     "showText": "boolean",
+     "text": "string",
+     "widgetName": "string",
+     "width": "string",
+     "height": "string",
+     "stretchToFillArea": "boolean",
+     "opacity": "string",
+     "durationLong": "boolean",
+     "customPosition": "boolean",
+     "gravityType": "string",
+     "xOffset": "string",
+     "yOffset": "string"
+    }
+   },
+   "init_variable_system_setting_wear": {
+    "name": "Init Variable System Setting (Android Wear)",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.by",
+    "tags": {
+     "useDefaultName": "boolean",
+     "wearDevice": "string",
+     "settingCategory": "string",
+     "settingName": "string",
+     "variable": "string"
+    }
+   },
+   "input_speech_wear": {
+    "name": "Input Speech (Android Wear)",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.cp",
+    "tags": {
+     "useDefaultName": "boolean",
+     "wearDevice": "string",
+     "prompt": "string",
+     "defineLanguage": "boolean",
+     "language": "string"
+    }
+   },
+   "show_custom_widget_overlay_wear": {
+    "name": "Show Custom Widget Overlay (Android Wear)",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.gk",
+    "tags": {
+     "useDefaultName": "boolean",
+     "wearDevice": "string",
+     "overlayName": "string",
+     "widgetName": "string",
+     "width": "string",
+     "height": "string",
+     "gravityType": "string",
+     "xOffset": "string",
+     "yOffset": "string",
+     "draggable": "boolean",
+     "opacity": "string",
+     "clickable": "boolean",
+     "stretchToFillArea": "boolean",
+     "showOnTop": "boolean",
+     "noPositionRestriction": "boolean",
+     "useAccessibilityService": "boolean"
+    }
+   },
+   "hide_custom_widget_overlay_wear": {
+    "name": "Hide Custom Widget Overlay (Android Wear)",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.bm",
+    "tags": {
+     "useDefaultName": "boolean",
+     "wearDevice": "string",
+     "overlayNames": "string"
+    }
+   },
+   "set_system_setting_wear": {
+    "name": "Set System Setting (Android Wear)",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.fu",
+    "tags": {
+     "useDefaultName": "boolean",
+     "wearDevice": "string",
+     "settingCategory": "string",
+     "settingName": "string",
+     "value": "string",
+     "verified": "boolean"
+    }
+   },
+   "ftp_init_variable_file_list": {
+    "name": "FTP Init Variable File List",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.ax",
+    "tags": {
+     "useDefaultName": "boolean",
+     "protocol": "string",
+     "verifyCertificates": "boolean",
+     "protType": "string",
+     "server": "string",
+     "port": "int",
+     "username": "string",
+     "variable": "string",
+     "filePattern": "string",
+     "includeFileAttributes": "boolean",
+     "defineControlEncoding": "boolean",
+     "controlEncoding": "string"
+    }
+   },
+   "dropbox_init_variable_file_list": {
+    "name": "Dropbox Init Variable File List",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.aj",
+    "tags": {
+     "useDefaultName": "boolean",
+     "variable": "string",
+     "filePattern": "string",
+     "includeFileAttributes": "boolean"
+    }
+   },
+   "google_drive_init_variable_file_list": {
+    "name": "Google Drive Init Variable File List (Experimental)",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.bi",
+    "tags": {
+     "useDefaultName": "boolean",
+     "deviceAccount": "string",
+     "variable": "string",
+     "filePattern": "string",
+     "includeFileAttributes": "boolean"
+    }
+   },
+   "ftp_create_directories": {
+    "name": "FTP Create Directories",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.au",
+    "tags": {
+     "useDefaultName": "boolean",
+     "protocol": "string",
+     "verifyCertificates": "boolean",
+     "protType": "string",
+     "server": "string",
+     "port": "int",
+     "username": "string",
+     "serverDirectories": "string",
+     "defineControlEncoding": "boolean",
+     "controlEncoding": "string"
+    }
+   },
+   "dropbox_create_directories": {
+    "name": "Dropbox Create Directories",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.ag",
+    "tags": {
+     "useDefaultName": "boolean",
+     "dropboxDirectories": "string"
+    }
+   },
+   "google_drive_create_directories": {
+    "name": "Google Drive Create Directories (Experimental)",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.bf",
+    "tags": {
+     "useDefaultName": "boolean",
+     "deviceAccount": "string",
+     "googleDriveDirectories": "string"
+    }
+   },
+   "init_variables_gleeo_project_structure": {
+    "name": "Init Variables Gleeo Project Structure",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.cg",
+    "tags": {
+     "useDefaultName": "boolean",
+     "structureType": "string",
+     "variableDomains": "string",
+     "variableProjects": "string",
+     "allProjects": "boolean",
+     "projectDomain": "string",
+     "variableTasks": "string",
+     "allTasks": "boolean",
+     "taskDomain": "string",
+     "taskProject": "string"
+    }
+   },
+   "init_variable_image_metadata": {
+    "name": "Init Variable Image Metadata",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.br",
+    "tags": {
+     "useDefaultName": "boolean",
+     "path": "string",
+     "variable": "string",
+     "parseDates": "boolean",
+     "includeDirectoryName": "boolean",
+     "getRawValues": "boolean",
+     "extractThumbnail": "boolean"
+    }
+   },
+   "set_disabled_keyguard_features": {
+    "name": "Set Disabled Keyguard Features",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.eu",
+    "tags": {
+     "useDefaultName": "boolean",
+     "disableWidgets": "boolean",
+     "disableCamera": "boolean",
+     "disableNotifications": "boolean",
+     "disableUnredactedNotifications": "boolean",
+     "disableTrustAgents": "boolean",
+     "disableFingerprintSensor": "boolean"
+    }
+   },
+   "init_variable_notifications_status_bar": {
+    "name": "Init Variable Notifications on Statusbar",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.bu",
+    "tags": {
+     "useDefaultName": "boolean",
+     "variable": "string"
+    }
+   },
+   "exit_device_idle_mode": {
+    "name": "Exit Device Idle/Doze Mode",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.as",
+    "tags": {}
+   },
+   "set_app_notification_peekable": {
+    "name": "Set App Notification Peekable",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.ee",
+    "tags": {
+     "useDefaultName": "boolean",
+     "packageName": "string",
+     "peekable": "boolean"
+    }
+   },
+   "remove_wifi_access_point": {
+    "name": "Remove WiFi Access Point",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.dp",
+    "tags": {
+     "useDefaultName": "boolean",
+     "ssid": "string"
+    }
+   },
+   "set_proximity_screen_off_state": {
+    "name": "Set Proximity Screen Off State",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.fl",
+    "tags": {
+     "useDefaultName": "boolean",
+     "showResetNotification": "boolean"
+    }
+   },
+   "set_wifi_state_wear": {
+    "name": "Set WiFi State (Android Wear)",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.ge",
+    "tags": {
+     "useDefaultName": "boolean",
+     "wearDevice": "string"
+    }
+   },
+   "set_restrict_background_data_state": {
+    "name": "Set Restrict Background Data State",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.fm",
+    "tags": {
+     "useDefaultName": "boolean"
+    }
+   },
+   "update_media_database": {
+    "name": "Update Media Database (Experimental)",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.hk",
+    "tags": {
+     "useDefaultName": "boolean",
+     "path": "string"
+    }
+   },
+   "init_variable_package_info": {
+    "name": "Init Variable Package Info",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.bv",
+    "tags": {
+     "useDefaultName": "boolean",
+     "variable": "string",
+     "all": "boolean",
+     "packageNames": "string",
+     "permissionInfo": "boolean",
+     "activityInfo": "boolean",
+     "receiverInfo": "boolean",
+     "providerInfo": "boolean",
+     "serviceInfo": "boolean"
+    }
+   },
+   "init_variables_media_session": {
+    "name": "Init Variables Media Session (Experimental)",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.cj",
+    "tags": {
+     "useDefaultName": "boolean",
+     "packageNameFilter": "string"
+    }
+   },
+   "update_quick_settings_tile": {
+    "name": "Update Quick Settings Tile",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.hl",
+    "tags": {
+     "useDefaultName": "boolean",
+     "tileID": "string",
+     "label": "string",
+     "iconType": "string",
+     "icon": "string",
+     "customIconPath": "string",
+     "state": "string"
+    }
+   },
+   "save_widget_image_file": {
+    "name": "Save Widget to Image File",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.du",
+    "tags": {
+     "useDefaultName": "boolean",
+     "path": "string",
+     "widgetName": "string",
+     "quality": "string"
+    }
+   },
+   "combine_images": {
+    "name": "Combine Images",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.o",
+    "tags": {
+     "useDefaultName": "boolean",
+     "variableBaseImage": "string",
+     "variableOverlayImage": "string",
+     "mode": "string",
+     "gravityType": "string",
+     "xOffset": "string",
+     "yOffset": "string",
+     "opacity": "string"
+    }
+   },
+   "seek_action_sound": {
+    "name": "Seek Action Sound",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.dx",
+    "tags": {
+     "useDefaultName": "boolean",
+     "soundSeekType": "string",
+     "position": "string"
+    }
+   },
+   "init_variables_contact_info": {
+    "name": "Init Variables Contact Info",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.cd",
+    "tags": {
+     "useDefaultName": "boolean",
+     "contactSearchType": "string",
+     "searchValue": "string"
+    }
+   },
+   "init_variable_contact_list": {
+    "name": "Init Variable Contact List",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.bo",
+    "tags": {
+     "useDefaultName": "boolean",
+     "variable": "string",
+     "all": "boolean",
+     "groupNames": "string"
+    }
+   },
+   "init_variables_network_statistics": {
+    "name": "Init Variables Network Statistics",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.ck",
+    "tags": {
+     "useDefaultName": "long",
+     "typeWifi": "boolean",
+     "typeMobile": "boolean",
+     "sim": "string",
+     "dateRangeType": "string",
+     "startDay": "string",
+     "fromScript": "string",
+     "toScript": "string",
+     "stateDefault": "boolean",
+     "stateForeground": "boolean",
+     "allPackages": "boolean",
+     "packageNames": "string",
+     "variableTxBytes": "string",
+     "variableRxBytes": "string",
+     "variableTotalBytes": "string"
+    }
+   },
+   "modify_automagic_notification_status_bar": {
+    "name": "Modify Automagic Notification on Statusbar",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.cy",
+    "tags": {
+     "useDefaultName": "boolean",
+     "notificationIconType": "string",
+     "notificationIcon": "string",
+     "customNotificationIcon": "string",
+     "message": "string",
+     "channel": "string",
+     "sound": "boolean",
+     "vibrate": "boolean",
+     "flashLED": "boolean",
+     "flashLEDColor": "int",
+     "flashLEDOn": "long",
+     "flashLEDOff": "long",
+     "flagLocalOnly": "boolean",
+     "accentColorEnabled": "boolean",
+     "accentColor": "int",
+     "flagOngoing": "boolean",
+     "flagNoClear": "boolean",
+     "notificationIDEnabled": "boolean",
+     "notificationID": "string",
+     "category": "string",
+     "priority": "string",
+     "visibility": "string",
+     "messageBigEnabled": "boolean",
+     "messageBig": "string",
+     "showProgressbar": "boolean",
+     "progressbarIndeterminate": "boolean",
+     "progressbarValue": "string",
+     "progressbarMaximum": "string",
+     "largeIconEnabled": "boolean",
+     "largeIcon": "string",
+     "group": "string",
+     "isGroupSummary": "boolean"
+    }
+   },
+   "snooze_notification_status_bar": {
+    "name": "Snooze Notification on Statusbar",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.gq",
+    "tags": {
+     "useDefaultName": "boolean",
+     "duration": "string"
+    }
+   },
+   "send_ussd_request": {
+    "name": "Send USSD Request",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.ea",
+    "tags": {
+     "useDefaultName": "boolean",
+     "sim": "string",
+     "ussdRequest": "string"
+    }
+   },
+   "set_camera_usage_state": {
+    "name": "Set Camera Usage State",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.eo",
+    "tags": {
+     "useDefaultName": "boolean"
+    }
+   },
+   "set_lineage_system_setting": {
+    "name": "Set LineageOS System Setting",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.fa",
+    "tags": {
+     "useDefaultName": "boolean",
+     "settingCategory": "string",
+     "settingName": "string",
+     "value": "string",
+     "verified": "boolean"
+    }
+   },
+   "modify_notification_channel": {
+    "name": "Modify Notification Channel",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.db",
+    "tags": {
+     "useDefaultName": "boolean",
+     "packageName": "string",
+     "channelId": "string",
+     "importance": "string",
+     "showBadge": "boolean",
+     "lockscreenVisibility": "string",
+     "bypassDnd": "boolean",
+     "sound": "string",
+     "enableVibration": "boolean",
+     "enableLights": "boolean"
+    }
+   },
+   "show_control_user_interface_infos": {
+    "name": "Show Control UI Infos",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.gi",
+    "tags": {}
+   },
+   "show_control_user_interface_gesture_recorder": {
+    "name": "Show Control UI Gesture Recorder",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.gh",
+    "tags": {}
+   },
+   "delete_http_request_cookies": {
+    "name": "Delete HTTP Request Cookies",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.ac",
+    "tags": {
+     "useDefaultName": "boolean",
+     "domainList": "string"
+    }
+   },
+   "compare_images": {
+    "name": "Compare Images",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.p",
+    "tags": {
+     "useDefaultName": "boolean",
+     "variableImage1": "string",
+     "topInsetImage1": "string",
+     "leftInsetImage1": "string",
+     "bottomInsetImage1": "string",
+     "rightInsetImage1": "string",
+     "variableImage2": "string",
+     "topInsetImage2": "string",
+     "leftInsetImage2": "string",
+     "bottomInsetImage2": "string",
+     "rightInsetImage2": "string",
+     "tolerance": "string",
+     "differencesOutputColor": "int"
+    }
+   },
+   "wa_reply": {
+    "name": "Reply to WhatsApp Message",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.wa",
+    "tags": {
+     "useDefaultName": "string",
+     "name": "string",
+     "message": "string"
+    },
+    "example": "<action type=\"wa_reply\">\n    <useDefaultName>false</useDefaultName>\n    <name>Reply Harga</name>\n    <message>Harga: Rp 100.000</message>\n  </action>"
+   },
+   "wa_gemini_reply": {
+    "name": "Reply with Google Gemini",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.wag",
+    "tags": {
+     "useDefaultName": "string",
+     "name": "string",
+     "prompt": "string",
+     "apiKey": "string",
+     "model": "string",
+     "violationReply": "string",
+     "replyPrefix": "string",
+     "maxTokens": "string",
+     "temperature": "string",
+     "topK": "string",
+     "topP": "string",
+     "stopSequences": "string",
+     "errorReply": "string"
+    },
+    "example": "<action type=\"wa_gemini_reply\">\n    <useDefaultName>true</useDefaultName>\n    <name>Reply with Google Gemini</name>\n    <prompt>You are an AI assistant from Automagic that sends automatic WhatsApp messages. You are helpful, creative, clever, and very friendly. You always give an answer.\n\n1:: %prev_message_0_3_512%\n2:: %prev_reply_0_3_512%\n1:: %prev_message_0_2_512%\n2:: %prev_reply_0_2_512%\n1:: %prev_message_0_1_512%\n2:: %prev_reply_0_1_512%\n1:: %message_512%</prompt>\n    <apiKey>AIzaSyDaB0qgUWZWYJj_sbQ7DY5f-gAus53Zp6E</apiKey>\n    <model>gemini-3.5-flash-lite</model>\n    <violationReply>Sorry, the request violates the content policy.</violationReply>\n    <replyPrefix />\n    <maxTokens>512</maxTokens>\n    <temperature />\n    <topK />\n    <topP />\n    <stopSequences>1:://2:://3::</stopSequences>\n    <errorReply>Error: One of the parameters is invalid, your Gemini account needs attention or Gemini is currently unavailable.</errorReply>\n  </action>"
+   },
+   "wa_status": {
+    "name": "Post WhatsApp Status",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.was",
+    "tags": {
+     "useDefaultName": "string",
+     "name": "string",
+     "text": "string"
+    },
+    "example": "<action type=\"wa_status\">\n    <useDefaultName>true</useDefaultName>\n    <name>Post WhatsApp Status</name>\n    <text>tes</text>\n  </action>"
+   }
+  }
+ }
+}
