@@ -393,6 +393,7 @@ memori**. Editor menampilkan:
 | `Simpan` / `Muat ulang` | tulis ulang / batalkan perubahan |
 | `Persona bawaan` | tambah fakta persona yang belum ada |
 | `Hapus semua` | kosongkan fakta + matikan persona otomatis |
+| `Hapus riwayat` | hapus pesan + ringkasan untuk kontak itu |
 
 Saklar **Pasang persona bawaan otomatis** langsung mengubah isi kotak fakta:
 menyalakan menambahkan baris persona, mematikan menghapusnya. Fakta buatan sendiri
@@ -400,6 +401,10 @@ tidak pernah disentuh, dan kunci yang sudah kamu isi tidak ditimpa persona.
 
 > Nama kontak harus sama persis dengan `{wa_conversation}` dari trigger, termasuk
 > emoji. `Sayangkuu` dan `Sayangkuu 💗💋` adalah dua memori berbeda.
+
+**Mengganti persona sebuah kontak:** jalankan `Hapus riwayat` setelah mengubah prompt.
+Riwayat dipisah per kontak, bukan per persona, jadi tanpa reset teks persona lama
+masih dikirim lewat `%prev_message%` dan `%summary%`.
 
 #### Action Gemini Memory (`wa_memory`)
 
@@ -447,7 +452,7 @@ dengan ~500 token.
 
 1. **Backup flow** dari Automagic sebelum memasang build mod.
 2. Jika perangkat masih memakai Automagic resmi, APK ini **tidak bisa** dipasang sebagai update karena sertifikatnya berbeda. Ekspor flow, uninstall versi resmi, lalu install APK ini dan impor kembali flow. Jika perangkat sudah memakai build patched dengan kunci yang sama, update biasa bisa dilakukan.
-3. Install `Automagic_1.38.0-wa.8.apk`.
+3. Install `Automagic_1.38.0-wa.9.apk`.
 4. Install `AutomagicWaBridge_1.0.0.apk`, aktifkan di LSPosed dengan scope **WhatsApp** (hanya perlu untuk action status).
 5. Dokumentasi offline sudah ikut di dalam APK — tidak ada langkah tambahan.
 6. Buka Automagic dan aktifkan **Notification access** untuk Automagic di pengaturan Android.

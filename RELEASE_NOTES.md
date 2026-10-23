@@ -1,64 +1,51 @@
-Rilis kedelapan **Automagic Mod**, berbasis Automagic Premium 1.38.0.
+Rilis kesembilan **Automagic Mod**, berbasis Automagic Premium 1.38.0.
 
-Fokus rilis ini: **editor memori Gemini**.
+Fokus rilis ini: **riwayat tidak lagi tercampur antar persona**.
+
+## Masalah yang diselesaikan
+
+Kalau satu kontak pernah memakai persona A lalu diganti ke persona B, Gemini tetap
+menerima teks persona A. Penyebabnya tiga:
+
+1. Riwayat dipisah **per kontak**, bukan per persona — jadi berganti prompt tidak
+   memulai thread baru.
+2. Ringkasan otomatis tidak ikut terhapus saat riwayat direset, sehingga ringkasan
+   persona lama masih dikirim lewat `%summary%`.
+3. Kunci penyimpanan menyaring nama kontak menjadi `_`, sehingga
+   `Sayangkuu 💗💋` dan `Sayangkuu 💋💗` bertabrakan dan riwayatnya bercampur.
 
 ## Yang baru
 
-### 1. Memori kini bisa diedit seperti teks
+### Tombol Hapus riwayat
 
-Dulu fakta hanya bisa diubah satu per satu lewat action — merepotkan untuk 12 fakta.
-Sekarang ada editor:
+Di editor memori, per kontak. Menghapus pesan **dan** ringkasan sekaligus. Fakta
+memori tetap.
 
-**Edit action Gemini → scroll bawah → Buka editor memori**
+### Kunci penyimpanan anti-tabrakan
 
-```
-KONTAK / PERCAKAPAN   [ Sayangkuu 💗💋  ▾ ]
-                      [ Kontak baru... ]
+Nama kontak persis + hash. Riwayat dan memori lama dipindahkan otomatis saat pertama
+dibaca, jadi upgrade tidak menghilangkan data.
 
-☑ Pasang persona bawaan otomatis untuk kontak ini
-12 fakta · terakhir: 2 jam lalu
+### Persona dipisah per kontak
 
-FAKTA — satu per baris, format key: value
-  nama: Gilang
-  pasangan: Melani
-  pekerjaan: sibuk 08:00-21:00 nganter orderan
-  pantangan: suka minum es saat sakit
+- **Auto Reply Melani** — hanya `Sayangkuu 💗💋`.
+- **Pi Coding Agent - Developer** — flow baru dengan persona developer, dipicu
+  keyword `!dev`.
 
-RINGKASAN OTOMATIS (boleh diedit)
-  ...
+## Alur yang disarankan saat mengganti persona
 
-[ Simpan ] [ Muat ulang ]
-[ Persona bawaan ] [ Hapus semua ]
-```
-
-### 2. Saklar persona otomatis benar-benar bekerja
-
-Saklar langsung mengubah isi kotak fakta:
-
-| Saklar | Akibat |
-| --- | --- |
-| dinyalakan | baris persona yang belum ada langsung ditambahkan |
-| dimatikan | baris persona dihapus, fakta buatanmu tetap |
-
-Matikan untuk kontak kerja supaya persona Gilang tidak ikut terkirim ke Gemini.
-
-### 3. Perbaikan penting
-
-- **Kontak kedua tidak tersimpan.** Menambah kontak baru membuat daftar dibangun
-  ulang dan Spinner memilih item pertama, sehingga kontak yang baru diketik tertimpa
-  dan fakta masuk ke kontak yang salah. Ini bug yang kamu temukan saat uji.
-- **Kunci ganda di `%memory%`.** Persona dulu menimpa seluruh daftar; sekarang hanya
-  melengkapi kunci yang belum ada.
-- **Simpan mematikan persona otomatis.** Sekarang hanya `Hapus semua` yang
-  mematikannya.
+1. Edit action Gemini → **Buka editor memori**.
+2. Pilih kontak → **Hapus riwayat** (menghapus pesan + ringkasan).
+3. Sesuaikan fakta → **Simpan**.
+4. Matikan/nyalakan **Pasang persona bawaan otomatis** sesuai kebutuhan.
 
 ## Catatan
 
-- Nama kontak harus sama persis dengan `{wa_conversation}` dari trigger, **termasuk
-  emoji**. `Sayangkuu` dan `Sayangkuu 💗💋` adalah dua memori berbeda — kalau ragu,
-  pakai `Kontak baru...` lalu salin nama dari notifikasi WhatsApp.
-- Ringkasan memakai model dan API key yang sama dengan action Gemini.
-- Memori disimpan di `wa_memory_state`, terpisah dari riwayat percakapan.
+- Flow developer dipicu `!dev` (mode CONTAINS) agar tidak terjadi balasan berulang
+  bila kontak itu ternyata bot. Ubah ke mode `ANY` di editor trigger kalau kontaknya
+  manusia.
+- API key pada flow developer disalin dari action Gemini yang sudah ada di perangkat.
+- Dokumen: 451 halaman/bahasa.
 
 ## Catatan tuning
 

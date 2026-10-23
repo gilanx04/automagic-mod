@@ -2,6 +2,50 @@
 
 Semua perubahan penting pada build mod Automagic dicatat di sini.
 
+## [1.38.0-wa.9] — 2026-10-24
+
+Rilis kesembilan: **isolasi riwayat per kontak** dan pemisahan persona.
+
+### Ditambahkan
+
+#### Tombol Hapus riwayat di editor
+
+- Menghapus pesan tersimpan **dan** ringkasan otomatis untuk kontak yang dipilih.
+- Fakta memori tidak terpengaruh.
+- Hasil ditampilkan di layar: jumlah pesan + ringkasan yang dihapus.
+
+#### Isolasi riwayat per nama kontak
+
+- Kunci penyimpanan sekarang memakai nama kontak persis + hash SHA-1 (8 heksadesimal).
+- Sebelumnya nama disaring menjadi `_` dan dipotong 120 karakter, sehingga
+  `Sayangkuu 💗💋` dan `Sayangkuu 💋💗` sama-sama menjadi `Sayangkuu_____` dan
+  riwayatnya bercampur. Hal yang sama berlaku pada memori.
+- Data berkunci lama dipindahkan otomatis saat pertama kali dibaca; tidak ada riwayat
+  yang hilang saat upgrade.
+
+### Diperbaiki
+
+- **Ringkasan otomatis tidak ikut dihapus** saat riwayat direset, sehingga ringkasan
+  persona lama tetap dikirim lewat `%summary%` setelah riwayatnya kosong.
+  - `wa_reset_history` kini juga mengosongkan ringkasan (per kontak atau semua).
+  - `WaMemoryStore.clearAllSummaries()` ditambahkan.
+- **Penjaga tabrakan memori**: bila data pada sebuah kunci ternyata milik kontak lain,
+  data itu tidak dipakai.
+
+### Diubah
+
+- Flow **Auto Reply Melani** sekarang hanya menangani `Sayangkuu 💗💋`. `Pi Coding
+  Agent` dikeluarkan dari filter agar persona Gilang tidak bocor ke chat lain.
+- Flow baru **Pi Coding Agent - Developer**: persona developer terpisah, dipicu
+  keyword `!dev` (mode CONTAINS) agar tidak terjadi balasan berulang bila kontak itu
+  ternyata bot.
+
+### Catatan
+
+- Ringkasan dipadatkan dari riwayat; begitu riwayat direset, ringkasan lama otomatis
+  dianggap basi.
+- Dokumen: 451 halaman/bahasa.
+
 ## [1.38.0-wa.8] — 2026-10-24
 
 Rilis kedelapan: **editor memori Gemini** dan perbaikan persona otomatis.

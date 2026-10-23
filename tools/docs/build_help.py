@@ -338,6 +338,14 @@ tercatat, sehingga konteks yang dikirim ke Gemini menjadi basi dan model cenderu
 mengulang pertanyaan lama.</p>
 <h2>Hasil</h2>
 <p>Jumlah yang dihapus disimpan di <code>{wa_history_status}</code>.</p>
+<h2>Ringkasan ikut dihapus</h2>
+<p>Ringkasan otomatis adalah padatan dari riwayat. Karena itu action ini juga
+mengosongkan <code>%summary%</code> untuk percakapan yang direset, agar ringkasan lama
+tidak dikirim setelah riwayatnya hilang. Fakta <code>%memory%</code> tidak diubah.</p>
+<h2>Kapan dipakai</h2>
+<p>Setelah flow dimatikan lama lalu diaktifkan lagi, atau setelah persona sebuah kontak
+diganti. Riwayat dipisah per kontak, bukan per persona, sehingga teks persona lama
+tetap terkirim bila tidak direset.</p>
 <h2>Catatan</h2>
 <p>Riwayat disimpan di SharedPreferences <code>wa_conversation_state</code>, maksimal 30
 entri per percakapan. Menghapus riwayat tidak menghapus chat WhatsApp asli.</p>
@@ -375,7 +383,12 @@ entri per percakapan. Menghapus riwayat tidak menghapus chat WhatsApp asli.</p>
 <li><b>Persona bawaan</b> menambahkan fakta persona yang belum ada. Fakta buatan
 sendiri dipertahankan; kunci yang sudah kamu isi tidak ditimpa.</li>
 <li><b>Hapus semua</b> mengosongkan fakta dan mematikan pemasangan persona otomatis.</li>
+<li><b>Hapus riwayat</b> menghapus pesan tersimpan <b>dan</b> ringkasan otomatis untuk
+kontak itu. Fakta memori tidak terpengaruh.</li>
 </ul>
+<p>Pakai <b>Hapus riwayat</b> setiap kali mengganti persona sebuah kontak. Riwayat
+dipisah per kontak, bukan per persona, sehingga tanpa reset teks persona lama masih
+ikut dikirim lewat <code>%prev_message%</code> dan <code>%summary%</code>.</p>
 <h2>Saklar persona otomatis</h2>
 <p>Saklar <b>Pasang persona bawaan otomatis untuk kontak ini</b> langsung mengubah
 isi kotak fakta, bukan hanya menyimpan status:</p>
@@ -392,6 +405,10 @@ persona Gilang tidak ikut terkirim ke Gemini.</p>
 <h2>Catatan</h2>
 <p>Memori disimpan per percakapan di SharedPreferences <code>wa_memory_state</code>.
 Fakta bawaan ditandai <code>builtin</code> agar bisa dibedakan dari catatan buatan sendiri.</p>
+<h2>Isolasi per kontak</h2>
+<p>Kunci penyimpanan memakai nama kontak persis ditambah hash, sehingga dua kontak
+yang hanya berbeda pada emoji atau spasi tidak bertabrakan. Riwayat lama dengan kunci
+format sebelumnya dipindahkan otomatis saat pertama kali dibaca.</p>
 <h2>Beberapa kontak dalam satu filter</h3>
 <p>Memori dipisah per kontak memakai <code>{wa_conversation}</code>, jadi dua kontak
 dalam satu filter trigger <b>tidak</b> saling menimpa. Namun persona bawaan dipasang
