@@ -10,20 +10,20 @@ Repo ini berisi dokumentasi dan APK mod. Source code asli Automagic tidak disert
 
 | Properti | Nilai |
 | --- | --- |
-| Versi rilis | `1.38.0-wa.4` |
+| Versi rilis | `1.38.0-wa.5` |
 | `versionName` APK | `1.38.0` |
 | `versionCode` | `4900` |
 | Paket | `ch.gridvision.ppam.androidautomagic` |
-| Ukuran APK | 8.823.000 byte (8,82 MB) |
-| APK | [`Automagic_1.38.0-wa.4.apk`](https://github.com/gilanx04/automagic-mod/releases/download/v1.38.0-wa.4/Automagic_1.38.0-wa.4.apk) |
-| Modul bridge (LSPosed) | [`AutomagicWaBridge_1.0.0.apk`](https://github.com/gilanx04/automagic-mod/releases/download/v1.38.0-wa.4/AutomagicWaBridge_1.0.0.apk) |
-| Dokumentasi offline | [`AutomagicDocs_1.38.zip`](https://github.com/gilanx04/automagic-mod/releases/download/v1.38.0-wa.4/AutomagicDocs_1.38.zip) |
-| Tools agent | [`AutomagicTools_1.0.zip`](https://github.com/gilanx04/automagic-mod/releases/download/v1.38.0-wa.4/AutomagicTools_1.0.zip) |
-| Checksum | [`SHA256SUMS`](https://github.com/gilanx04/automagic-mod/releases/download/v1.38.0-wa.4/SHA256SUMS) |
+| Ukuran APK | 10.313.036 byte (9,84 MB) |
+| APK | [`Automagic_1.38.0-wa.5.apk`](https://github.com/gilanx04/automagic-mod/releases/download/v1.38.0-wa.5/Automagic_1.38.0-wa.5.apk) |
+| Modul bridge (LSPosed) | [`AutomagicWaBridge_1.0.0.apk`](https://github.com/gilanx04/automagic-mod/releases/download/v1.38.0-wa.5/AutomagicWaBridge_1.0.0.apk) |
+| Dokumentasi offline | [`AutomagicDocs_1.38.zip`](https://github.com/gilanx04/automagic-mod/releases/download/v1.38.0-wa.5/AutomagicDocs_1.38.zip) |
+| Tools agent | [`AutomagicTools_1.0.zip`](https://github.com/gilanx04/automagic-mod/releases/download/v1.38.0-wa.5/AutomagicTools_1.0.zip) |
+| Checksum | [`SHA256SUMS`](https://github.com/gilanx04/automagic-mod/releases/download/v1.38.0-wa.5/SHA256SUMS) |
 | Diuji pada | Xiaomi 2311DRK48G, Android 17 (SDK 37), WhatsApp 2.26.40.76, LSPosed 2.2.1 |
 
 ```text
-505936a20bdbad2c6f0ab4a742a6d4f79e14b9c092563ca9eab0f2a0601b1062  Automagic_1.38.0-wa.4.apk
+505936a20bdbad2c6f0ab4a742a6d4f79e14b9c092563ca9eab0f2a0601b1062  Automagic_1.38.0-wa.5.apk
 0ae9a8b3933404a8fdc0ad6a6d4a2ca9b4a34e46e90cf846251252324357ddd9  AutomagicWaBridge_1.0.0.apk
 e6343052cb1f77b3ed3f53b4fe5de4981a63ede46eb192412082db6f911f7160  AutomagicDocs_1.38.zip
 2a97d4c9ca6352bc1101c93faae8b49e2f1e30c365637afcea3e0e8f014b39cc  AutomagicTools_1.0.zip
@@ -148,7 +148,7 @@ Pengaturan:
 | `top_k` | Bilangan bulat positif. |
 | `top_p` | 0.0–1.0. |
 | Stop sequences | Dipisahkan `//`, misalnya `1://2://3::`. |
-| Error reply | Balasan saat API key salah, kuota habis, jaringan gagal, atau Gemini tidak tersedia. |
+| Error reply | Balasan saat API key salah, kuota habis, jaringan gagal, atau Gemini tidak tersedia. Jika nilainya masih default, penyebab asli (mis. `HTTP 400: ...`) ditambahkan di belakangnya. |
 
 #### Penanda prompt
 
@@ -246,17 +246,18 @@ memulihkannya memakai arsip `web.archive.org`:
 - **Cakupan** — 219 action, 127 trigger, 88 condition; seluruhnya cocok dengan ID
   komponen di APK, ditambah 4 halaman untuk komponen buatan mod ini
   (`wa_reply`, `wa_status`, `wa_gemini_reply`, `wa_message_received`).
+- **Built-in** — dibundel di `assets/amdocs/`, diekstrak otomatis saat dipakai.
 
-Pemasangan dokumentasi (butuh root):
+**Dokumentasi sudah dibundel di dalam APK** (sejak `wa.5`). Tidak perlu langkah
+pemasangan manual:
 
-```bash
-unzip AutomagicDocs_1.38.zip -d docs
-# lalu salin docs/{en,de} ke /data/data/ch.gridvision.ppam.androidautomagic/files/help/
-# dan docs/catalog/{en,de} ke .../files/catalog/
-```
-
-Atau pakai `tools/docs/install_docs.sh` dari `AutomagicTools_1.0.zip`.
-Dokumentasi tetap ada saat APK di-update, tetapi hilang bila aplikasi di-uninstall.
+- Berkas disimpan di `assets/amdocs/` (HTML en/de + katalog + knowledge base agent).
+- Diekstrak **malas** ke data aplikasi saat pertama dibuka: satu halaman saat
+  halaman itu dibuka, katalog saat katalog dibuka, knowledge base saat action
+  `ai_flow_agent` pertama kali dijalankan.
+- Karena ikut APK, dokumentasi tetap ada setelah update maupun uninstall/install ulang.
+- Varian bundel ini **tanpa screenshot** (tag `<img>` dibuang) agar APK tetap ~9,8 MB.
+  Versi bergambar tetap tersedia terpisah di `AutomagicDocs_1.38.zip`.
 
 ### 8. AI flow agent (amflow)
 
@@ -335,9 +336,9 @@ dijalankan ulang.
 
 1. **Backup flow** dari Automagic sebelum memasang build mod.
 2. Jika perangkat masih memakai Automagic resmi, APK ini **tidak bisa** dipasang sebagai update karena sertifikatnya berbeda. Ekspor flow, uninstall versi resmi, lalu install APK ini dan impor kembali flow. Jika perangkat sudah memakai build patched dengan kunci yang sama, update biasa bisa dilakukan.
-3. Install `Automagic_1.38.0-wa.4.apk`.
+3. Install `Automagic_1.38.0-wa.5.apk`.
 4. Install `AutomagicWaBridge_1.0.0.apk`, aktifkan di LSPosed dengan scope **WhatsApp** (hanya perlu untuk action status).
-5. Pasang dokumentasi offline dari `AutomagicDocs_1.38.zip` (lihat bagian [Dokumentasi offline](#7-dokumentasi-offline)).
+5. Dokumentasi offline sudah ikut di dalam APK — tidak ada langkah tambahan.
 6. Buka Automagic dan aktifkan **Notification access** untuk Automagic di pengaturan Android.
 7. Nonaktifkan AutoResponder WhatsApp lain selama pengujian agar tidak ada balasan ganda.
 8. Buat flow dan aktifkan.
@@ -410,8 +411,8 @@ Admin | admin, cs
 
 ```bash
 sha256sum -c SHA256SUMS
-apksigner verify --print-certs Automagic_1.38.0-wa.4.apk
-aapt2 dump badging Automagic_1.38.0-wa.4.apk | head -3
+apksigner verify --print-certs Automagic_1.38.0-wa.5.apk
+aapt2 dump badging Automagic_1.38.0-wa.5.apk | head -3
 ```
 
 Sertifikat build ini:

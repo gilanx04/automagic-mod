@@ -1,44 +1,39 @@
-Rilis keempat **Automagic Mod**, berbasis Automagic Premium 1.38.0.
+Rilis kelima **Automagic Mod**, berbasis Automagic Premium 1.38.0.
 
-Fokus rilis ini: **AI Flow Agent di dalam Automagic** (Gemini BYOK, rotasi multi API key).
+Fokus rilis ini: **dokumentasi dibundel di APK** dan **perbaikan Gemini Reply**.
 
 ## Yang baru
 
-### Action AI Flow Agent
+### Dokumentasi & knowledge base built-in
 
-- Merancang flow dari deskripsi bahasa alami, langsung di perangkat tanpa PC.
-- Tiga tahap: pilih komponen dari katalog 441 komponen → susun XML → validasi dan
-  perbaiki otomatis bila ada error.
-- Hasil ditulis ke `/sdcard/Automagic/agent/`, bisa langsung dipasang atau preview.
-- Variabel `{ai_flow_status}`, `{ai_flow_file}`, `{ai_flow_error}` untuk dirantai ke action lain.
-- Tidak ada API key yang dibundel: provider Gemini murni BYOK, key diisi user.
+- Dokumentasi offline (449 halaman x 2 bahasa), katalog 448 komponen, dan knowledge
+  base AI agent kini ikut di dalam APK.
+- Diekstrak otomatis saat dipakai (malas), jadi tidak ada langkah pemasangan manual.
+- Tetap ada setelah update maupun uninstall/install ulang.
+- APK bertambah ~1,4 MB (8,4 -> 9,8 MB). Versi bundel tanpa screenshot; versi
+  bergambar tetap tersedia di `AutomagicDocs_1.38.zip`.
 
-### Rotasi multi API key
+### Perbaikan Gemini Reply
 
-- Beberapa key (satu per baris) dipakai berurutan.
-- Key kena limit (HTTP 429) diistirahatkan 30 menit lalu key berikutnya dipakai.
-- Key tidak valid diistirahatkan 24 jam. Status cooldown tersimpan di perangkat.
-
-### Perbaikan penting
-
-- Definisi komponen kini ditulis sebelum `<flow>` (sebelumnya flow bisa muncul dengan
-  node kosong yang tidak bisa diedit).
-- `amflow install` menulis ulang `flow_check`, sehingga Automagic tidak lagi menolak
-  flow hasil edit eksternal.
+- Percakapan yang dikirim ke Gemini dinormalisasi (peran sama digabung, giliran
+  `model` di awal dibuang). Ini memperbaiki error generik
+  "One of the parameters is invalid..." yang muncul saat riwayat percakapan kosong
+  atau tidak berselang-seling.
+- Penyebab asli error kini ditampilkan di belakang pesan default, mis.
+  `... (HTTP 400: Please ensure that multiturn requests alternate between user and model)`.
 
 ## Pasang
 
 1. Backup flow Automagic.
-2. Install `Automagic_1.38.0-wa.4.apk` (update biasa bila sudah memakai build ini).
+2. Install `Automagic_1.38.0-wa.5.apk` (update biasa bila sudah memakai build ini).
 3. Install `AutomagicWaBridge_1.0.0.apk` dan aktifkan di LSPosed (scope WhatsApp)
    bila memakai action status.
-4. Pasang `AutomagicDocs_1.38.zip` sesuai `tools/docs/install_docs.sh`.
-5. Ekstrak `AutomagicTools_1.0.zip` bila ingin memakai amflow.
+4. Dokumentasi sudah built-in - tidak perlu langkah tambahan.
 
 ## Checksum
 
 ```text
-cf8719eaea937073777f5e14021b482460ee01501d5dd76e3a5865e91a70888d  Automagic_1.38.0-wa.4.apk
+5fa5e1d0f40d2fe24793e502143ad99918595fddfaa255ea02e5acef9b053897  Automagic_1.38.0-wa.5.apk
 0ae9a8b3933404a8fdc0ad6a6d4a2ca9b4a34e46e90cf846251252324357ddd9  AutomagicWaBridge_1.0.0.apk
 e6343052cb1f77b3ed3f53b4fe5de4981a63ede46eb192412082db6f911f7160  AutomagicDocs_1.38.zip
 2a97d4c9ca6352bc1101c93faae8b49e2f1e30c365637afcea3e0e8f014b39cc  AutomagicTools_1.0.zip
@@ -49,5 +44,5 @@ Sertifikat APK: `CN=Automagic Patched, O=Local, C=ID` (bukan sertifikat resmi Gr
 ## Penting
 
 - Ini bukan build resmi. Tidak ada lisensi tambahan yang diberikan.
-- Dokumentasi disimpan di data aplikasi; hilang bila aplikasi di-uninstall.
-- `amflow` tidak menghapus flow yang ada dan selalu membuat backup sebelum menulis.
+- Screenshot dokumentasi tidak dibundel agar APK tidak membengkak; teks lengkap tetap ada.
+- API key Gemini tetap BYOK, disimpan sebagai teks biasa di flow XML.

@@ -22,6 +22,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 SRC = ROOT / "automagic-help"
 OUT = ROOT / "work" / "docs" / "help-out"
+NO_IMAGES = False
 VERSION = "1.38"
 
 CSS = """
@@ -242,7 +243,15 @@ def convert(md: str) -> tuple[str, str]:
     return title, "\n".join(out)
 
 
+def strip_images(body: str) -> str:
+    """Buang tag <img> (varian tanpa screenshot agar tidak ada ikon rusak)."""
+    import re as _re
+    return _re.sub(r"<img[^>]*>", "", body)
+
+
 def page(title: str, body: str) -> str:
+    if NO_IMAGES:
+        body = strip_images(body)
     return (
         "<!DOCTYPE html><html><head><meta charset=\"utf-8\">"
         "<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">"
@@ -373,7 +382,8 @@ def build_lang(lang: str, items: list[tuple[str, Path]]) -> int:
                                         encoding="utf-8")
     count += 1
 
-    shutil.copytree(SRC / "assets", out_dir / "assets", dirs_exist_ok=True)
+    if not NO_IMAGES:
+        shutil.copytree(SRC / "assets", out_dir / "assets", dirs_exist_ok=True)
     (out_dir / "version.txt").write_text(VERSION, encoding="utf-8")
     return count
 
@@ -415,6 +425,10 @@ def build_catalog(lang: str, items: list[tuple[str, Path]]) -> Path:
 
 
 def main() -> int:
+    global OUT, NO_IMAGES
+    if "--no-images" in sys.argv:
+        NO_IMAGES = True
+        OUT = ROOT / "work" / "docs" / "help-out-nopix"
     items = collect_sources()
     if not items:
         print("sumber dokumentasi tidak ditemukan", file=sys.stderr)

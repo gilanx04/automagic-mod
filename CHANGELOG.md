@@ -2,6 +2,43 @@
 
 Semua perubahan penting pada build mod Automagic dicatat di sini.
 
+## [1.38.0-wa.5] — 2026-10-23
+
+Rilis kelima: **dokumentasi & knowledge base dibundel di APK**, plus perbaikan
+penting pada Gemini Reply.
+
+### Ditambahkan
+
+#### Dokumentasi built-in
+
+- HTML dokumentasi (en/de, 449 halaman/bahasa), katalog, dan knowledge base AI agent
+  dibundel di `assets/amdocs/` (905 berkas, +1,4 MB pada APK).
+- Kelas `DocsInstaller` mengekstrak **malas**: satu halaman saat dibuka, katalog saat
+  katalog dibuka, knowledge base saat action agent pertama dijalankan.
+- Dokumentasi tetap ada setelah update maupun uninstall/install ulang — tidak perlu
+  `install_docs.sh` atau zip lagi.
+- Varian bundel tanpa screenshot (tag `<img>` dibuang); versi bergambar tetap
+  tersedia di `AutomagicDocs_1.38.zip`.
+
+### Diperbaiki
+
+#### Gemini Reply: `INVALID_ARGUMENT`
+
+- Percakapan yang dikirim ke Gemini kini **dinormalisasi**: giliran dengan peran sama
+  digabung dan giliran `model` di awal dibuang. Sebelumnya placeholder riwayat yang
+  kosong menghasilkan urutan `user,user` (atau diawali `model`), dan Gemini menolak
+  seluruh permintaan dengan `INVALID_ARGUMENT`.
+- Pesan error generik tidak lagi menyembunyikan penyebab: bila `Error reply` masih
+  default, penyebab asli ditambahkan dalam tanda kurung, mis.
+  `... (HTTP 400: Please ensure that multiturn requests alternate between user and model)`.
+- Prompt dengan placeholder `%prev_message_0_3_512%` / `%prev_reply_0_3_512%` tetap
+  didukung (format: `%prev_message_<offset>_<limit>%`).
+
+#### Build
+
+- `apktool` menyimpan cache dex dan melaporkan "smali has not changed"; skrip build
+  sekarang menghapus cache tersebut sehingga setiap perubahan smali selalu ikut.
+
 ## [1.38.0-wa.4] — 2026-10-23
 
 Rilis keempat: **AI Flow Agent di dalam Automagic** (Gemini BYOK + rotasi multi API key).
