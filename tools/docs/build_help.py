@@ -304,6 +304,25 @@ internal, lalu mengembalikan hasil (1 = sukses, 2 = gagal).</p>
 <li>Audiens mengikuti privasi status terakhir di WhatsApp.</li>
 </ul>
 """),
+    "action_wa_reset_history": ("Action - Reset Conversation History", """
+<p>Menghapus riwayat percakapan yang dipakai placeholder Gemini
+(<code>%prev_message_*</code>, <code>%prev_reply_*</code>).</p>
+<h2>Pengaturan</h2>
+<ul>
+<li><b>What to reset</b> — Current conversation (dari trigger), Specific contact, atau All conversations.</li>
+<li><b>Contact / conversation</b> — dipakai untuk mode Specific. Mendukung variabel.</li>
+<li><b>Package</b> — default <code>com.whatsapp</code>.</li>
+</ul>
+<h2>Kapan dipakai</h2>
+<p>Setelah flow dimatikan lama lalu diaktifkan lagi. Selama flow mati tidak ada pesan yang
+tercatat, sehingga konteks yang dikirim ke Gemini menjadi basi dan model cenderung
+mengulang pertanyaan lama.</p>
+<h2>Hasil</h2>
+<p>Jumlah yang dihapus disimpan di <code>{wa_history_status}</code>.</p>
+<h2>Catatan</h2>
+<p>Riwayat disimpan di SharedPreferences <code>wa_conversation_state</code>, maksimal 30
+entri per percakapan. Menghapus riwayat tidak menghapus chat WhatsApp asli.</p>
+"""),
     "trigger_wa_message_received": ("Trigger - WhatsApp Message Received", """
 <p>Trigger yang berjalan saat notifikasi pesan WhatsApp masuk.</p>
 <h2>Pengaturan</h2>

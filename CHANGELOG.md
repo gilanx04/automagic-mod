@@ -2,6 +2,31 @@
 
 Semua perubahan penting pada build mod Automagic dicatat di sini.
 
+## [1.38.0-wa.6] — 2026-10-23
+
+Rilis keenam: action **Reset Conversation History**.
+
+### Ditambahkan
+
+#### Action Reset Conversation History (`wa_reset_history`)
+
+- Menghapus riwayat percakapan yang dipakai placeholder Gemini (`%prev_message_*`,
+  `%prev_reply_*`).
+- Tiga mode: **Current conversation** (dari variabel `{wa_conversation}`),
+  **Specific contact**, dan **All conversations**.
+- Hasil jumlah entri yang dihapus disimpan di `{wa_history_status}`.
+- Berguna setelah flow dimatikan lama: selama flow mati tidak ada pesan yang tercatat,
+  sehingga konteks ke Gemini menjadi basi dan model mengulang pertanyaan lama.
+
+#### API riwayat percakapan
+
+- `WaConversationStore.clear()`, `clearAll()`, `conversations()`, dan `size()`.
+
+#### Dokumentasi
+
+- Halaman `action_wa_reset_history` ditambahkan (en/de) dan ikut dibundel di APK.
+- Knowledge base agent diperbarui (225 action).
+
 ## [1.38.0-wa.5] — 2026-10-23
 
 Rilis kelima: **dokumentasi & knowledge base dibundel di APK**, plus perbaikan

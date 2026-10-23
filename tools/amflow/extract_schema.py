@@ -26,6 +26,31 @@ OUT = Path(__file__).resolve().parent / "schema.json"
 
 CATEGORY = {"a": "trigger", "b": "action", "c": "condition"}
 
+# Tag yang isinya rahasia. Nilainya diganti placeholder sebelum masuk schema,
+# knowledge base, maupun APK.
+SECRET_TAGS = (
+    "apiKey", "apikey", "api_key", "password", "passwd", "secret",
+    "clientSecret", "apiSecret", "token", "accessToken", "refreshToken",
+    "authToken", "privateKey", "apiKeyEditText",
+)
+SECRET_PLACEHOLDER = "<redacted>"
+
+
+def redact(text: str) -> str:
+    """Ganti isi tag rahasia dan pola kunci API yang dikenal."""
+    if not text:
+        return text
+    out = text
+    for tag in SECRET_TAGS:
+        out = re.sub(rf"(<{tag}>)(.*?)(</{tag}>)",
+                     lambda m: m.group(1) + SECRET_PLACEHOLDER + m.group(3),
+                     out, flags=re.S | re.I)
+    # pola kunci Google / Gemini
+    out = re.sub(r"AIza[0-9A-Za-z_\-]{20,}", SECRET_PLACEHOLDER, out)
+    out = re.sub(r"AQ\.[0-9A-Za-z_\-]{10,}", SECRET_PLACEHOLDER, out)
+    out = re.sub(r"sk-[0-9A-Za-z]{20,}", SECRET_PLACEHOLDER, out)
+    return out
+
 
 # ---------------------------------------------------------------- registry
 def parse_registry() -> list[dict]:
@@ -185,7 +210,7 @@ def main() -> int:
         entry = {"name": item["name"], "class": cls, "tags": tags}
         example = examples.get((item["category"], item["id"]))
         if example:
-            entry["example"] = example
+            entry["example"] = redact(example)
         components[item["category"]][item["id"]] = entry
 
     schema = {

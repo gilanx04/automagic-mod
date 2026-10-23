@@ -10,20 +10,20 @@ Repo ini berisi dokumentasi dan APK mod. Source code asli Automagic tidak disert
 
 | Properti | Nilai |
 | --- | --- |
-| Versi rilis | `1.38.0-wa.5` |
+| Versi rilis | `1.38.0-wa.6` |
 | `versionName` APK | `1.38.0` |
 | `versionCode` | `4900` |
 | Paket | `ch.gridvision.ppam.androidautomagic` |
-| Ukuran APK | 10.313.036 byte (9,84 MB) |
-| APK | [`Automagic_1.38.0-wa.5.apk`](https://github.com/gilanx04/automagic-mod/releases/download/v1.38.0-wa.5/Automagic_1.38.0-wa.5.apk) |
-| Modul bridge (LSPosed) | [`AutomagicWaBridge_1.0.0.apk`](https://github.com/gilanx04/automagic-mod/releases/download/v1.38.0-wa.5/AutomagicWaBridge_1.0.0.apk) |
-| Dokumentasi offline | [`AutomagicDocs_1.38.zip`](https://github.com/gilanx04/automagic-mod/releases/download/v1.38.0-wa.5/AutomagicDocs_1.38.zip) |
-| Tools agent | [`AutomagicTools_1.0.zip`](https://github.com/gilanx04/automagic-mod/releases/download/v1.38.0-wa.5/AutomagicTools_1.0.zip) |
-| Checksum | [`SHA256SUMS`](https://github.com/gilanx04/automagic-mod/releases/download/v1.38.0-wa.5/SHA256SUMS) |
+| Ukuran APK | 10.321.506 byte (9.84 MB) |
+| APK | [`Automagic_1.38.0-wa.6.apk`](https://github.com/gilanx04/automagic-mod/releases/download/v1.38.0-wa.6/Automagic_1.38.0-wa.6.apk) |
+| Modul bridge (LSPosed) | [`AutomagicWaBridge_1.0.0.apk`](https://github.com/gilanx04/automagic-mod/releases/download/v1.38.0-wa.6/AutomagicWaBridge_1.0.0.apk) |
+| Dokumentasi offline | [`AutomagicDocs_1.38.zip`](https://github.com/gilanx04/automagic-mod/releases/download/v1.38.0-wa.6/AutomagicDocs_1.38.zip) |
+| Tools agent | [`AutomagicTools_1.0.zip`](https://github.com/gilanx04/automagic-mod/releases/download/v1.38.0-wa.6/AutomagicTools_1.0.zip) |
+| Checksum | [`SHA256SUMS`](https://github.com/gilanx04/automagic-mod/releases/download/v1.38.0-wa.6/SHA256SUMS) |
 | Diuji pada | Xiaomi 2311DRK48G, Android 17 (SDK 37), WhatsApp 2.26.40.76, LSPosed 2.2.1 |
 
 ```text
-505936a20bdbad2c6f0ab4a742a6d4f79e14b9c092563ca9eab0f2a0601b1062  Automagic_1.38.0-wa.5.apk
+505936a20bdbad2c6f0ab4a742a6d4f79e14b9c092563ca9eab0f2a0601b1062  Automagic_1.38.0-wa.6.apk
 0ae9a8b3933404a8fdc0ad6a6d4a2ca9b4a34e46e90cf846251252324357ddd9  AutomagicWaBridge_1.0.0.apk
 e6343052cb1f77b3ed3f53b4fe5de4981a63ede46eb192412082db6f911f7160  AutomagicDocs_1.38.zip
 2a97d4c9ca6352bc1101c93faae8b49e2f1e30c365637afcea3e0e8f014b39cc  AutomagicTools_1.0.zip
@@ -292,7 +292,25 @@ python3 tools/amflow/amflow.py install "Backup harian.flow.xml" --restart
 `install` selalu membuat backup `flows.xml_amflow_<timestamp>.bak` dan tidak pernah
 menghapus flow yang sudah ada.
 
-### 9. Action AI Flow Agent
+### 9. Action Reset Conversation History
+
+Action baru: **Reset Conversation History** (`wa_reset_history`) — menghapus riwayat
+percakapan yang dipakai placeholder Gemini.
+
+| Pengaturan | Keterangan |
+| --- | --- |
+| What to reset | Current conversation (dari trigger), Specific contact, All conversations |
+| Contact / conversation | untuk mode Specific, mendukung variabel |
+| Package | default `com.whatsapp` |
+
+Hasil jumlah yang dihapus disimpan di `{wa_history_status}`.
+
+**Kapan perlu:** setelah flow dimatikan lama lalu diaktifkan lagi. Selama flow mati
+tidak ada pesan yang tercatat (trigger tidak jalan, balasan manual tidak terlihat),
+sehingga konteks yang dikirim ke Gemini menjadi basi — model lalu cenderung
+mengulang pertanyaan lama. Jalankan action ini sekali setelah flow aktif kembali.
+
+### 10. Action AI Flow Agent
 
 Action baru: **AI Flow Agent** (`ai_flow_agent`) — merancang flow Automagic dari
 deskripsi bahasa alami, langsung di perangkat.
@@ -324,10 +342,13 @@ dijalankan ulang.
 > Provider saat ini **Gemini (BYOK)** — tidak ada API key yang dibundel di APK; user
 > mengisi sendiri. Key tersimpan sebagai teks biasa di flow XML.
 
-### 10. Riwayat percakapan
+### 11. Riwayat percakapan
 
 - Disimpan per paket dan percakapan di SharedPreferences privat `wa_conversation_state`.
-- Maksimal 30 entri.
+- Maksimal 30 entri per percakapan.
+- Hanya mencatat pesan yang lewat trigger (masuk) dan action (keluar). Pesan yang
+  dikirim manual saat flow mati **tidak** tercatat.
+- Bisa dihapus dengan action **Reset Conversation History**.
 - Event masuk dideduplikasi selama 15 detik.
 - Dipakai oleh placeholder Gemini.
 - Tidak disimpan di flow XML.
@@ -336,7 +357,7 @@ dijalankan ulang.
 
 1. **Backup flow** dari Automagic sebelum memasang build mod.
 2. Jika perangkat masih memakai Automagic resmi, APK ini **tidak bisa** dipasang sebagai update karena sertifikatnya berbeda. Ekspor flow, uninstall versi resmi, lalu install APK ini dan impor kembali flow. Jika perangkat sudah memakai build patched dengan kunci yang sama, update biasa bisa dilakukan.
-3. Install `Automagic_1.38.0-wa.5.apk`.
+3. Install `Automagic_1.38.0-wa.6.apk`.
 4. Install `AutomagicWaBridge_1.0.0.apk`, aktifkan di LSPosed dengan scope **WhatsApp** (hanya perlu untuk action status).
 5. Dokumentasi offline sudah ikut di dalam APK — tidak ada langkah tambahan.
 6. Buka Automagic dan aktifkan **Notification access** untuk Automagic di pengaturan Android.
@@ -411,8 +432,8 @@ Admin | admin, cs
 
 ```bash
 sha256sum -c SHA256SUMS
-apksigner verify --print-certs Automagic_1.38.0-wa.5.apk
-aapt2 dump badging Automagic_1.38.0-wa.5.apk | head -3
+apksigner verify --print-certs Automagic_1.38.0-wa.6.apk
+aapt2 dump badging Automagic_1.38.0-wa.6.apk | head -3
 ```
 
 Sertifikat build ini:

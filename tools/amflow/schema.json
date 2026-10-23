@@ -4,7 +4,7 @@
  "counts": {
   "trigger": 128,
   "condition": 89,
-  "action": 224
+  "action": 225
  },
  "components": {
   "trigger": {
@@ -4741,7 +4741,7 @@
      "stopSequences": "string",
      "errorReply": "string"
     },
-    "example": "<action type=\"wa_gemini_reply\">\n    <useDefaultName>true</useDefaultName>\n    <name>Reply with Google Gemini</name>\n    <prompt>You are an AI assistant from Automagic that sends automatic WhatsApp messages. You are helpful, creative, clever, and very friendly. You always give an answer.\n\n1:: %prev_message_0_3_512%\n2:: %prev_reply_0_3_512%\n1:: %prev_message_0_2_512%\n2:: %prev_reply_0_2_512%\n1:: %prev_message_0_1_512%\n2:: %prev_reply_0_1_512%\n1:: %message_512%</prompt>\n    <apiKey>AIzaSyDaB0qgUWZWYJj_sbQ7DY5f-gAus53Zp6E</apiKey>\n    <model>gemini-3.5-flash-lite</model>\n    <violationReply>Sorry, the request violates the content policy.</violationReply>\n    <replyPrefix />\n    <maxTokens>512</maxTokens>\n    <temperature />\n    <topK />\n    <topP />\n    <stopSequences>1:://2:://3::</stopSequences>\n    <errorReply>Error: One of the parameters is invalid, your Gemini account needs attention or Gemini is currently unavailable.</errorReply>\n  </action>"
+    "example": "<action type=\"wa_gemini_reply\">\n    <useDefaultName>true</useDefaultName>\n    <name>Reply with Google Gemini</name>\n    <prompt>You are an AI assistant from Automagic that sends automatic WhatsApp messages. You are helpful, creative, clever, and very friendly. You always give an answer.\n\n1:: %prev_message_0_3_512%\n2:: %prev_reply_0_3_512%\n1:: %prev_message_0_2_512%\n2:: %prev_reply_0_2_512%\n1:: %prev_message_0_1_512%\n2:: %prev_reply_0_1_512%\n1:: %message_512%</prompt>\n    <apiKey><redacted></apiKey>\n    <model>gemini-3.5-flash-lite</model>\n    <violationReply>Sorry, the request violates the content policy.</violationReply>\n    <replyPrefix />\n    <maxTokens>512</maxTokens>\n    <temperature />\n    <topK />\n    <topP />\n    <stopSequences>1:://2:://3::</stopSequences>\n    <errorReply>Error: One of the parameters is invalid, your Gemini account needs attention or Gemini is currently unavailable.</errorReply>\n  </action>"
    },
    "wa_status": {
     "name": "Post WhatsApp Status",
@@ -4765,6 +4765,17 @@
      "flowName": "string",
      "fixAttempts": "string",
      "install": "string"
+    }
+   },
+   "wa_reset_history": {
+    "name": "Reset Conversation History",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.wac",
+    "tags": {
+     "useDefaultName": "string",
+     "name": "string",
+     "mode": "string",
+     "conversation": "string",
+     "packageName": "string"
     }
    }
   }
