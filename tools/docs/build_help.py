@@ -280,9 +280,28 @@ karena memakai notifikasi sebagai sumber action balasan.</p>
 <h2>Endpoint</h2>
 <pre><code>POST https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent
 x-goog-api-key: &lt;API key&gt;</code></pre>
-<h2>Placeholder</h2>
-<p><code>%message%</code>, <code>%message_512%</code>, <code>%prev_message_1%</code>,
-<code>%prev_reply_1%</code>, dan varian <code>_512</code>.</p>
+<h2>Placeholder pesan</h2>
+<p><code>%message%</code>, <code>%message_512%</code>, <code>%prev_message_0_1_512%</code>
+(offset 1 = paling baru), <code>%prev_reply_0_1_512%</code>.</p>
+<p>Format: <code>%prev_message_&lt;diabaikan&gt;_&lt;offset&gt;_&lt;limit&gt;%</code>. Gunakan
+bentuk tiga angka; <code>%prev_message_2_100%</code> berarti offset 100, bukan offset 2 limit 100.</p>
+<h2>Placeholder memori &amp; waktu</h2>
+<table>
+<tr><th>Placeholder</th><th>Isi</th></tr>
+<tr><td><code>%now%</code></td><td>waktu sekarang, mis. "Jum, 23 Okt 2026 22:55"</td></tr>
+<tr><td><code>%last_seen%</code></td><td>kapan terakhir bicara, mis. "3 hari lalu"</td></tr>
+<tr><td><code>%memory%</code></td><td>fakta jangka panjang (persona + catatan)</td></tr>
+<tr><td><code>%summary%</code></td><td>ringkasan pesan lama yang sudah dipadatkan</td></tr>
+</table>
+<p>Setiap giliran riwayat diberi label waktu, mis. <code>[2 jam lalu] kamu udah makan?</code>,
+sehingga model tahu jeda antar pesan. Bisa dimatikan dengan opsi
+<b>Include message timestamps</b>.</p>
+<p>Fakta dan ringkasan bisa dilihat serta diedit lewat tombol
+<b>Buka editor memori</b> di bagian bawah pengaturan ini.</p>
+<h2>Ringkasan otomatis</h2>
+<p><b>Summarize every N messages</b> memadatkan pesan lama menjadi ringkasan
+(maksimal 4 kalimat) setiap N pesan. Memakai satu panggilan API tambahan per N pesan.
+Isi 0 untuk mematikan. Ringkasan dikirim lewat <code>%summary%</code>.</p>
 <h2>Penanda prompt</h2>
 <p><code>1::</code> = giliran user, <code>2::</code> = giliran model. Teks sebelum penanda
 pertama menjadi system instruction.</p>
@@ -322,6 +341,62 @@ mengulang pertanyaan lama.</p>
 <h2>Catatan</h2>
 <p>Riwayat disimpan di SharedPreferences <code>wa_conversation_state</code>, maksimal 30
 entri per percakapan. Menghapus riwayat tidak menghapus chat WhatsApp asli.</p>
+"""),
+    "action_wa_memory": ("Action - Gemini Memory", """
+<p>Mengelola memori jangka panjang yang dikirim ke Gemini lewat placeholder
+<code>%memory%</code> dan <code>%summary%</code>.</p>
+<h2>Aksi</h2>
+<table>
+<tr><th>Pilihan</th><th>Fungsi</th></tr>
+<tr><td>Set a fact</td><td>simpan/ganti satu fakta (key + value)</td></tr>
+<tr><td>Remove a fact</td><td>hapus satu fakta berdasarkan key</td></tr>
+<tr><td>Clear all facts</td><td>hapus semua fakta</td></tr>
+<tr><td>Reset facts + summary</td><td>hapus fakta dan ringkasan</td></tr>
+<tr><td>Install built-in persona</td><td>pasang persona bawaan (Gilang) sebagai fakta</td></tr>
+<tr><td>Show memory</td><td>tampilkan fakta dan ringkasan</td></tr>
+</table>
+<h2>Pengaturan lain</h2>
+<ul>
+<li><b>Fact key</b> / <b>Fact value</b> — untuk aksi set dan remove.</li>
+<li><b>Contact / conversation</b> — mendukung <code>{wa_conversation}</code>.</li>
+<li><b>Package</b> — default <code>com.whatsapp</code>.</li>
+</ul>
+<h2>Hasil</h2>
+<p>Ringkasan hasil disimpan di <code>{wa_memory_status}</code>.</p>
+<h2>Editor memori</h2>
+<p>Fakta lebih mudah diubah lewat <b>editor</b>, bukan satu per satu:</p>
+<ul>
+<li>Tekan tombol <b>Buka editor memori</b> di pengaturan action ini atau di action
+<b>Reply with Google Gemini</b>.</li>
+<li>Pilih kontak pada daftar di atas, atau tekan <b>Kontak baru...</b>.</li>
+<li>Tulis fakta sebagai teks biasa, satu fakta per baris: <code>key: value</code>.</li>
+<li>Ringkasan otomatis juga bisa dilihat dan diedit di kotak bawah.</li>
+<li><b>Simpan</b> menulis ulang seluruh daftar; <b>Muat ulang</b> membatalkan perubahan.</li>
+<li><b>Persona bawaan</b> menambahkan fakta persona yang belum ada. Fakta buatan
+sendiri dipertahankan; kunci yang sudah kamu isi tidak ditimpa.</li>
+<li><b>Hapus semua</b> mengosongkan fakta dan mematikan pemasangan persona otomatis.</li>
+</ul>
+<h2>Saklar persona otomatis</h2>
+<p>Saklar <b>Pasang persona bawaan otomatis untuk kontak ini</b> langsung mengubah
+isi kotak fakta, bukan hanya menyimpan status:</p>
+<table>
+<tr><th>Saklar</th><th>Akibat pada kotak fakta</th></tr>
+<tr><td>dinyalakan</td><td>fakta persona yang belum ada langsung ditambahkan</td></tr>
+<tr><td>dimatikan</td><td>baris persona langsung dihapus, fakta buatan sendiri tetap</td></tr>
+</table>
+<p>Saat menyimpan dengan saklar menyala, persona dipastikan ada di daftar. Saat
+menyimpan dengan saklar mati, persona tidak ditambahkan. Pemasangan otomatis saat
+flow berjalan memakai aturan yang sama, jadi tidak pernah ada kunci ganda.</p>
+<p>Matikan saklar untuk kontak yang bukan pasangan, misalnya kontak kerja, agar
+persona Gilang tidak ikut terkirim ke Gemini.</p>
+<h2>Catatan</h2>
+<p>Memori disimpan per percakapan di SharedPreferences <code>wa_memory_state</code>.
+Fakta bawaan ditandai <code>builtin</code> agar bisa dibedakan dari catatan buatan sendiri.</p>
+<h2>Beberapa kontak dalam satu filter</h3>
+<p>Memori dipisah per kontak memakai <code>{wa_conversation}</code>, jadi dua kontak
+dalam satu filter trigger <b>tidak</b> saling menimpa. Namun persona bawaan dipasang
+otomatis pada setiap percakapan baru; untuk kontak yang bukan pasangan, buka editor
+lalu <b>Hapus semua</b> agar persona tidak ikut terkirim.</p>
 """),
     "trigger_wa_message_received": ("Trigger - WhatsApp Message Received", """
 <p>Trigger yang berjalan saat notifikasi pesan WhatsApp masuk.</p>

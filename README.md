@@ -379,7 +379,31 @@ Ringkasan obrolan sebelumnya:
 
 Teks sebelum penanda `1::` pertama dikirim sebagai `system_instruction`.
 
+#### Editor memori
+
+Cara termudah mengelola fakta: **edit action Gemini → scroll bawah → Buka editor
+memori**. Editor menampilkan:
+
+| Bagian | Fungsi |
+| --- | --- |
+| Dropdown kontak | pindah antar percakapan |
+| `Kontak baru...` | tambah kontak yang belum punya memori |
+| Kotak FAKTA | teks bebas, satu fakta per baris `key: value` |
+| Kotak RINGKASAN | lihat/edit ringkasan otomatis |
+| `Simpan` / `Muat ulang` | tulis ulang / batalkan perubahan |
+| `Persona bawaan` | tambah fakta persona yang belum ada |
+| `Hapus semua` | kosongkan fakta + matikan persona otomatis |
+
+Saklar **Pasang persona bawaan otomatis** langsung mengubah isi kotak fakta:
+menyalakan menambahkan baris persona, mematikan menghapusnya. Fakta buatan sendiri
+tidak pernah disentuh, dan kunci yang sudah kamu isi tidak ditimpa persona.
+
+> Nama kontak harus sama persis dengan `{wa_conversation}` dari trigger, termasuk
+> emoji. `Sayangkuu` dan `Sayangkuu 💗💋` adalah dua memori berbeda.
+
 #### Action Gemini Memory (`wa_memory`)
+
+Untuk dipakai di dalam flow (mis. menyimpan fakta dari variabel):
 
 | Pilihan | Fungsi |
 | --- | --- |
@@ -414,7 +438,7 @@ dengan ~500 token.
   dikirim manual saat flow mati **tidak** tercatat.
 - Bisa dihapus dengan action **Reset Conversation History**.
 - Fakta dan ringkasan jangka panjang disimpan terpisah di `wa_memory_state`
-  (per percakapan), dikelola action **Gemini Memory**.
+  (per percakapan), dikelola lewat **editor memori** atau action **Gemini Memory**.
 - Event masuk dideduplikasi selama 15 detik.
 - Dipakai oleh placeholder Gemini.
 - Tidak disimpan di flow XML.
@@ -423,7 +447,7 @@ dengan ~500 token.
 
 1. **Backup flow** dari Automagic sebelum memasang build mod.
 2. Jika perangkat masih memakai Automagic resmi, APK ini **tidak bisa** dipasang sebagai update karena sertifikatnya berbeda. Ekspor flow, uninstall versi resmi, lalu install APK ini dan impor kembali flow. Jika perangkat sudah memakai build patched dengan kunci yang sama, update biasa bisa dilakukan.
-3. Install `Automagic_1.38.0-wa.7.apk`.
+3. Install `Automagic_1.38.0-wa.8.apk`.
 4. Install `AutomagicWaBridge_1.0.0.apk`, aktifkan di LSPosed dengan scope **WhatsApp** (hanya perlu untuk action status).
 5. Dokumentasi offline sudah ikut di dalam APK — tidak ada langkah tambahan.
 6. Buka Automagic dan aktifkan **Notification access** untuk Automagic di pengaturan Android.

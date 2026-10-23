@@ -296,6 +296,8 @@ bentuk tiga angka; <code>%prev_message_2_100%</code> berarti offset 100, bukan o
 <p>Setiap giliran riwayat diberi label waktu, mis. <code>[2 jam lalu] kamu udah makan?</code>,
 sehingga model tahu jeda antar pesan. Bisa dimatikan dengan opsi
 <b>Include message timestamps</b>.</p>
+<p>Fakta dan ringkasan bisa dilihat serta diedit lewat tombol
+<b>Buka editor memori</b> di bagian bawah pengaturan ini.</p>
 <h2>Ringkasan otomatis</h2>
 <p><b>Summarize every N messages</b> memadatkan pesan lama menjadi ringkasan
 (maksimal 4 kalimat) setiap N pesan. Memakai satu panggilan API tambahan per N pesan.
@@ -361,9 +363,40 @@ entri per percakapan. Menghapus riwayat tidak menghapus chat WhatsApp asli.</p>
 </ul>
 <h2>Hasil</h2>
 <p>Ringkasan hasil disimpan di <code>{wa_memory_status}</code>.</p>
+<h2>Editor memori</h2>
+<p>Fakta lebih mudah diubah lewat <b>editor</b>, bukan satu per satu:</p>
+<ul>
+<li>Tekan tombol <b>Buka editor memori</b> di pengaturan action ini atau di action
+<b>Reply with Google Gemini</b>.</li>
+<li>Pilih kontak pada daftar di atas, atau tekan <b>Kontak baru...</b>.</li>
+<li>Tulis fakta sebagai teks biasa, satu fakta per baris: <code>key: value</code>.</li>
+<li>Ringkasan otomatis juga bisa dilihat dan diedit di kotak bawah.</li>
+<li><b>Simpan</b> menulis ulang seluruh daftar; <b>Muat ulang</b> membatalkan perubahan.</li>
+<li><b>Persona bawaan</b> menambahkan fakta persona yang belum ada. Fakta buatan
+sendiri dipertahankan; kunci yang sudah kamu isi tidak ditimpa.</li>
+<li><b>Hapus semua</b> mengosongkan fakta dan mematikan pemasangan persona otomatis.</li>
+</ul>
+<h2>Saklar persona otomatis</h2>
+<p>Saklar <b>Pasang persona bawaan otomatis untuk kontak ini</b> langsung mengubah
+isi kotak fakta, bukan hanya menyimpan status:</p>
+<table>
+<tr><th>Saklar</th><th>Akibat pada kotak fakta</th></tr>
+<tr><td>dinyalakan</td><td>fakta persona yang belum ada langsung ditambahkan</td></tr>
+<tr><td>dimatikan</td><td>baris persona langsung dihapus, fakta buatan sendiri tetap</td></tr>
+</table>
+<p>Saat menyimpan dengan saklar menyala, persona dipastikan ada di daftar. Saat
+menyimpan dengan saklar mati, persona tidak ditambahkan. Pemasangan otomatis saat
+flow berjalan memakai aturan yang sama, jadi tidak pernah ada kunci ganda.</p>
+<p>Matikan saklar untuk kontak yang bukan pasangan, misalnya kontak kerja, agar
+persona Gilang tidak ikut terkirim ke Gemini.</p>
 <h2>Catatan</h2>
 <p>Memori disimpan per percakapan di SharedPreferences <code>wa_memory_state</code>.
 Fakta bawaan ditandai <code>builtin</code> agar bisa dibedakan dari catatan buatan sendiri.</p>
+<h2>Beberapa kontak dalam satu filter</h3>
+<p>Memori dipisah per kontak memakai <code>{wa_conversation}</code>, jadi dua kontak
+dalam satu filter trigger <b>tidak</b> saling menimpa. Namun persona bawaan dipasang
+otomatis pada setiap percakapan baru; untuk kontak yang bukan pasangan, buka editor
+lalu <b>Hapus semua</b> agar persona tidak ikut terkirim.</p>
 """),
     "trigger_wa_message_received": ("Trigger - WhatsApp Message Received", """
 <p>Trigger yang berjalan saat notifikasi pesan WhatsApp masuk.</p>

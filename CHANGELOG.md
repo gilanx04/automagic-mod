@@ -2,6 +2,59 @@
 
 Semua perubahan penting pada build mod Automagic dicatat di sini.
 
+## [1.38.0-wa.8] — 2026-10-24
+
+Rilis kedelapan: **editor memori Gemini** dan perbaikan persona otomatis.
+
+### Ditambahkan
+
+#### Editor memori (Gemini Memory)
+
+Activity baru untuk melihat dan mengubah memori sebagai teks, bukan satu fakta
+per action.
+
+- Daftar kontak (Spinner) untuk berpindah percakapan, plus **Kontak baru...**.
+- Kotak **FAKTA**: teks bebas, satu fakta per baris `key: value`, font monospace.
+- Kotak **RINGKASAN**: ringkasan otomatis bisa dilihat dan diedit.
+- **Simpan** / **Muat ulang**, **Persona bawaan**, **Hapus semua**.
+- Label status: jumlah fakta, status persona otomatis, kapan terakhir bicara.
+- Dibuka dari tombol **Buka editor memori** di pengaturan action
+  **Reply with Google Gemini** dan **Gemini Memory**.
+
+#### Saklar persona otomatis
+
+- Saklar **Pasang persona bawaan otomatis untuk kontak ini** langsung mengubah isi
+  kotak fakta: menyalakan menambahkan baris persona yang belum ada, mematikan
+  menghapusnya. Fakta buatan user tidak disentuh.
+- Pemasangan otomatis saat flow berjalan memakai aturan yang sama.
+
+#### API memori
+
+- `WaMemoryStore.installPersona()` — menambah persona yang belum ada (aditif).
+- `WaMemoryStore.removePersona()` — mencabut persona berdasarkan nama kunci.
+- `WaMemoryStore.replaceFacts()` — menulis ulang seluruh daftar.
+- `WaMemoryStore.setNoSeed()`, `conversations()`, `Memory.noSeed`.
+
+### Diperbaiki
+
+- **Kontak baru tidak tersimpan saat menambah kontak kedua.** Membangun ulang
+  daftar kontak membuat Spinner memilih item pertama dan menimpa percakapan yang
+  baru diketik; fakta lalu masuk ke kontak yang salah. Kontak yang sedang dibuka
+  sekarang selalu ikut masuk daftar sebelum adapter dipasang.
+- **`installPersona` menghasilkan kunci ganda.** Persona dulu menimpa seluruh
+  daftar; kini hanya melengkapi kunci yang belum ada, sehingga `%memory%` tidak
+  memuat kunci yang sama dua kali.
+- **Menyimpan fakta mematikan persona otomatis.** Sebelumnya setiap **Simpan**
+  menyalakan `noSeed`; sekarang hanya saat daftar benar-benar kosong.
+- **Saklar persona hanya menyimpan status** tanpa mengubah data, sehingga tidak
+  bisa dibuktikan dari editor.
+
+### Catatan
+
+- Nama kontak harus sama persis dengan `{wa_conversation}` dari trigger, termasuk
+  emoji. Kontak `Sayangkuu` dan `Sayangkuu 💗💋` adalah dua memori berbeda.
+- Dokumen: 451 halaman/bahasa, 443 komponen di katalog.
+
 ## [1.38.0-wa.7] — 2026-10-23
 
 Rilis ketujuh: **memori jangka panjang Gemini** (waktu, fakta, ringkasan).

@@ -1,67 +1,62 @@
-Rilis ketujuh **Automagic Mod**, berbasis Automagic Premium 1.38.0.
+Rilis kedelapan **Automagic Mod**, berbasis Automagic Premium 1.38.0.
 
-Fokus rilis ini: **memori jangka panjang Gemini**.
+Fokus rilis ini: **editor memori Gemini**.
 
 ## Yang baru
 
-### 1. Gemini tidak lagi buta waktu
+### 1. Memori kini bisa diedit seperti teks
 
-Setiap giliran riwayat diberi label relatif:
+Dulu fakta hanya bisa diubah satu per satu lewat action — merepotkan untuk 12 fakta.
+Sekarang ada editor:
 
-```
-1:: [3 hari lalu] kamu sayang aku?
-2:: [3 hari lalu] sayang banget dong ayangg
-1:: [2 jam lalu] sayang kemana?
-1:: sekarang — kamu udah makan?
-```
-
-Placeholder baru: `%now%`, `%last_seen%`. Sebelumnya timestamp disimpan tetapi
-tidak pernah dikirim ke model.
-
-### 2. Fakta jangka panjang (`%memory%`)
-
-Persona dan catatan stabil dikirim setiap kali, hanya ~150 token:
+**Edit action Gemini → scroll bawah → Buka editor memori**
 
 ```
-- nama: Gilang
-- pasangan: Melani
-- pekerjaan: sibuk 08:00-21:00 nganter orderan
-- sifat_melani: manja dan sering ngeyel, saat sakit tetap minum es
-- gaya_balasan: maksimal 2 kalimat pendek, jangan mengulang pertanyaan
+KONTAK / PERCAKAPAN   [ Sayangkuu 💗💋  ▾ ]
+                      [ Kontak baru... ]
+
+☑ Pasang persona bawaan otomatis untuk kontak ini
+12 fakta · terakhir: 2 jam lalu
+
+FAKTA — satu per baris, format key: value
+  nama: Gilang
+  pasangan: Melani
+  pekerjaan: sibuk 08:00-21:00 nganter orderan
+  pantangan: suka minum es saat sakit
+
+RINGKASAN OTOMATIS (boleh diedit)
+  ...
+
+[ Simpan ] [ Muat ulang ]
+[ Persona bawaan ] [ Hapus semua ]
 ```
 
-Dikelola lewat action baru **Gemini Memory** (`wa_memory`): set, remove, clear,
-reset, install persona bawaan, show memory.
+### 2. Saklar persona otomatis benar-benar bekerja
 
-### 3. Ringkasan otomatis (`%summary%`)
+Saklar langsung mengubah isi kotak fakta:
 
-Pesan lama dipadatkan menjadi 4 kalimat setiap 10 pesan. Ingatan bisa membentang
-berminggu-minggu tanpa mengirim seluruh riwayat. Bisa dimatikan (isi `0`).
-
-**Biaya:** satu panggilan API tambahan per 10 pesan. Lapis waktu dan fakta
-**tanpa** tambahan kuota.
-
-### 4. Dokumentasi offline kini ikut ter-update
-
-Dulu halaman lama tidak pernah diganti karena ekstraksi hanya memeriksa
-keberadaan berkas. Sekarang ada penanda versi bundel.
-
-## Mengapa bukan embedding / RAG
-
-Untuk percakapan dua orang, embedding justru lebih boros:
-
-| Masalah | Angka |
+| Saklar | Akibat |
 | --- | --- |
-| Embedding > teks | "sayang kemana?" = 14 karakter, embedding 768 dim ≈ 7,5 KB JSON |
-| Kuota | satu panggilan `:embedContent` per pesan |
-| Relevansi | chat berurutan: yang relevan hampir selalu yang terbaru, bukan yang mirip |
+| dinyalakan | baris persona yang belum ada langsung ditambahkan |
+| dimatikan | baris persona dihapus, fakta buatanmu tetap |
 
-Tiga lapis di atas mencapai hasil yang sama dengan ~500 token.
+Matikan untuk kontak kerja supaya persona Gilang tidak ikut terkirim ke Gemini.
+
+### 3. Perbaikan penting
+
+- **Kontak kedua tidak tersimpan.** Menambah kontak baru membuat daftar dibangun
+  ulang dan Spinner memilih item pertama, sehingga kontak yang baru diketik tertimpa
+  dan fakta masuk ke kontak yang salah. Ini bug yang kamu temukan saat uji.
+- **Kunci ganda di `%memory%`.** Persona dulu menimpa seluruh daftar; sekarang hanya
+  melengkapi kunci yang belum ada.
+- **Simpan mematikan persona otomatis.** Sekarang hanya `Hapus semua` yang
+  mematikannya.
 
 ## Catatan
 
-- Persona bawaan memakai nama Gilang/Melani. Untuk kontak lain jalankan
-  **Gemini Memory → Reset facts + summary**.
+- Nama kontak harus sama persis dengan `{wa_conversation}` dari trigger, **termasuk
+  emoji**. `Sayangkuu` dan `Sayangkuu 💗💋` adalah dua memori berbeda — kalau ragu,
+  pakai `Kontak baru...` lalu salin nama dari notifikasi WhatsApp.
 - Ringkasan memakai model dan API key yang sama dengan action Gemini.
 - Memori disimpan di `wa_memory_state`, terpisah dari riwayat percakapan.
 
