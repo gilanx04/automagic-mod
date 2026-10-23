@@ -502,7 +502,14 @@ def cmd_install(args) -> int:
     print(f"terpasang: {len(new_flows)} flow baru -> {DEVICE_FLOWS}")
 
     if args.restart:
-        su("am force-stop ch.gridvision.ppam.androidautomagic")
+        # "am force-stop" tidak selalu mematikan proses di beberapa ROM; kill -9 agar
+        # Automagic memuat ulang flows.xml dari disk (kalau tidak, daftar lama ditulis balik).
+        for _ in range(5):
+            pid = su(f"pidof {PKG}").strip()
+            if not pid:
+                break
+            su(f"kill -9 {pid}")
+            time.sleep(1)
         print("Automagic dihentikan, buka lagi untuk memuat flow")
     return 0
 

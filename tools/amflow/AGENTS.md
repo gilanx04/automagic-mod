@@ -118,6 +118,12 @@ flow_check = SHA1("89389812312" + isi flows.xml)   # hex, tanpa newline
 `amflow install` menulis ulang `flow_check` otomatis. Kalau mengedit manual, hitung
 ulang nilai ini, jika tidak Automagic akan menonaktifkan semua flow.
 
+**Penting:** Automagic memakai `/sdcard/Automagic/flows.xml` sebagai berkas aktif
+(`files/flows.xml` hanya salinan). Keduanya harus berisi isi yang sama. Selain itu
+`am force-stop` tidak selalu mematikan proses di sebagian ROM: matikan dengan
+`kill -9 $(pidof ch.gridvision.ppam.androidautomagic)` sebelum menulis, kalau tidak
+aplikasi akan menulis daftar flow dari memori dan menimpa perubahan.
+
 ## Agent (Gemini, BYOK, multi-key)
 
 ```bash
