@@ -11,6 +11,7 @@ Hasil (dipasang ke files/amagent/ di data aplikasi):
 from __future__ import annotations
 
 import json
+import os
 import re
 import sys
 import html as html_mod
@@ -20,7 +21,7 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 SCHEMA = HERE / "schema.json"
 DOCS_SRC = ROOT / "automagic-help"
-HELP_OUT = ROOT / "work" / "docs" / "help-out"
+HELP_OUT = Path(os.environ.get("AMFLOW_DOCS", str(ROOT / "work" / "docs" / "help-out")))
 OUT = ROOT / "work" / "docs" / "agent-out"
 
 

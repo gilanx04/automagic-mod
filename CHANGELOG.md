@@ -2,6 +2,70 @@
 
 Semua perubahan penting pada build mod Automagic dicatat di sini.
 
+## [1.38.0-wa.7] — 2026-10-23
+
+Rilis ketujuh: **memori jangka panjang Gemini** (waktu, fakta, ringkasan).
+
+### Ditambahkan
+
+#### Label waktu pada riwayat
+
+- Setiap giliran riwayat yang dikirim ke Gemini diberi label relatif, mis.
+  `[3 jam lalu] kamu udah makan?`.
+- Opsi **Include message timestamps** (default aktif) untuk mematikan.
+- Sebelumnya timestamp disimpan tetapi tidak pernah dikirim, sehingga model tidak
+  tahu jeda antar pesan.
+
+#### Placeholder memori
+
+| Placeholder | Isi |
+| --- | --- |
+| `%now%` | waktu sekarang, mis. `Jum, 23 Okt 2026 22:55` |
+| `%last_seen%` | kapan terakhir bicara, mis. `3 hari lalu` |
+| `%memory%` | fakta jangka panjang (persona + catatan) |
+| `%summary%` | ringkasan pesan lama |
+
+#### Action Gemini Memory (`wa_memory`)
+
+- Mode: set, remove, clear facts, reset facts + summary, install built-in persona,
+  show memory.
+- Persona bawaan 12 fakta (nama, panggilan, pekerjaan, sifat, emosi yang
+  diizinkan, aturan balasan) dipasang otomatis saat percakapan pertama kali
+  memakai action Gemini.
+- Hasil aksi disimpan di `{wa_memory_status}`.
+
+#### Ringkasan otomatis
+
+- Opsi **Summarize every N messages** (default 10, `0` = mati).
+- Pesan lama dipadatkan menjadi maksimal 4 kalimat, dikirim lewat `%summary%`.
+- Berjalan di thread terpisah setelah balasan terkirim, jadi tidak menambah latensi.
+- Memakai satu panggilan API tambahan per N pesan.
+
+#### Penyimpanan
+
+- `WaMemoryStore` — SharedPreferences `wa_memory_state`, per paket + percakapan.
+- Fakta bawaan ditandai `builtin` agar bisa dibedakan dari catatan buatan user.
+
+### Diperbaiki
+
+- **Dokumentasi offline tidak ikut diperbarui saat APK di-update.** Ekstraksi dulu
+  hanya memeriksa "berkas sudah ada", sehingga halaman versi lama tetap dipakai
+  selamanya. Sekarang ada penanda `bundle.txt` berisi versi bundel; dokumentasi,
+  katalog, dan knowledge base diekstrak ulang saat versi berubah.
+
+### Diubah
+
+- `build_knowledge.py` menerima variabel lingkungan `AMFLOW_DOCS` untuk memilih
+  sumber HTML (mis. build tanpa gambar).
+- Prompt contoh pada flow Gemini kini memakai `%memory%`, `%now%`, `%last_seen%`,
+  dan `%summary%`.
+
+### Catatan
+
+- Dokumen: 451 halaman/bahasa, 443 komponen di katalog.
+- Persona bawaan memakai nama Gilang/Melani; untuk kontak lain jalankan
+  **Gemini Memory → Reset facts + summary**.
+
 ## [1.38.0-wa.6] — 2026-10-23
 
 Rilis keenam: action **Reset Conversation History**.

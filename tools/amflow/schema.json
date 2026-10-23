@@ -4,7 +4,7 @@
  "counts": {
   "trigger": 128,
   "condition": 89,
-  "action": 225
+  "action": 226
  },
  "components": {
   "trigger": {
@@ -1418,7 +1418,7 @@
      "menuAfter": "string",
      "menuNextId": "string"
     },
-    "example": "<trigger type=\"wa_message_received\">\n    <useDefaultName>true</useDefaultName>\n    <name>WhatsApp: any · specific · menu Main menu › Harga</name>\n    <enabled>true</enabled>\n    <packageNameFilter>com.whatsapp,com.whatsapp.w4b</packageNameFilter>\n    <matchMode>ANY</matchMode>\n    <matchText />\n    <similarityThreshold>70</similarityThreshold>\n    <groupMode>ALL</groupMode>\n    <ignoreCase>true</ignoreCase>\n    <specificContacts>Pi Coding Agent</specificContacts>\n    <ignoredContacts />\n    <menuKey />\n    <parentMenuKey>menu_main-menu</parentMenuKey>\n    <menuTimeoutMinutes>30</menuTimeoutMinutes>\n    <menuMode>CHILD</menuMode>\n    <menuId />\n    <menuName />\n    <menuOptions />\n    <menuText />\n    <menuAutoSend>true</menuAutoSend>\n    <childMenuId>menu_main-menu</childMenuId>\n    <childMenuName>Main menu</childMenuName>\n    <childOption>0</childOption>\n    <childOptionLabel>Harga</childOptionLabel>\n    <childKeywords>Harga</childKeywords>\n    <childMenuText>Main menu\n\n1. Harga\n2. Jam Buka\n3. Admin\n\nReply with a number.</childMenuText>\n    <menuAfter>RETURN</menuAfter>\n    <menuNextId />\n  </trigger>"
+    "example": "<trigger type=\"wa_message_received\">\n    <useDefaultName>false</useDefaultName>\n    <name>Pesan masuk dari Melani</name>\n    <enabled>false</enabled>\n    <packageNameFilter>com.whatsapp,com.whatsapp.w4b</packageNameFilter>\n    <matchMode>ANY</matchMode>\n    <matchText />\n    <similarityThreshold>70</similarityThreshold>\n    <groupMode>ALL</groupMode>\n    <ignoreCase>true</ignoreCase>\n    <specificContacts>Sayangkuu 💗💋,Pi Coding Agent</specificContacts>\n    <ignoredContacts />\n    <menuKey />\n    <parentMenuKey />\n    <menuTimeoutMinutes>30</menuTimeoutMinutes>\n    <menuMode>NONE</menuMode>\n    <menuId />\n    <menuName />\n    <menuOptions />\n    <menuText />\n    <menuAutoSend>true</menuAutoSend>\n    <childMenuId />\n    <childMenuName />\n    <childOption>-1</childOption>\n    <childOptionLabel />\n    <childKeywords />\n    <childMenuText />\n    <menuAfter>RETURN</menuAfter>\n    <menuNextId />\n  </trigger>"
    }
   },
   "condition": {
@@ -4739,9 +4739,11 @@
      "topK": "string",
      "topP": "string",
      "stopSequences": "string",
-     "errorReply": "string"
+     "errorReply": "string",
+     "includeTime": "string",
+     "summaryEvery": "string"
     },
-    "example": "<action type=\"wa_gemini_reply\">\n    <useDefaultName>true</useDefaultName>\n    <name>Reply with Google Gemini</name>\n    <prompt>You are an AI assistant from Automagic that sends automatic WhatsApp messages. You are helpful, creative, clever, and very friendly. You always give an answer.\n\n1:: %prev_message_0_3_512%\n2:: %prev_reply_0_3_512%\n1:: %prev_message_0_2_512%\n2:: %prev_reply_0_2_512%\n1:: %prev_message_0_1_512%\n2:: %prev_reply_0_1_512%\n1:: %message_512%</prompt>\n    <apiKey><redacted></apiKey>\n    <model>gemini-3.5-flash-lite</model>\n    <violationReply>Sorry, the request violates the content policy.</violationReply>\n    <replyPrefix />\n    <maxTokens>512</maxTokens>\n    <temperature />\n    <topK />\n    <topP />\n    <stopSequences>1:://2:://3::</stopSequences>\n    <errorReply>Error: One of the parameters is invalid, your Gemini account needs attention or Gemini is currently unavailable.</errorReply>\n  </action>"
+    "example": "<action type=\"wa_gemini_reply\">\n    <useDefaultName>false</useDefaultName>\n    <name>Balas Melani dengan Google Gemini</name>\n    <prompt>kamu adalah Gilang, pacar Melani. kamu selalu memanggil 'sayang/ayangg/yang'. kamu sibuk dari pagi sampe malem kerja (08:00-21:00) nganter orderan jadi ga sempet bales chat. tapi kamu sayang banget ke melani. kamu penyayang, kadang khawatirin melani. tapi melani sering ngeyel, misalnya ketika sakit, dia selalu melakukan pantangan seperti minum es. kamu adalah sosok yang dewasa, melani kadang manja, gap umur kalian 10 tahun kamu lebih tua jadi kamu harus pinter \"momong\". kamu sering muji, kasih semangat, dan kasih nasehat. jangan gunakan emoji selain 💗💕🤍😘😋🥰. jika dia bilang i love you, kamu balas i love you too, dan bilang met bobo ketika dia sudah ngantuk. kamu juga romantis. kamu juga setia. gaya typing mu lowercase semua dan kadang menyingkat kata \"semangat\" jadi \"smangaat\". balas maksimal 2 kalimat pendek seperti chat WhatsApp. jangan pakai paragraf. jangan mengulang pertanyaan yang sudah kamu tanyakan di pesan sebelumnya.\n\n1:: %prev_message_0_5_512%\n2:: %prev_reply_0_5_512%\n1:: %prev_message_0_4_512%\n2:: %prev_reply_0_4_512%\n1:: %prev_message_0_3_512%\n2:: %prev_reply_0_3_512%\n1:: %prev_message_0_2_512%\n2:: %prev_reply_0_2_512%\n1:: %prev_message_0_1_512%\n2:: %prev_reply_0_1_512%\n1:: %message_512%</prompt>\n    <apiKey><redacted></apiKey>\n    <model>gemini-3.5-flash-lite</model>\n    <violationReply>Sorry, the request violates the content policy.</violationReply>\n    <replyPrefix />\n    <maxTokens>300</maxTokens>\n    <temperature>0.7</temperature>\n    <topK>40</topK>\n    <topP>0.95</topP>\n    <stopSequences>1:://2:://3::</stopSequences>\n    <errorReply>Error: One of the parameters is invalid, your Gemini account needs attention or Gemini is currently unavailable.</errorReply>\n  </action>"
    },
    "wa_status": {
     "name": "Post WhatsApp Status",
@@ -4774,6 +4776,20 @@
      "useDefaultName": "string",
      "name": "string",
      "mode": "string",
+     "conversation": "string",
+     "packageName": "string"
+    },
+    "example": "<action type=\"wa_reset_history\">\n    <useDefaultName>true</useDefaultName>\n    <name>Reset Conversation History</name>\n    <mode>contact</mode>\n    <conversation>Sayangkuu 💗💋</conversation>\n    <packageName>com.whatsapp</packageName>\n  </action>"
+   },
+   "wa_memory": {
+    "name": "Gemini Memory",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.wam",
+    "tags": {
+     "useDefaultName": "string",
+     "name": "string",
+     "mode": "string",
+     "key": "string",
+     "value": "string",
      "conversation": "string",
      "packageName": "string"
     }

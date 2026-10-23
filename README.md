@@ -342,13 +342,79 @@ dijalankan ulang.
 > Provider saat ini **Gemini (BYOK)** — tidak ada API key yang dibundel di APK; user
 > mengisi sendiri. Key tersimpan sebagai teks biasa di flow XML.
 
-### 11. Riwayat percakapan
+### 11. Memori jangka panjang Gemini
+
+Tiga lapis memori agar model tidak "buta waktu" dan tidak lupa hal penting, tanpa
+mengirim seluruh riwayat.
+
+| Lapis | Isi | Biaya kuota |
+| --- | --- | --- |
+| Waktu | label `[3 jam lalu]` pada tiap giliran, `%now%`, `%last_seen%` | 0 |
+| Fakta | `%memory%` — persona + catatan stabil per kontak | 0 |
+| Ringkasan | `%summary%` — pesan lama dipadatkan tiap N pesan | 1 panggilan / N pesan |
+
+#### Placeholder baru
+
+| Placeholder | Isi |
+| --- | --- |
+| `%now%` | waktu sekarang, mis. `Jum, 23 Okt 2026 22:55` |
+| `%last_seen%` | kapan terakhir bicara, mis. `3 hari lalu` |
+| `%memory%` | daftar fakta (persona + catatan) |
+| `%summary%` | ringkasan pesan lama |
+
+Contoh prompt:
+
+```
+%memory%
+
+Konteks: sekarang %now%. Terakhir kamu bicara dengan Melani %last_seen%.
+
+Ringkasan obrolan sebelumnya:
+%summary%
+
+1:: %prev_message_0_3_512%
+2:: %prev_reply_0_3_512%
+1:: %message_512%
+```
+
+Teks sebelum penanda `1::` pertama dikirim sebagai `system_instruction`.
+
+#### Action Gemini Memory (`wa_memory`)
+
+| Pilihan | Fungsi |
+| --- | --- |
+| Set a fact | simpan/ganti satu fakta |
+| Remove a fact | hapus satu fakta |
+| Clear all facts | hapus semua fakta |
+| Reset facts + summary | hapus fakta dan ringkasan |
+| Install built-in persona | pasang persona bawaan (12 fakta) |
+| Show memory | tampilkan fakta dan ringkasan |
+
+Persona bawaan dipasang otomatis saat percakapan pertama kali memakai action Gemini.
+Hasil aksi disimpan di `{wa_memory_status}`.
+
+#### Pengaturan Gemini Reply
+
+| Pengaturan | Default | Keterangan |
+| --- | --- | --- |
+| Include message timestamps | aktif | label waktu pada tiap giliran |
+| Summarize every N messages | `10` | `0` = matikan ringkasan otomatis |
+
+**Mengapa bukan embedding/RAG?** Untuk chat dua orang, embedding 768 dimensi
+(~7,5 KB JSON) jauh lebih besar daripada teks aslinya (belasan byte), butuh satu
+panggilan API tambahan per pesan, dan retrieval semantik hampir selalu kalah dari
+recency pada percakapan berurutan. Tiga lapis di atas mencapai hasil yang sama
+dengan ~500 token.
+
+### 12. Riwayat percakapan
 
 - Disimpan per paket dan percakapan di SharedPreferences privat `wa_conversation_state`.
 - Maksimal 30 entri per percakapan.
 - Hanya mencatat pesan yang lewat trigger (masuk) dan action (keluar). Pesan yang
   dikirim manual saat flow mati **tidak** tercatat.
 - Bisa dihapus dengan action **Reset Conversation History**.
+- Fakta dan ringkasan jangka panjang disimpan terpisah di `wa_memory_state`
+  (per percakapan), dikelola action **Gemini Memory**.
 - Event masuk dideduplikasi selama 15 detik.
 - Dipakai oleh placeholder Gemini.
 - Tidak disimpan di flow XML.
@@ -357,7 +423,7 @@ dijalankan ulang.
 
 1. **Backup flow** dari Automagic sebelum memasang build mod.
 2. Jika perangkat masih memakai Automagic resmi, APK ini **tidak bisa** dipasang sebagai update karena sertifikatnya berbeda. Ekspor flow, uninstall versi resmi, lalu install APK ini dan impor kembali flow. Jika perangkat sudah memakai build patched dengan kunci yang sama, update biasa bisa dilakukan.
-3. Install `Automagic_1.38.0-wa.6.apk`.
+3. Install `Automagic_1.38.0-wa.7.apk`.
 4. Install `AutomagicWaBridge_1.0.0.apk`, aktifkan di LSPosed dengan scope **WhatsApp** (hanya perlu untuk action status).
 5. Dokumentasi offline sudah ikut di dalam APK — tidak ada langkah tambahan.
 6. Buka Automagic dan aktifkan **Notification access** untuk Automagic di pengaturan Android.
