@@ -15,6 +15,7 @@ Dipakai oleh AI agent (atau manusia) sebagai "tangan" saat merancang flow:
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 import re
@@ -28,7 +29,15 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 SCHEMA_PATH = HERE / "schema.json"
 DOCS = ROOT / "automagic-help"
-DEVICE_FLOWS = Path(os.environ.get("AMFLOW_TARGET", "/sdcard/Automagic/flows.xml"))
+PKG = "ch.gridvision.ppam.androidautomagic"
+# Automagic membaca flow dari penyimpanan internal; /sdcard hanya salinan/mirror.
+INTERNAL_FLOWS = Path(f"/data/data/{PKG}/files/flows.xml")
+# Automagic menolak flows.xml yang diubah di luar aplikasi kecuali berkas ini cocok:
+#   flow_check = SHA1("89389812312" + isi flows.xml)
+FLOW_CHECK = Path(f"/data/data/{PKG}/files/flow_check")
+FLOW_CHECK_SALT = b"89389812312"
+MIRROR_FLOWS = Path("/sdcard/Automagic/flows.xml")
+DEVICE_FLOWS = Path(os.environ.get("AMFLOW_TARGET", str(INTERNAL_FLOWS)))
 CONTAINER = {"trigger": "triggercontainer", "condition": "conditioncontainer",
              "action": "actioncontainer"}
 CATEGORIES = ("trigger", "condition", "action")
@@ -111,9 +120,10 @@ def cmd_component(args) -> int:
 
 
 # ------------------------------------------------------------------ flow build
-def new_flow(name: str, group: str = "Custom") -> ET.Element:
+def new_flow(name: str, group: str = "Custom", enabled: bool = False) -> ET.Element:
     flow = ET.Element("flow", {"type": "flow"})
-    for tag, text in (("name", name), ("group", group), ("enabled", "false"),
+    for tag, text in (("name", name), ("group", group),
+                      ("enabled", "true" if enabled else "false"),
                       ("lastExecutionStartTime", "0"), ("lastExecutionEndTime", "0"),
                       ("executionPolicy", "PARALLEL")):
         ET.SubElement(flow, tag).text = text
@@ -178,13 +188,28 @@ def load_doc(path: Path) -> ET.Element:
 def cmd_new(args) -> int:
     out = Path(args.file)
     root = ET.Element("data", {"version": "1.38.0"})
-    root.append(new_flow(args.name, args.group))
+    root.append(new_flow(args.name, args.group, args.enable))
     write(root, out)
     print(f"dibuat: {out}")
     return 0
 
 
+def normalize_order(root: ET.Element) -> None:
+    """Automagic me-resolve container saat parsing, jadi definisi komponen harus
+    berada SEBELUM elemen <flow> (sama seperti berkas yang ditulis aplikasi)."""
+    children = list(root)
+    defs = [c for c in children if c.tag != "flow"]
+    flows = [c for c in children if c.tag == "flow"]
+    ordered = defs + flows
+    if ordered != children:
+        for c in children:
+            root.remove(c)
+        for c in ordered:
+            root.append(c)
+
+
 def write(root: ET.Element, path: Path) -> None:
+    normalize_order(root)
     ET.indent(root, space="  ")
     body = ET.tostring(root, encoding="unicode")
     path.write_text("<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>\n" + body,
@@ -358,6 +383,45 @@ def su(cmd: str) -> str:
     return subprocess.run(["su", "-c", cmd], capture_output=True, text=True).stdout
 
 
+def su_ok(cmd: str) -> bool:
+    return subprocess.run(["su", "-c", cmd], capture_output=True).returncode == 0
+
+
+def read_device(path: Path) -> bytes:
+    """Baca berkas milik aplikasi lewat root."""
+    if path.exists() and os.access(path, os.R_OK):
+        return path.read_bytes()
+    return subprocess.run(["su", "-c", f"cat {path}"], capture_output=True).stdout
+
+
+def write_device(src: Path, dst: Path) -> None:
+    su(f"cp {src} {dst}")
+    owner = su(f"stat -c %u:%g /data/data/{PKG}").strip()
+    if owner:
+        su(f"chown {owner} {dst}")
+
+
+def flow_check_hash(data: bytes) -> str:
+    digest = hashlib.sha1()
+    digest.update(FLOW_CHECK_SALT)
+    digest.update(data)
+    return digest.hexdigest()
+
+
+def write_flow_check(flows_path: Path) -> str:
+    """Perbarui flow_check agar Automagic menerima flows.xml hasil edit eksternal."""
+    data = read_device(flows_path)
+    value = flow_check_hash(data)
+    tmp = Path("/data/data/com.termux/files/home/.tmp/amflow_flow_check")
+    tmp.parent.mkdir(parents=True, exist_ok=True)
+    tmp.write_text(value, encoding="utf-8")
+    su(f"cp {tmp} {FLOW_CHECK}")
+    owner = su(f"stat -c %u:%g /data/data/{PKG}").strip()
+    if owner:
+        su(f"chown {owner} {FLOW_CHECK}")
+    return value
+
+
 def cmd_install(args) -> int:
     schema = load_schema()
     src = Path(args.file)
@@ -371,7 +435,7 @@ def cmd_install(args) -> int:
     for w in warnings:
         print(f"peringatan: {w}")
 
-    if not DEVICE_FLOWS.exists():
+    if not su_ok(f"test -f {DEVICE_FLOWS}"):
         sys.exit(f"{DEVICE_FLOWS} tidak ada")
 
     stamp = time.strftime("%Y%m%d_%H%M%S")
@@ -379,29 +443,63 @@ def cmd_install(args) -> int:
     su(f"cp {DEVICE_FLOWS} {backup}")
     print(f"backup: {backup}")
 
-    merged = load_doc(DEVICE_FLOWS)
-    existing = {f.findtext("name") for f in merged.findall("flow")}
+    merged = ET.fromstring(read_device(DEVICE_FLOWS))
+    existing = {}
+    for f in merged.findall("flow"):
+        existing[f.findtext("name")] = f
+
     new_flows = []
     for flow in root.findall("flow"):
         name = flow.findtext("name")
         if name in existing:
-            print(f"dilewati, flow dengan nama sama sudah ada: {name}")
-            continue
+            if not args.replace:
+                print(f"dilewati, flow dengan nama sama sudah ada: {name} "
+                      f"(pakai --replace untuk menimpa)")
+                continue
+            merged.remove(existing[name])
+            print(f"diganti: {name}")
         new_flows.append(flow)
+
+    # buang definisi lama dengan nama yang sama agar tidak duplikat
+    replace_names = set()
+    for cat in CATEGORIES:
+        for d in root.findall(cat):
+            n = d.findtext("name")
+            if n:
+                replace_names.add((cat, n.strip()))
+    for cat in CATEGORIES:
+        for d in list(merged.findall(cat)):
+            n = d.findtext("name")
+            if n and (cat, n.strip()) in replace_names:
+                merged.remove(d)
+
+    # definisi dulu (sebelum <flow> pertama), baru flow
+    insert_at = 0
+    for idx, child in enumerate(list(merged)):
+        if child.tag == "flow":
+            insert_at = idx
+            break
+    else:
+        insert_at = len(list(merged))
+
+    new_defs = [d for cat in CATEGORIES for d in root.findall(cat)]
+    for offset, d in enumerate(new_defs):
+        merged.insert(insert_at + offset, d)
 
     for flow in new_flows:
         merged.append(flow)
-    for cat in CATEGORIES:
-        for d in root.findall(cat):
-            merged.append(d)
 
     tmp = Path("/data/data/com.termux/files/home/.tmp/amflow_merge.xml")
     tmp.parent.mkdir(parents=True, exist_ok=True)
     write(merged, tmp)
 
-    su(f"cp {tmp} {DEVICE_FLOWS}")
-    su(f"chown media_rw:media_rw {DEVICE_FLOWS}")
-    print(f"terpasang: {len(new_flows)} flow baru")
+    write_device(tmp, DEVICE_FLOWS)
+    check = write_flow_check(DEVICE_FLOWS)
+    print(f"flow_check: {check}")
+    if DEVICE_FLOWS != MIRROR_FLOWS and su_ok(f"test -d {MIRROR_FLOWS.parent}"):
+        su(f"cp {DEVICE_FLOWS} {MIRROR_FLOWS}")
+        su(f"chown media_rw:media_rw {MIRROR_FLOWS}")
+    print(f"terpasang: {len(new_flows)} flow baru -> {DEVICE_FLOWS}")
 
     if args.restart:
         su("am force-stop ch.gridvision.ppam.androidautomagic")
@@ -432,6 +530,8 @@ def main() -> int:
     p.add_argument("name")
     p.add_argument("--group", default="Custom")
     p.add_argument("--file", default=None)
+    p.add_argument("--enable", action="store_true",
+                   help="langsung aktifkan flow (default: nonaktif)")
     p.set_defaults(func=cmd_new)
 
     p = sub.add_parser("add", help="tambah komponen ke flow")
@@ -451,6 +551,8 @@ def main() -> int:
     p = sub.add_parser("install", help="pasang flow ke Automagic")
     p.add_argument("file")
     p.add_argument("--restart", action="store_true")
+    p.add_argument("--replace", action="store_true",
+                   help="timpa flow dengan nama yang sama")
     p.set_defaults(func=cmd_install)
 
     args = parser.parse_args()

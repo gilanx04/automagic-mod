@@ -1,28 +1,35 @@
-Rilis ketiga **Automagic Mod**, berbasis Automagic Premium 1.38.0.
+Rilis keempat **Automagic Mod**, berbasis Automagic Premium 1.38.0.
 
-Fokus rilis ini: **dokumentasi offline** dan **tooling AI agent untuk flow**.
+Fokus rilis ini: **AI Flow Agent di dalam Automagic** (Gemini BYOK, rotasi multi API key).
 
 ## Yang baru
 
-### Dokumentasi offline
+### Action AI Flow Agent
 
-- Semua halaman bantuan yang sebelumnya 404 kini tersedia offline.
-- 449 halaman per bahasa (en/de), 56 screenshot, plus katalog 448 komponen.
-- Help memakai mekanisme offline bawaan aplikasi; Catalog dipatch agar memakai
-  file lokal dan tetap bisa navigasi antar halaman.
+- Merancang flow dari deskripsi bahasa alami, langsung di perangkat tanpa PC.
+- Tiga tahap: pilih komponen dari katalog 441 komponen → susun XML → validasi dan
+  perbaiki otomatis bila ada error.
+- Hasil ditulis ke `/sdcard/Automagic/agent/`, bisa langsung dipasang atau preview.
+- Variabel `{ai_flow_status}`, `{ai_flow_file}`, `{ai_flow_error}` untuk dirantai ke action lain.
+- Tidak ada API key yang dibundel: provider Gemini murni BYOK, key diisi user.
 
-### AI flow agent (amflow)
+### Rotasi multi API key
 
-- CLI untuk agent: cari dokumentasi, lihat skema komponen, buat flow, validasi,
-  lalu pasang dengan backup otomatis.
-- Skema komponen diekstrak dari source: 223 action, 128 trigger, 89 condition.
-- Validator menangkap kesalahan umum sebelum flow dipasang.
-- `AGENTS.md` menjelaskan alur kerja dan aturan keamanan untuk agent.
+- Beberapa key (satu per baris) dipakai berurutan.
+- Key kena limit (HTTP 429) diistirahatkan 30 menit lalu key berikutnya dipakai.
+- Key tidak valid diistirahatkan 24 jam. Status cooldown tersimpan di perangkat.
+
+### Perbaikan penting
+
+- Definisi komponen kini ditulis sebelum `<flow>` (sebelumnya flow bisa muncul dengan
+  node kosong yang tidak bisa diedit).
+- `amflow install` menulis ulang `flow_check`, sehingga Automagic tidak lagi menolak
+  flow hasil edit eksternal.
 
 ## Pasang
 
 1. Backup flow Automagic.
-2. Install `Automagic_1.38.0-wa.3.apk` (update biasa bila sudah memakai build ini).
+2. Install `Automagic_1.38.0-wa.4.apk` (update biasa bila sudah memakai build ini).
 3. Install `AutomagicWaBridge_1.0.0.apk` dan aktifkan di LSPosed (scope WhatsApp)
    bila memakai action status.
 4. Pasang `AutomagicDocs_1.38.zip` sesuai `tools/docs/install_docs.sh`.
@@ -31,7 +38,7 @@ Fokus rilis ini: **dokumentasi offline** dan **tooling AI agent untuk flow**.
 ## Checksum
 
 ```text
-505936a20bdbad2c6f0ab4a742a6d4f79e14b9c092563ca9eab0f2a0601b1062  Automagic_1.38.0-wa.3.apk
+cf8719eaea937073777f5e14021b482460ee01501d5dd76e3a5865e91a70888d  Automagic_1.38.0-wa.4.apk
 0ae9a8b3933404a8fdc0ad6a6d4a2ca9b4a34e46e90cf846251252324357ddd9  AutomagicWaBridge_1.0.0.apk
 e6343052cb1f77b3ed3f53b4fe5de4981a63ede46eb192412082db6f911f7160  AutomagicDocs_1.38.zip
 2a97d4c9ca6352bc1101c93faae8b49e2f1e30c365637afcea3e0e8f014b39cc  AutomagicTools_1.0.zip

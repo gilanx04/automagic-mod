@@ -76,6 +76,9 @@ atas permintaan user. Semua alat ada di `work/amflow/`.
 
 Poin penting:
 
+- **Definisi komponen WAJIB ditulis sebelum `<flow>`.** Automagic me-resolve nama
+  container saat parsing; kalau definisi ada di belakang, container jadi kosong dan
+  tidak bisa diedit. `amflow` sudah menata ulang otomatis, jangan diubah manual.
 - `actioncontainer` / `conditioncontainer` menyimpan nama sebagai **teks elemen**.
 - `triggercontainer` menyimpan nama sebagai **child `<trigger>`** (boleh lebih dari satu).
 - Nama komponen harus unik **per kategori**; trigger dan condition boleh bernama sama.
@@ -92,7 +95,8 @@ Poin penting:
 | `new <nama>` | buat file flow kosong |
 | `add <file> <id>` | tambah komponen + container + koneksi |
 | `validate <file>` | cek struktur, tag, koneksi, keterjangkauan |
-| `install <file>` | backup + gabung ke flows.xml |
+| `install <file> [--replace] [--restart]` | backup + gabung ke flows.xml |
+| `agent.py "<permintaan>" [--install]` | rancang flow dengan Gemini (multi API key) |
 
 ## Batasan yang perlu disampaikan ke user
 
@@ -101,3 +105,28 @@ Poin penting:
   lebih aman untuk komponen yang punya contoh.
 - Automagic tidak memuat ulang flow saat berjalan; perlu `--restart` atau buka ulang app.
 - Beberapa aksi butuh izin runtime (SMS, lokasi, aksesibilitas) yang tidak bisa diberikan agent.
+
+## Integritas flows.xml
+
+Automagic menolak `flows.xml` yang diubah di luar aplikasi ("The flow definitions
+have been modified outside of Automagic"). Berkas penjaganya:
+
+```
+flow_check = SHA1("89389812312" + isi flows.xml)   # hex, tanpa newline
+```
+
+`amflow install` menulis ulang `flow_check` otomatis. Kalau mengedit manual, hitung
+ulang nilai ini, jika tidak Automagic akan menonaktifkan semua flow.
+
+## Agent (Gemini, BYOK, multi-key)
+
+```bash
+python3 work/amflow/agent.py "setiap jam 7 pagi kirim status WA: selamat pagi" \
+    --keys keys.txt --install
+```
+
+- `keys.txt`: satu API key per baris (boleh juga `GEMINI_API_KEYS=k1,k2`).
+- Key yang kena limit (HTTP 429) otomatis dilewati dan istirahat 30 menit;
+  key tidak valid 24 jam. State di `.keys_state.json`.
+- Alur: pilih komponen → susun XML → validasi → minta model memperbaiki → tulis file.
+- `--endpoint` bisa diarahkan ke server tiruan untuk pengujian (`mock_gemini.py`).

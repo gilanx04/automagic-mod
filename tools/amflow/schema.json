@@ -4,7 +4,7 @@
  "counts": {
   "trigger": 128,
   "condition": 89,
-  "action": 223
+  "action": 224
  },
  "components": {
   "trigger": {
@@ -4752,6 +4752,20 @@
      "text": "string"
     },
     "example": "<action type=\"wa_status\">\n    <useDefaultName>true</useDefaultName>\n    <name>Post WhatsApp Status</name>\n    <text>tes</text>\n  </action>"
+   },
+   "ai_flow_agent": {
+    "name": "AI Flow Agent",
+    "class": "ch.gridvision.ppam.androidautomagic.model.a.aif",
+    "tags": {
+     "useDefaultName": "string",
+     "name": "string",
+     "prompt": "string",
+     "keys": "string",
+     "model": "string",
+     "flowName": "string",
+     "fixAttempts": "string",
+     "install": "string"
+    }
    }
   }
  }

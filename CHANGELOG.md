@@ -2,6 +2,48 @@
 
 Semua perubahan penting pada build mod Automagic dicatat di sini.
 
+## [1.38.0-wa.4] — 2026-10-23
+
+Rilis keempat: **AI Flow Agent di dalam Automagic** (Gemini BYOK + rotasi multi API key).
+
+### Ditambahkan
+
+#### Action AI Flow Agent (`ai_flow_agent`)
+
+- Merancang flow dari deskripsi bahasa alami, langsung di perangkat.
+- Tiga tahap: pilih komponen dari katalog → susun XML → validasi & perbaiki otomatis.
+- Memakai knowledge base on-device: `catalog.txt` (441 komponen), `catalog.json`
+  (tag + contoh nyata), `docs_index.json` (448 halaman dokumentasi).
+- Hasil ditulis ke `/sdcard/Automagic/agent/<nama>.flow.xml`; opsi langsung pasang.
+- Variabel hasil: `{ai_flow_status}`, `{ai_flow_file}`, `{ai_flow_error}`.
+- Eksekusi asinkron memakai `androidautomagiclib.util.cj`, jadi UI tidak membeku.
+
+#### Rotasi API key Gemini
+
+- Beberapa key (satu per baris) dipakai berurutan.
+- HTTP 429 / kuota habis → key diistirahatkan 30 menit, key berikutnya dipakai.
+- Key tidak valid diistirahatkan 24 jam.
+- Status cooldown disimpan di SharedPreferences `amagent_keys`.
+- Tidak ada API key yang dibundel; provider Gemini murni BYOK.
+
+#### Tooling agent (CLI)
+
+- `agent.py` — versi CLI dari agent (multi key, endpoint kustom, `--install`).
+- `mock_gemini.py` — server Gemini tiruan untuk menguji tanpa API key.
+- `build_knowledge.py` — membangun knowledge base on-device.
+
+### Diperbaiki
+
+- **Urutan elemen flow**: definisi komponen wajib ditulis sebelum `<flow>`.
+  Sebelumnya `amflow` menaruh `<flow>` lebih dulu sehingga container tidak
+  ter-resolve (nama kosong dan tidak bisa diedit). `amflow` kini menata ulang otomatis.
+- **Integritas flows.xml**: `amflow install` sekarang menulis ulang `flow_check`
+  (`SHA1("89389812312" + isi flows.xml)`) sehingga Automagic tidak lagi menampilkan
+  "The flow definitions have been modified outside of Automagic".
+- `--replace` untuk menimpa flow dengan nama sama, `--enable` untuk mengaktifkan
+  flow saat dibuat, `--from-example` menyalin tag berulang (mis. 7 `<weekday>`).
+- Action menyimpan hasil parse `periodic_timer`/`time` dengan benar.
+
 ## [1.38.0-wa.3] — 2026-10-23
 
 Rilis ketiga: **restorasi dokumentasi offline** dan **tooling AI agent untuk merancang flow**.
